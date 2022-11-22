@@ -1,5 +1,8 @@
 package fr.ut1.rtai.cartes;
 
+import fr.ut1.rtai.monopoly.Joueur;
+import fr.ut1.rtai.monopoly.Plateau;
+
 public abstract class Carte {
 
 	private String titre;
@@ -10,6 +13,8 @@ public abstract class Carte {
 		this.description = description;
 	}
 
+	public abstract void actionCarte(Joueur joueur, Plateau plateau);
+
 	public String getTitre() {
 		return this.titre;
 	}
@@ -17,7 +22,6 @@ public abstract class Carte {
 	public String getDesc() {
 		return this.description;
 	}
-
 
 	@Override
 	public String toString() {
