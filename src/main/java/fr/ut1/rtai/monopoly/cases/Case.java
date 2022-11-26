@@ -19,6 +19,10 @@ public abstract class Case {
 		this.numCase=numero;
 	}
 	
+	
+	public String getNomCase() {
+		return this.intitule;
+	}
 
 	
 	/**

@@ -10,5 +10,13 @@ public abstract class CasePropriete extends Case {
         this.coutAchat=coutAchat;
         this.valeurHypotheque=valeurHypotheque;
     }
+    
+    public int getCoutAchat() {
+    	return this.coutAchat;
+    }
+    
+    public int getValeurHypothequee() {
+    	return this.valeurHypotheque;
+    }
 
 }

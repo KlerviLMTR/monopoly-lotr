@@ -1,5 +1,5 @@
 package fr.ut1.rtai.monopoly;
 
-public enum CouleurCase {
+public enum ECouleurCase {
 	violet, blanc, rose, orange, rouge, jaune, vert, bleu
 }

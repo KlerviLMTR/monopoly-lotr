@@ -1,6 +1,6 @@
 package fr.ut1.rtai.monopoly;
 
-import java.util.Map;
+
 import java.util.Set;
 
 import fr.ut1.rtai.monopoly.cases.Monture;
@@ -9,7 +9,7 @@ import fr.ut1.rtai.monopoly.cases.Territoire;
 public class Joueur {
 
 	private String nom;
-	private Pion pion;
+	private EPion pion;
 	private int solde;
 	private boolean estEnPrison;
 	private Plateau plateau;
@@ -19,7 +19,7 @@ public class Joueur {
 	
 	public Joueur(String nom) {
 		this.nom=nom;
-		this.pion=Pion.Gandalf;//valeur par defaut
+		this.pion=EPion.Gandalf;//valeur par defaut
 		this.possedeCarteSortiePrison=false;
 	}
 	
@@ -27,7 +27,7 @@ public class Joueur {
 		return this.nom;
 	}
 	
-	public void setPion(Pion p) {
+	public void setPion(EPion p) {
 		this.pion=p;
 		
 	}
@@ -44,7 +44,7 @@ public class Joueur {
 		return this.estEnPrison;
 	}
 
-	public Pion getPion() {
+	public EPion getPion() {
 		return this.pion;
 	}
 	

@@ -3,9 +3,11 @@ public class Application {
 
 	public static void main(String[] args) {
 	
-		Plateau p = new Plateau();
-		System.out.println(p.afficherJoueurs());
-		System.out.println(p.afficherPositionJoueurs());
+		PartieDeMonopoly partie = new PartieDeMonopoly();
+		partie.definirNbJoueurs();
+		System.out.println(partie.getNbJoueurs());
+		partie.creerLesJoueurs();
+		System.out.println(partie.afficherJoueurs());
 
 		
 	}
