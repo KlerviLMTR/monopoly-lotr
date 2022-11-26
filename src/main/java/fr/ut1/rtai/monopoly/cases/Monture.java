@@ -1,10 +1,18 @@
 package fr.ut1.rtai.monopoly.cases;
 
-public class Monture extends CasePropriete {
+import fr.ut1.rtai.monopoly.Joueur;
 
-	public Monture(String nom, int valeur) {
-		super(nom, valeur);
-		// TODO Auto-generated constructor stub
+public class Monture extends CasePropriete {
+	
+	private int[] loyers;
+	public Monture(String nom, int coutAchat, int valHyp) {
+		super(nom, coutAchat, valHyp);
+		this.loyers= new int[] {25,50,100,200};
+	}
+
+	@Override
+	public void actionCase(Joueur j) {
+		
 	}
 
 }

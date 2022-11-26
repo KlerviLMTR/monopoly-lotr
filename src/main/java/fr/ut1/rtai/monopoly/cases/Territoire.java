@@ -1,10 +1,25 @@
 package fr.ut1.rtai.monopoly.cases;
 
-public class Territoire extends CasePropriete {
+import fr.ut1.rtai.monopoly.CouleurCase;
+import fr.ut1.rtai.monopoly.Joueur;
 
-	public Territoire(String nom,int valeur, int[] loyers) {
-		super(nom,valeur);
-		// TODO Auto-generated constructor stub
+public class Territoire extends CasePropriete {
+	
+	private int [] tableDesLoyers;
+	private int coutConstruction;
+	private String nomRegion;
+	private CouleurCase couleur;
+	
+	public Territoire(String nom,CouleurCase coul,int coutAchat,int valHyp, int coutConstru, int[] loyers) {
+		super(nom,coutAchat, valHyp);
+		this.coutConstruction=coutConstru;
+		this.tableDesLoyers=loyers;
+		this.couleur=coul;
+	}
+
+	@Override
+	public void actionCase(Joueur j) {
+		
 	}
 
 }
