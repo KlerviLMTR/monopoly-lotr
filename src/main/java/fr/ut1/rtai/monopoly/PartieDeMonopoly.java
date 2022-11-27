@@ -37,10 +37,12 @@ public class PartieDeMonopoly {
 		}catch(Exception e){
 			int nb = 0;
 			this.traiterReponseQuestionNbJoueurs(nb);
-			this.verifierNbJoueurs(nbJoueurs);
 		}
 	}
 	
+	/**
+	 *Demande aux joueurs leurs noms d'usage et les genere en consequence 
+	 */
 	public void creerLesJoueurs() {
 		//Pour chaque joueur, lui demander son nom
 		String[] nomsJoueurs = new String[this.nbJoueurs];
@@ -61,6 +63,11 @@ public class PartieDeMonopoly {
 		}
 	}
 	
+	/**
+	 * @param nbJoueurs
+	 * @param nomsJoueurs
+	 * Cree la liste des joueurs participant a la partie. Appelee par la methode creerLesJoueurs.
+	 */
 	protected void genererJoueurs(int nbJoueurs, String[] nomsJoueurs) {
 		this.joueurs=new ArrayList<Joueur>();
 		for(int i = 0; i<nomsJoueurs.length;i++) {
@@ -82,6 +89,11 @@ public class PartieDeMonopoly {
 		this.nbJoueurs=nb;
 	}
 	
+	/**
+	 * @param nb
+	 * @throws IllegalArgumentException
+	 * genere une exception si 
+	 */
 	protected void verifierNbJoueurs(int nb) throws IllegalArgumentException{
 		if (nb < 2 || nb > 6) {
 			throw new IllegalArgumentException("Format de reponse invalide");

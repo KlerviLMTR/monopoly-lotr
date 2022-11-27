@@ -4,8 +4,8 @@ import fr.ut1.rtai.monopoly.Joueur;
 
 public class BatonDeMagicien extends CasePropriete {
 
-	public BatonDeMagicien(String nom, int coutAchat, int valHyp) {
-		super(nom, coutAchat, valHyp);
+	public BatonDeMagicien(String nom) {
+		super(nom,150,75);
 	}
 
 	@Override
