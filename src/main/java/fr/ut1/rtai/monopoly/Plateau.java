@@ -1,6 +1,9 @@
 package fr.ut1.rtai.monopoly;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import fr.ut1.rtai.monopoly.cartes.Carte;
 import fr.ut1.rtai.monopoly.cartes.CarteAllerEnPrison;
@@ -12,13 +15,27 @@ import fr.ut1.rtai.monopoly.cartes.CarteSortirDePrison;
 import fr.ut1.rtai.monopoly.cases.*;
 
 public class Plateau {
-
+	
+	public static final Map<ECouleurCase, Integer> NBLOTPARCOULEUR ;
+	static {
+		HashMap<ECouleurCase, Integer> tmpHash = new HashMap<ECouleurCase, Integer>();
+		tmpHash.put(ECouleurCase.violet, 2);
+		tmpHash.put(ECouleurCase.blanc, 3);
+		tmpHash.put(ECouleurCase.rose, 3);
+		tmpHash.put(ECouleurCase.orange, 3);
+		tmpHash.put(ECouleurCase.jaune, 3);
+		tmpHash.put(ECouleurCase.vert, 3);
+		tmpHash.put(ECouleurCase.bleu, 2);
+		NBLOTPARCOULEUR = Collections.unmodifiableMap(tmpHash);
+	}
+	
 	private ArrayList<Case> cases; //choix d'une ArrayList car suite de cases ordonnees
 	private ArrayList<Carte> cartesPeuple;
 	private ArrayList<Carte> cartesEvenement;
 
 
 	public Plateau() {
+
 		this.genererCasesPlateau();
 		this.genererCartesPeuple();
 		this.genererCartesEvenement();
@@ -203,6 +220,15 @@ public class Plateau {
 		}
 
 	}
+	
+	// -------- Getters et setters utiles ----------
+	public ArrayList<Carte> getCartesPeuple(){
+		return this.cartesPeuple;
+	}
+	
+	public ArrayList<Carte> getCartesEvenement(){
+		return this.cartesPeuple;
+	}
 
 
 
@@ -222,23 +248,6 @@ public class Plateau {
 
 
 
-
-
-
-
-
-
-
-
-
-	//	public String afficherPositionJoueurs() {
-	//		String aff = "--- Position des joueurs ---\n\n";
-	//		for(int i=0;i<this.joueurs.size();i++) {
-	//			Joueur jCourant = this.joueurs.get(i);
-	//			aff+= "[ " + this.joueurs.get(i).getNomPion() + " : case n° "+ this.positionsJoueurs.get(jCourant.getPion()).getNumCase()+" ]\n";
-	//		}
-	//		return aff;
-	//	}
 
 
 

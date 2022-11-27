@@ -1,5 +1,8 @@
 package fr.ut1.rtai.monopoly.cartes;
 
+import fr.ut1.rtai.monopoly.Joueur;
+import fr.ut1.rtai.monopoly.Plateau;
+
 public class CarteGagnerDuPouvoir extends Carte {
 	
 	private int montantGagne;
@@ -10,7 +13,7 @@ public class CarteGagnerDuPouvoir extends Carte {
     }
 
 	@Override
-	public void actionCarte() {
+	public void actionCarte(Joueur j, Plateau p) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -8,6 +8,7 @@ public class Territoire extends CasePropriete {
 	private int [] tableDesLoyers;
 	private int coutConstruction;
 	private ECouleurCase couleur;
+
 	
 	public Territoire(String nom,ECouleurCase coul,int coutAchat,int valHyp, int coutConstru, int[] loyers) {
 		super(nom,coutAchat, valHyp);

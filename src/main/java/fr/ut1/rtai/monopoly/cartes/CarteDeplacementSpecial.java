@@ -1,5 +1,8 @@
 package fr.ut1.rtai.monopoly.cartes;
 
+import fr.ut1.rtai.monopoly.Joueur;
+import fr.ut1.rtai.monopoly.Plateau;
+
 public class CarteDeplacementSpecial extends Carte {
 	
 	private String typeDeplacement ; //Monture: se deplace jusqua la monture la plus proche
@@ -11,7 +14,7 @@ public class CarteDeplacementSpecial extends Carte {
 	}
 
 	@Override
-	public void actionCarte() {
+	public void actionCarte(Joueur j, Plateau p) {
 		// TODO Auto-generated method stub
 
 	}

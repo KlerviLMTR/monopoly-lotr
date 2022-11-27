@@ -97,6 +97,7 @@ public class PartieDeMonopoly {
 			}
 			nomsJoueurs[i] = nomJ;
 			this.genererJoueurs(this.nbJoueurs, nomsJoueurs);
+
 		}
 	}
 
@@ -160,6 +161,7 @@ public class PartieDeMonopoly {
 	                	System.out.println("OK ! \n");
 						Thread.sleep(1000);
 						j.setPion(pionsDispo.get(choixPion));
+						j.getPion().setNumeroCase(0);
 						pionsDispo.remove(choixPion);
 	                }		
 	                inputOk = true;
@@ -210,8 +212,7 @@ public class PartieDeMonopoly {
 		}
 		return true;
 	}
-
-
+	
 
 
 
@@ -270,13 +271,13 @@ public class PartieDeMonopoly {
 	}
 	
 	/**
-	 *affiche les joueurs et leur pion associe 
+	 *affiche les joueurs et leur pion associe avec leur position
 	 */
 	private void afficherJoueursEtPions() {
 		// Ecrire les messages destinés aux joueurs
 		System.out.println("--- LISTE DES JOUEURS ---\n\n");
 		for (Joueur j : this.joueurs) {
-			System.out.println("- " + j.toString());
+			System.out.println("- " + j.toString()+ this.p.getCaseNumero(j.getPion().getNumCase()+1));
 		}
 	}
 	
