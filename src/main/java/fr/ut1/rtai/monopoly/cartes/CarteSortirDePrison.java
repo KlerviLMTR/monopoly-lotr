@@ -11,7 +11,14 @@ public class CarteSortirDePrison extends Carte {
 
 	@Override
 	public void actionCarte(Joueur j, Plateau p) {
-		
+		if (this.getTitre().equals("Carte Peuple")){
+			p.getCartesPeuple().remove(0);
+			j.setNbCartesSortiePrison(true);
+		}
+		else {
+			p.getCartesEvenement().remove(0);
+			j.setNbCartesSortiePrison(true);
+		}
 	}
 
 }

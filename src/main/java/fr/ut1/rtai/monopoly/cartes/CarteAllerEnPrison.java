@@ -13,7 +13,7 @@ public class CarteAllerEnPrison extends Carte {
 	public void actionCarte(Joueur j, Plateau p) {
 		j.estMisEnPrison();
 		j.getPion().avancer(10);
-		
+		super.estPiocheeEtRemiseAuFondDuPaquet();
 	}
 
 }

@@ -97,7 +97,10 @@ public class PartieDeMonopoly {
 			}
 			nomsJoueurs[i] = nomJ;
 			this.genererJoueurs(this.nbJoueurs, nomsJoueurs);
-
+			//donner le plateau courant aux joueurs
+			for (Joueur j : this.joueurs) {
+				j.setPlateau(this.p);
+			}
 		}
 	}
 

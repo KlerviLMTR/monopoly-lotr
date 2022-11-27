@@ -15,7 +15,8 @@ public class CarteDeplacementSpecial extends Carte {
 
 	@Override
 	public void actionCarte(Joueur j, Plateau p) {
-		// TODO Auto-generated method stub
+		System.out.println("Completez moi! ...");
+		super.estPiocheeEtRemiseAuFondDuPaquet();
 
 	}
 

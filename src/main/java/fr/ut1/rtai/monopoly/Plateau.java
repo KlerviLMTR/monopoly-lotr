@@ -39,6 +39,12 @@ public class Plateau {
 		this.genererCasesPlateau();
 		this.genererCartesPeuple();
 		this.genererCartesEvenement();
+		for (Carte c : this.cartesEvenement) {
+			c.setPlateau(this);
+		}
+		for (Carte c : this.cartesPeuple) {
+			c.setPlateau(this);
+		}
 	}
 
 	private void genererCartesPeuple() {
@@ -118,6 +124,8 @@ public class Plateau {
         this.cartesEvenement.add(c14);
         this.cartesEvenement.add(c15);
         this.cartesEvenement.add(c16);
+        
+
 
 	}
 
@@ -244,6 +252,19 @@ public class Plateau {
 
 	public ArrayList<Case>getCases(){
 		return this.cases;
+	}
+	
+	// ------- Méthodes d'affichage --------
+	public void afficherCartesEvenement() {
+		for(Carte c : this.cartesEvenement) {
+			System.out.println(c);
+		}
+	}
+	
+	public void afficherCartesPeuple() {
+		for(Carte c : this.cartesPeuple) {
+			System.out.println(c);
+		}
 	}
 
 

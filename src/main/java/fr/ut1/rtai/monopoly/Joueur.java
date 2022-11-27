@@ -4,6 +4,7 @@ package fr.ut1.rtai.monopoly;
 import java.util.HashSet;
 import java.util.Set;
 
+import fr.ut1.rtai.monopoly.cartes.CarteSortirDePrison;
 import fr.ut1.rtai.monopoly.cases.BatonDeMagicien;
 import fr.ut1.rtai.monopoly.cases.Case;
 import fr.ut1.rtai.monopoly.cases.CasePropriete;
@@ -19,16 +20,17 @@ public class Joueur {
 	private Set<Monture> monturesPossedees; //Choix d'un set car l'ordre des montures possedees n'a pas d'importance
 	private Set<Territoire> territoiresPossedes;//idem
 	private Set<BatonDeMagicien> batonsDeMagicienPossedes;//idem
-	private boolean possedeCarteSortiePrison;
-	private int nbCartesSortiePrison;
+	private boolean possedeCarteSortiePrisonPeuple;
+	private boolean possedeCarteSortiePrisonEvenement;
 	private int nbToursPrison;
 	private boolean estEnFaillite;
+	private Plateau plateau;
 	
 	public Joueur(String nom) {
 		this.nom=nom;
-		this.possedeCarteSortiePrison=false;
 		this.estEnPrison=false;
-		this.nbCartesSortiePrison=0;
+		this.possedeCarteSortiePrisonPeuple=false;
+		this.possedeCarteSortiePrisonEvenement=false;
 		this.estEnFaillite=false;
 		this.monturesPossedees = new HashSet<Monture>();
 		this.territoiresPossedes = new HashSet<Territoire>();
@@ -50,6 +52,10 @@ public class Joueur {
 		return this.nom;
 	}
 	
+	public void setPlateau(Plateau p) {
+		this.plateau = p;
+	}
+	
 	public void setPion(Pion pion) {
 		this.pion=pion;
 		
@@ -68,16 +74,22 @@ public class Joueur {
 		return this.pion;
 	}
 	
-	public int getNbCartesSortiePrison() {
-		return this.nbCartesSortiePrison;
+	public boolean getNbCartesSortiePrisonPeuple() {
+		return this.possedeCarteSortiePrisonPeuple;
+	}
+	public boolean getNbCartesSortiePrisonEvenement() {
+		return this.possedeCarteSortiePrisonEvenement;
 	}
 
-	public void setNbCartesSortiePrison(int nombre) {
-		this.nbCartesSortiePrison = nombre;
+	public void setNbCartesSortiePrison(boolean b) {
+		this.possedeCarteSortiePrisonPeuple = b;
 	}
 	
 	//  --------  Méthodes du joueur ----------
 	
+	public void piocherUneCartePeuple() {
+		this.plateau.getCartesPeuple().get(0).actionCarte(this, this.plateau);
+	}
 	
 	public void gagnerduPouvoir(int pouvoir) {
 		this.solde += pouvoir;
@@ -94,6 +106,35 @@ public class Joueur {
 	
 	public int getNbBatonsDeMagicienPossedes() {
 		return this.batonsDeMagicienPossedes.size();
+	}
+	
+	
+	/**
+	 *Precondition : possede au moins 1 carte sortie de prison 
+	 * @throws InterruptedException 
+	 */
+	public void utiliserCarteSortiePrison() throws InterruptedException {
+		if(this.possedeCarteSortiePrisonEvenement || this.possedeCarteSortiePrisonPeuple) {
+			System.out.println("Vous utilisez votre carte Sortie de prison et vous évadez ! ");
+			Thread.sleep(1000);
+			System.out.println("Vous replacez la carte dans son  paquet.");
+			this.estEnPrison = false;
+			
+			if (this.possedeCarteSortiePrisonEvenement){
+				//retirer la carte au joueur
+				this.possedeCarteSortiePrisonEvenement=false;
+				//la replacer dans son paquet
+				this.plateau.getCartesEvenement().add( new CarteSortirDePrison("Carte Evenement", "Vous vous évadez de prison. Vous pouvez conserver cette carte et vous en servir à tout moment."));
+			}
+			else if (this.possedeCarteSortiePrisonPeuple) {
+				this.possedeCarteSortiePrisonPeuple=false;
+				this.plateau.getCartesPeuple().add(new CarteSortirDePrison("Carte Peuple", "Vous vous évadez de prison. Vous pouvez conserver cette carte et vous en servir à tout moment."));
+			}
+		}
+		else {
+			System.out.println("Vous ne disposez pas de carte sortie de prison.");
+		}
+
 	}
 	
 	

@@ -14,7 +14,26 @@ public abstract class Carte {
 		this.description = description;
 	}
 	
+	
+	
 	public abstract void actionCarte(Joueur j, Plateau p);
+	
+	public void estPiocheeEtRemiseAuFondDuPaquet() {
+		if (this.getTitre().equals("Carte Peuple")){
+			//On la remet au fond du paquet car ce n'est pas une carte que le joueur va garder
+			p.getCartesPeuple().add(p.getCartesPeuple().remove(0));
+		}
+		else {
+			p.getCartesEvenement().add(p.getCartesEvenement().remove(0));
+
+		}
+	}
+	
+
+
+	public void setPlateau(Plateau p ) {
+		this.p=p;
+	}
 
 	public String getTitre() {
 		return this.titre;

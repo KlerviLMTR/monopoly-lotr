@@ -12,9 +12,8 @@ public class CarteDeplacement extends Carte {
 		this.caseCible=caseCible;
 	}
 	@Override
-	public void actionCarte(Joueur j,Plateau p) {
-		// TODO Auto-generated method stub
-		
+	public void actionCarte(Joueur j, Plateau p) {
+		System.out.println("Completez moi! ...");
+		super.estPiocheeEtRemiseAuFondDuPaquet();
 	}
-
 }
