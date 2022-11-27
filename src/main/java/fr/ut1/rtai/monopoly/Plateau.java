@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import fr.ut1.rtai.monopoly.cartes.Carte;
 import fr.ut1.rtai.monopoly.cartes.CarteAllerEnPrison;
 import fr.ut1.rtai.monopoly.cartes.CarteDeplacement;
+import fr.ut1.rtai.monopoly.cartes.CarteDeplacementSpecial;
 import fr.ut1.rtai.monopoly.cartes.CarteGagnerDuPouvoir;
+import fr.ut1.rtai.monopoly.cartes.CarteSortirDePrison;
 import fr.ut1.rtai.monopoly.cases.*;
 
 public class Plateau {
@@ -40,6 +42,7 @@ public class Plateau {
         Carte c13 = new CarteGagnerDuPouvoir("Carte Peuple","Frais d’hospitalisation. Payez 100€.",100);
         Carte c14 = new CarteGagnerDuPouvoir("Carte Peuple","Vous devez faire des travaux sur vos propriétés : versez 40€ pour chaque maison et 115€ pour chaque hôtel que vous possédez.",40);
         Carte c15 = new CarteAllerEnPrison("Carte Peuple","Allez en Prison. Avancez tout droit en Prison. Ne passez pas par la case Départ. Ne recevez pas 200€.");
+        Carte c16 = new CarteSortirDePrison("Carte Peuple", "Vous êtes libéré(e) de prison");
 
         // Ajout des cartes dans le paquet
         this.cartesPeuple.add(c1);
@@ -57,10 +60,47 @@ public class Plateau {
         this.cartesPeuple.add(c13);
         this.cartesPeuple.add(c14);
         this.cartesPeuple.add(c15);
+        this.cartesEvenement.add(c16);
 	}
 
 	private void genererCartesEvenement() {
-		// TODO Auto-generated method stub
+        this.cartesEvenement = new ArrayList<Carte>();
+        // Création des cartes
+        Carte c1 = new CarteGagnerDuPouvoir("Carte Evenement","La Banque vous verse un dividende de 50€.",50);
+        Carte c2 = new CarteGagnerDuPouvoir("Carte Evenement","Votre immeuble et votre prêt rapportent. Vous devez toucher 50€.",50);
+        Carte c3 = new CarteDeplacement("Carte Evenement","Avancez jusqu’à la case Départ (Recevez 200€).", this.getCaseNumero(1));
+        Carte c4 = new CarteDeplacement("Carte Evenement","Avancez jusqu’au Gué de Bruinen. Si vous passez par la case Départ, recevez 200€.", this.getCaseNumero(12));
+        Carte c5 = new CarteDeplacement("Carte Evenement","Rendez-vous sur la casse Edoras. Si vous passez par la case Départ, recevez 200€.", this.getCaseNumero(25));
+        Carte c6 = new CarteDeplacement("Carte Evenement","Connaissez-vous Asfaloth ? Rendez-vous sur la case Asfaloth pour le rencontrer. Si vous passez par la case Départ, recevez 200€.", this.getCaseNumero(16));
+        Carte c7 = new CarteGagnerDuPouvoir("Carte Evenement","La Banque vous verse un dividende de 50€.",15);
+        Carte c8 = new CarteGagnerDuPouvoir("Carte Evenement","Vous faites des réparations sur toutes vos propriétés : versez 25€ pour chaque maison et 100€ pour chaque hôtel que vous possédez.",25);
+        Carte c9 = new CarteGagnerDuPouvoir("Carte Evenement","Vous avez été élu Président du Conseil d’Administration. Versez 50€ à chaque joueur.",50);
+        Carte c10 = new CarteDeplacementSpecial("Carte Evenement","Avancez jusqu’à la case cheval la plus proche. Si elle n’appartient à personne, vous pouvez l’acheter auprès de la Banque. Si elle appartient déjà à un autre joueur, vous devez lui payer deux fois le loyer demandé.", "Monture");
+        Carte c11 = new CarteDeplacementSpecial("Carte Evenement","Avancez jusqu’à la case cheval la plus proche. Si elle n’appartient à personne, vous pouvez l’acheter auprès de la Banque. Si elle appartient déjà à un autre joueur, vous devez lui payer deux fois le loyer demandé.", "Monture");
+        Carte c12 = new CarteDeplacementSpecial("Carte Evenement","Avancez jusqu’à la case « Bâton de Gandalf » ou « Bâton de Saroumane » la plus proche. Si elle n’appartient à personne, vous pouvez l’acheter auprès de la Banque. Si elle appartient déjà à un autre joueur, lancez les dés et payez le montant du total de vos dés multiplié par 10.", "Magicien");
+        Carte c13 = new CarteDeplacementSpecial("Carte Evenement","Reculez de trois cases.","recul3cases");
+        Carte c14 = new CarteDeplacement("Carte Evenement","Rendez-vous sur la Montagne du Destin.", this.getCaseNumero(40));
+        Carte c15 = new CarteAllerEnPrison("Carte Evenement","Allez en Prison. Avancez tout droit en Prison. Ne passez pas par la case Départ. Ne recevez pas 200€.");
+        Carte c16 = new CarteSortirDePrison("Carte Evenement", "Vous êtes libéré(e) de prison");
+     
+        
+        // Ajout des cartes dans le paquet
+        this.cartesEvenement.add(c1);
+        this.cartesEvenement.add(c2);
+        this.cartesEvenement.add(c3);
+        this.cartesEvenement.add(c4);
+        this.cartesEvenement.add(c5);
+        this.cartesEvenement.add(c6);
+        this.cartesEvenement.add(c7);
+        this.cartesEvenement.add(c8);
+        this.cartesEvenement.add(c9);
+        this.cartesEvenement.add(c10);
+        this.cartesEvenement.add(c11);
+        this.cartesEvenement.add(c12);
+        this.cartesEvenement.add(c13);
+        this.cartesEvenement.add(c14);
+        this.cartesEvenement.add(c15);
+        this.cartesEvenement.add(c16);
 
 	}
 
