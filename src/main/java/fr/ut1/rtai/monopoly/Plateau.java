@@ -13,42 +13,8 @@ public class Plateau {
 		//1 - Creer les cases du plateau
 		this.genererCasesPlateau();
 		
-		
-		
-		
-		//this.genererJoueurs(this.nbJoueurs, null);
-
-
-		//Creer les joueurs
-//		this.joueurs=new ArrayList<Joueur>();
-//		Scanner scanner = new Scanner(System.in);
-//		System.out.println("Combien de joueurs participent à la partie ?");
-//		this.nbJoueurs = scanner.nextInt();
-//		scanner.nextLine();
-//		for (int i=0; i<nbJoueurs;i++) {
-//			System.out.println("Saisissez le prénom du joueur "+(i+1)+" :");
-//			String prenom = scanner.nextLine();
-//			this.joueurs.add(new Joueur(prenom));
-//		}
-
-		//TODO: changer le bloc qui suit par la methode affecterPions qui demande aux joueurs a tour de rôle quel pion ils prennent (eviter les doublons
-//		System.out.println("--- Choix des pions ---\n");
-//		EPion[] listePions = EPion.values();
-//		for (int i = 0; i < 5; i++) {
-//			System.out.println((i+1)+ " - "+ listePions[i].afficherPion());
-//
-//		}
-//
-//		for (Joueur j : this.joueurs) {		
-//			System.out.println("\n"+j.getNom()+ ", veuillez choisir votre personnage : (entrer le chiffre correspondant)" );
-//			int choixPion = scanner.nextInt();
-//			//affecter le pion au joueur
-//			j.setPion(this.pionSelonChiffreChoisi(choixPion));
-//		}
-	}
-
 	
-
+	}
 	
 	
 

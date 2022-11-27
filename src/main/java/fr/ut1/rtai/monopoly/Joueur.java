@@ -9,7 +9,7 @@ import fr.ut1.rtai.monopoly.cases.Territoire;
 public class Joueur {
 
 	private String nom;
-	private EPion pion;
+	private Pion pion;
 	private int solde;
 	private boolean estEnPrison;
 	private Plateau plateau;
@@ -19,7 +19,7 @@ public class Joueur {
 	
 	public Joueur(String nom) {
 		this.nom=nom;
-		this.pion=EPion.Gandalf;//valeur par defaut
+		this.pion=new Pion(EPion.Gandalf);//valeur par defaut
 		this.possedeCarteSortiePrison=false;
 	}
 	
@@ -27,24 +27,24 @@ public class Joueur {
 		return this.nom;
 	}
 	
-	public void setPion(EPion p) {
-		this.pion=p;
+	public void setPion(Pion pion) {
+		this.pion=pion;
 		
 	}
 	
 	public String toString() {
-		return this.nom + " dans le rôle de "+ this.pion.afficherPion();
+		return this.nom + " dans le rôle de "+ this.pion.getTypePion().afficherPion();
 	}
 
 	public String getNomPion() {
-		return this.pion.name();
+		return this.pion.getTypePion().name();
 	}
 	
 	public boolean isEstEnPrison() {
 		return this.estEnPrison;
 	}
 
-	public EPion getPion() {
+	public Pion getPion() {
 		return this.pion;
 	}
 	
