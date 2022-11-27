@@ -7,6 +7,7 @@ import fr.ut1.rtai.monopoly.cartes.CarteAllerEnPrison;
 import fr.ut1.rtai.monopoly.cartes.CarteDeplacement;
 import fr.ut1.rtai.monopoly.cartes.CarteDeplacementSpecial;
 import fr.ut1.rtai.monopoly.cartes.CarteGagnerDuPouvoir;
+import fr.ut1.rtai.monopoly.cartes.CartePerdreDuPouvoir;
 import fr.ut1.rtai.monopoly.cartes.CarteSortirDePrison;
 import fr.ut1.rtai.monopoly.cases.*;
 
@@ -27,22 +28,22 @@ public class Plateau {
 		  // Creation du paquet
         this.cartesPeuple = new ArrayList<Carte>();
         // Création des cartes
-        Carte c1 = new CarteGagnerDuPouvoir("Carte Peuple","Vous avez gagné le deuxième prix de beauté. Recevez 10€.",10);
-        Carte c2 = new CarteGagnerDuPouvoir("Carte Peuple","C’est votre anniversaire : chaque joueur doit vous donner 10€.",10);
-        Carte c3 = new CarteGagnerDuPouvoir("Carte Peuple","Commission d’expert immobilier. Recevez 25€.",25);
-        Carte c4 = new CarteGagnerDuPouvoir("Carte Peuple","La vente de vos stocks vous rapporte. Recevez 50€.",50);
-        Carte c5 = new CarteGagnerDuPouvoir("Carte Peuple","Vous héritez de 100€.",100);
-        Carte c6 = new CarteGagnerDuPouvoir("Carte Peuple","Votre placement vous rapporte. Recevez 100€.",100);
-        Carte c7 = new CarteGagnerDuPouvoir("Carte Peuple","Votre assurance vie cous rapporte. Recevez 100€.",100);
-        Carte c8 = new CarteGagnerDuPouvoir("Carte Peuple","Les impôts vous remboursent. Recevez 200€.",200);
-        Carte c9 = new CarteGagnerDuPouvoir("Carte Peuple","Erreur de la Banque en votre faveur. Recevez 200€.",200);
-        Carte c10 = new CarteDeplacement("Carte Peuple","Avancez jusqu’à la case Départ (Recevez 200€).", this.getCaseNumero(1));
-        Carte c11 = new CarteGagnerDuPouvoir("Carte Peuple","Frais de scolarité. Payez 50€.",50);
-        Carte c12 = new CarteGagnerDuPouvoir("Carte Peuple","Visite chez le Médecin. Payez 50€.",50);
-        Carte c13 = new CarteGagnerDuPouvoir("Carte Peuple","Frais d’hospitalisation. Payez 100€.",100);
-        Carte c14 = new CarteGagnerDuPouvoir("Carte Peuple","Vous devez faire des travaux sur vos propriétés : versez 40€ pour chaque maison et 115€ pour chaque hôtel que vous possédez.",40);
-        Carte c15 = new CarteAllerEnPrison("Carte Peuple","Allez en Prison. Avancez tout droit en Prison. Ne passez pas par la case Départ. Ne recevez pas 200€.");
-        Carte c16 = new CarteSortirDePrison("Carte Peuple", "Vous êtes libéré(e) de prison");
+        Carte c1 = new CarteGagnerDuPouvoir("Carte Peuple","Vous vendez votre vieille épée rouillée. Vous gagnez 10 de pouvoir.",10);
+        Carte c2 = new CarteGagnerDuPouvoir("Carte Peuple","C’est votre anniversaire : chaque joueur vous donne 10 de pouvoir.",10);
+        Carte c3 = new CarteGagnerDuPouvoir("Carte Peuple","Lors d'une promenade dans les bois, vous entendez le chant des elfes. Vous gagnez 25 de pouvoir.",25);
+        Carte c4 = new CarteGagnerDuPouvoir("Carte Peuple","Vous tombez sur le garde-manger de Saroumane ! Vous gagnez 50 de pouvoir.",50);
+        Carte c5 = new CarteGagnerDuPouvoir("Carte Peuple","Lors d'une expédition dans les mines de la Moria, vous tombez sur un filon de Mithril. Vous gagnez 100 de pouvoir.",100);
+        Carte c6 = new CartePerdreDuPouvoir("Carte Peuple","Lors d'une expédition dans les mines de la Moria, vous réveillez un Balrog de Morgoth! Vous perdez 100 de pouvoir. (Fuyez, pauvre fou!)",100);
+        Carte c7 = new CarteGagnerDuPouvoir("Carte Peuple","La récolte d'herbe a pipe de la Comté a été bonne cette année. Vous gagnez 100 de pouvoir.",100);
+        Carte c8 = new CarteGagnerDuPouvoir("Carte Peuple","Vos expéditions dans les terres désolées du Mordor vous rapportent. Vous gagnez 200 de pouvoir.",200);
+        Carte c9 = new CarteGagnerDuPouvoir("Carte Peuple","Un sage Hobbit vous apprend le secret de la meilleure bière de la Comté! Vous gagnez 200 de pouvoir.",200);
+        Carte c10 = new CarteDeplacement("Carte Peuple","Avancez jusqu’à la case Départ (Recevez 200 de pouvoir).", this.getCaseNumero(1));
+        Carte c11 = new CartePerdreDuPouvoir("Carte Peuple","Vous tombez sur une hordre d'Uruk-hai mécontents. Vous perdez 50 de pouvoir.",50);
+        Carte c12 = new CartePerdreDuPouvoir("Carte Peuple","Votre dernière soirée au Poney Fringant a été un peu trop arrosée... Vous perdez 50 de pouvoir.",50);
+        Carte c13 = new CartePerdreDuPouvoir("Carte Peuple","Oh non ! Vous vous faites pourchasser par une horde de Nazguls! Vous perdez 100 de pouvoir.",100);
+        Carte c14 = new CartePerdreDuPouvoir("Carte Peuple","Vous devez faire des travaux sur vos propriétés : vous perdez 40 de pouvoir pour chaque place forte et 115 de pouvoir pour chaque forteresse que vous possédez.",40);
+        Carte c15 = new CarteAllerEnPrison("Carte Peuple","Les cavaliers noirs vous ont attrapé.e. Vous êtes amené.e en prison pour 3 tours");
+        Carte c16 = new CarteSortirDePrison("Carte Peuple", "Vous vous évadez de prison. Vous pouvez conserver cette carte et vous en servir à tout moment.");
 
         // Ajout des cartes dans le paquet
         this.cartesPeuple.add(c1);
@@ -66,22 +67,22 @@ public class Plateau {
 	private void genererCartesEvenement() {
         this.cartesEvenement = new ArrayList<Carte>();
         // Création des cartes
-        Carte c1 = new CarteGagnerDuPouvoir("Carte Evenement","La Banque vous verse un dividende de 50€.",50);
-        Carte c2 = new CarteGagnerDuPouvoir("Carte Evenement","Votre immeuble et votre prêt rapportent. Vous devez toucher 50€.",50);
-        Carte c3 = new CarteDeplacement("Carte Evenement","Avancez jusqu’à la case Départ (Recevez 200€).", this.getCaseNumero(1));
-        Carte c4 = new CarteDeplacement("Carte Evenement","Avancez jusqu’au Gué de Bruinen. Si vous passez par la case Départ, recevez 200€.", this.getCaseNumero(12));
-        Carte c5 = new CarteDeplacement("Carte Evenement","Rendez-vous sur la casse Edoras. Si vous passez par la case Départ, recevez 200€.", this.getCaseNumero(25));
-        Carte c6 = new CarteDeplacement("Carte Evenement","Connaissez-vous Asfaloth ? Rendez-vous sur la case Asfaloth pour le rencontrer. Si vous passez par la case Départ, recevez 200€.", this.getCaseNumero(16));
-        Carte c7 = new CarteGagnerDuPouvoir("Carte Evenement","La Banque vous verse un dividende de 50€.",15);
-        Carte c8 = new CarteGagnerDuPouvoir("Carte Evenement","Vous faites des réparations sur toutes vos propriétés : versez 25€ pour chaque maison et 100€ pour chaque hôtel que vous possédez.",25);
-        Carte c9 = new CarteGagnerDuPouvoir("Carte Evenement","Vous avez été élu Président du Conseil d’Administration. Versez 50€ à chaque joueur.",50);
-        Carte c10 = new CarteDeplacementSpecial("Carte Evenement","Avancez jusqu’à la case cheval la plus proche. Si elle n’appartient à personne, vous pouvez l’acheter auprès de la Banque. Si elle appartient déjà à un autre joueur, vous devez lui payer deux fois le loyer demandé.", "Monture");
-        Carte c11 = new CarteDeplacementSpecial("Carte Evenement","Avancez jusqu’à la case cheval la plus proche. Si elle n’appartient à personne, vous pouvez l’acheter auprès de la Banque. Si elle appartient déjà à un autre joueur, vous devez lui payer deux fois le loyer demandé.", "Monture");
-        Carte c12 = new CarteDeplacementSpecial("Carte Evenement","Avancez jusqu’à la case « Bâton de Gandalf » ou « Bâton de Saroumane » la plus proche. Si elle n’appartient à personne, vous pouvez l’acheter auprès de la Banque. Si elle appartient déjà à un autre joueur, lancez les dés et payez le montant du total de vos dés multiplié par 10.", "Magicien");
+        Carte c1 = new CarteGagnerDuPouvoir("Carte Evenement","En expédition dans les montagne brumeuses, vous trouvez un précieux trésor. Vous gagnez 50 de pouvoir.",50);
+        Carte c2 = new CarteGagnerDuPouvoir("Carte Evenement","Votre petite auberge à Edoras fait le bonheur de ses habitués. Vous gagnez 50 de pouvoir.",50);
+        Carte c3 = new CarteDeplacement("Carte Evenement","Avancez jusqu’à la case Départ (Recevez 200 de pouvoir).", this.getCaseNumero(1));
+        Carte c4 = new CarteDeplacement("Carte Evenement","Aventurez vous jusqu’au Gué de Bruinen. Si vous passez par la case Départ, recevez 200 de pouvoir.", this.getCaseNumero(12));
+        Carte c5 = new CarteDeplacement("Carte Evenement","Galopez jusqu'à Edoras. Si vous passez par la case Départ, recevez 200 de pouvoir.", this.getCaseNumero(25));
+        Carte c6 = new CarteDeplacement("Carte Evenement","Connaissez-vous Asfaloth ? Rendez-vous sur la case Asfaloth pour rencontrer cette brave monture. Si vous passez par la case Départ, recevez 200 de pouvoir.", this.getCaseNumero(16));
+        Carte c7 = new CarteGagnerDuPouvoir("Carte Evenement","Vous vendez votre récolte de champignons à deux hobbits enthousiastes. Vous gagnez 15 de pouvoir.",15);
+        Carte c8 = new CartePerdreDuPouvoir("Carte Evenement","Vous faites des réparations sur toutes vos propriétés : vous perdez 25 de pouvoir pour chaque place forte et 100 de pouvoir pour chaque forteresse que vous possédez.",25);
+        Carte c9 = new CartePerdreDuPouvoir("Carte Evenement","Vous avez été élu Grand Intendant du Gondor. Vous donnez 50 de pouvoir à chaque joueur.",50);
+        Carte c10 = new CarteDeplacementSpecial("Carte Evenement","Allez à la rencontre de la Monture la plus proche. Si elle n’appartient à personne, vous pouvez l’acheter. Si elle appartient déjà à un autre joueur, vous devez lui payer deux fois le loyer demandé.", "Monture");
+        Carte c11 = new CarteDeplacementSpecial("Carte Evenement","Allez à la rencontre de la la plus proche. Si elle n’appartient à personne, vous pouvez l’acheter. Si elle appartient déjà à un autre joueur, vous devez lui payer deux fois le loyer demandé.", "Monture");
+        Carte c12 = new CarteDeplacementSpecial("Carte Evenement","Allez quérir le conseil du Magicien le plus proche. Si le bâton de ce dernier n’appartient à personne, vous pouvez l’acheter. S'il appartient déjà à un autre joueur, lancez les dés et payez le montant du total de vos dés multiplié par 10.", "Magicien");
         Carte c13 = new CarteDeplacementSpecial("Carte Evenement","Reculez de trois cases.","recul3cases");
-        Carte c14 = new CarteDeplacement("Carte Evenement","Rendez-vous sur la Montagne du Destin.", this.getCaseNumero(40));
-        Carte c15 = new CarteAllerEnPrison("Carte Evenement","Allez en Prison. Avancez tout droit en Prison. Ne passez pas par la case Départ. Ne recevez pas 200€.");
-        Carte c16 = new CarteSortirDePrison("Carte Evenement", "Vous êtes libéré(e) de prison");
+        Carte c14 = new CarteDeplacement("Carte Evenement","Rendez-vous à la Montagne du Destin.", this.getCaseNumero(40));
+        Carte c15 = new CarteAllerEnPrison("Carte Evenement","Une horde de loups Wargs vous pourchasse jusque dans les geôles de l'Isengard. Vous croupissez en prison pendant 3 tours.");
+        Carte c16 = new CarteSortirDePrison("Carte Evenement", "Vous vous évadez de prison. Vous pouvez conserver cette carte et vous en servir à tout moment.");
          
         // Ajout des cartes dans le paquet
         this.cartesEvenement.add(c1);
