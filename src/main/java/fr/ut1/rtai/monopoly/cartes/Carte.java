@@ -9,6 +9,8 @@ public abstract class Carte {
 		this.titre = titre;
 		this.description = description;
 	}
+	
+	public abstract void actionCarte();
 
 	public String getTitre() {
 		return this.titre;

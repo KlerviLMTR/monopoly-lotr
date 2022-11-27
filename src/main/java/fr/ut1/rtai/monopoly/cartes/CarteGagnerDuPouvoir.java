@@ -9,4 +9,10 @@ public class CarteGagnerDuPouvoir extends Carte {
         this.montantGagne=montant;
     }
 
+	@Override
+	public void actionCarte() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

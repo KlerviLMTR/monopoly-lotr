@@ -10,4 +10,10 @@ public class CartePerdreDuPouvoir extends Carte {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public void actionCarte() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

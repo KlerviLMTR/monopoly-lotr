@@ -9,5 +9,10 @@ public class CarteDeplacement extends Carte {
 		super(titre, description);
 		this.caseCible=caseCible;
 	}
+	@Override
+	public void actionCarte() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

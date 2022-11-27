@@ -2,21 +2,69 @@ package fr.ut1.rtai.monopoly;
 
 import java.util.ArrayList;
 
-
+import fr.ut1.rtai.monopoly.cartes.Carte;
+import fr.ut1.rtai.monopoly.cartes.CarteAllerEnPrison;
+import fr.ut1.rtai.monopoly.cartes.CarteDeplacement;
+import fr.ut1.rtai.monopoly.cartes.CarteGagnerDuPouvoir;
 import fr.ut1.rtai.monopoly.cases.*;
 
 public class Plateau {
-	
+
 	private ArrayList<Case> cases; //choix d'une ArrayList car suite de cases ordonnees
+	private ArrayList<Carte> cartesPeuple;
+	private ArrayList<Carte> cartesEvenement;
+
 
 	public Plateau() {
-		//1 - Creer les cases du plateau
 		this.genererCasesPlateau();
-		
-	
+		this.genererCartesPeuple();
+		this.genererCartesEvenement();
 	}
-	
-	
+
+	private void genererCartesPeuple() {
+		  // Creation du paquet
+        this.cartesPeuple = new ArrayList<Carte>();
+        // Création des cartes
+        Carte c1 = new CarteGagnerDuPouvoir("Carte Peuple","Vous avez gagné le deuxième prix de beauté. Recevez 10€.",10);
+        Carte c2 = new CarteGagnerDuPouvoir("Carte Peuple","C’est votre anniversaire : chaque joueur doit vous donner 10€.",10);
+        Carte c3 = new CarteGagnerDuPouvoir("Carte Peuple","Commission d’expert immobilier. Recevez 25€.",25);
+        Carte c4 = new CarteGagnerDuPouvoir("Carte Peuple","La vente de vos stocks vous rapporte. Recevez 50€.",50);
+        Carte c5 = new CarteGagnerDuPouvoir("Carte Peuple","Vous héritez de 100€.",100);
+        Carte c6 = new CarteGagnerDuPouvoir("Carte Peuple","Votre placement vous rapporte. Recevez 100€.",100);
+        Carte c7 = new CarteGagnerDuPouvoir("Carte Peuple","Votre assurance vie cous rapporte. Recevez 100€.",100);
+        Carte c8 = new CarteGagnerDuPouvoir("Carte Peuple","Les impôts vous remboursent. Recevez 200€.",200);
+        Carte c9 = new CarteGagnerDuPouvoir("Carte Peuple","Erreur de la Banque en votre faveur. Recevez 200€.",200);
+        Carte c10 = new CarteDeplacement("Carte Peuple","Avancez jusqu’à la case Départ (Recevez 200€).", this.getCaseNumero(1));
+        Carte c11 = new CarteGagnerDuPouvoir("Carte Peuple","Frais de scolarité. Payez 50€.",50);
+        Carte c12 = new CarteGagnerDuPouvoir("Carte Peuple","Visite chez le Médecin. Payez 50€.",50);
+        Carte c13 = new CarteGagnerDuPouvoir("Carte Peuple","Frais d’hospitalisation. Payez 100€.",100);
+        Carte c14 = new CarteGagnerDuPouvoir("Carte Peuple","Vous devez faire des travaux sur vos propriétés : versez 40€ pour chaque maison et 115€ pour chaque hôtel que vous possédez.",40);
+        Carte c15 = new CarteAllerEnPrison("Carte Peuple","Allez en Prison. Avancez tout droit en Prison. Ne passez pas par la case Départ. Ne recevez pas 200€.");
+
+        // Ajout des cartes dans le paquet
+        this.cartesPeuple.add(c1);
+        this.cartesPeuple.add(c2);
+        this.cartesPeuple.add(c3);
+        this.cartesPeuple.add(c4);
+        this.cartesPeuple.add(c5);
+        this.cartesPeuple.add(c6);
+        this.cartesPeuple.add(c7);
+        this.cartesPeuple.add(c8);
+        this.cartesPeuple.add(c9);
+        this.cartesPeuple.add(c10);
+        this.cartesPeuple.add(c11);
+        this.cartesPeuple.add(c12);
+        this.cartesPeuple.add(c13);
+        this.cartesPeuple.add(c14);
+        this.cartesPeuple.add(c15);
+	}
+
+	private void genererCartesEvenement() {
+		// TODO Auto-generated method stub
+
+	}
+
+
 
 	/**
 	 *Genere l'ensemble des cases du plateau avec leurs specificites propres
@@ -107,7 +155,7 @@ public class Plateau {
 		this.cases.add(c39);
 		Territoire c40 = new Territoire("Montagne du Destin", ECouleurCase.bleu,400,200,200, new int[] {50,200,600,1400,1700,2000});
 		this.cases.add(c40);
-		
+
 		//ajouter les positions des cases sur le plateau
 		for(Case c:cases) {
 			int numCase = cases.indexOf(c);
@@ -115,9 +163,9 @@ public class Plateau {
 		}
 
 	}
-	
 
-	
+
+
 	/**
 	 * @param numero
 	 * @return 
@@ -127,30 +175,30 @@ public class Plateau {
 	public Case getCaseNumero(int numero){
 		return this.cases.get(numero-1);
 	}
-	
+
 	public ArrayList<Case>getCases(){
 		return this.cases;
 	}
-	
-	
-	
 
 
 
 
 
-	
 
 
 
-//	public String afficherPositionJoueurs() {
-//		String aff = "--- Position des joueurs ---\n\n";
-//		for(int i=0;i<this.joueurs.size();i++) {
-//			Joueur jCourant = this.joueurs.get(i);
-//			aff+= "[ " + this.joueurs.get(i).getNomPion() + " : case n° "+ this.positionsJoueurs.get(jCourant.getPion()).getNumCase()+" ]\n";
-//		}
-//		return aff;
-//	}
+
+
+
+
+	//	public String afficherPositionJoueurs() {
+	//		String aff = "--- Position des joueurs ---\n\n";
+	//		for(int i=0;i<this.joueurs.size();i++) {
+	//			Joueur jCourant = this.joueurs.get(i);
+	//			aff+= "[ " + this.joueurs.get(i).getNomPion() + " : case n° "+ this.positionsJoueurs.get(jCourant.getPion()).getNumCase()+" ]\n";
+	//		}
+	//		return aff;
+	//	}
 
 
 
