@@ -27,72 +27,54 @@ public class PartieDeMonopoly {
 		return this.joueurs;
 	}
 
-	// ---------- Fonctions relatives à la creation des joueurs --------------
+	// ---------- Methodes relatives à la creation des joueurs --------------
 
 	/**
 	 *definit le nb de joueurs particpant a la partie. Utilise traiterReponseQuestionNbJoueurs() et verifierNbJoueurs 
 	 * @throws InterruptedException 
 	 */
-	public void definirNbJoueurs() throws InterruptedException {
-		// Ecrire les messages destinés aux joueurs
-		System.out.println("\n--- INSCRIPTION DES JOUEURS ---\n\n");
-		this.afficherBarreChargement();
-		boolean inputOk = false;
-		int cptErr = 0;
-		String questionCasNominal = "Combien de joueurs participeront à la partie ? (Saisissez votre réponse , 2 à 6 joueurs autorisés) :";
-		String questionSiErreur = "Le nombre de joueurs doit être un chiffre compris entre 2 et 6. Veuillez le saisir à nouveau : ";
-		String texteSiTropDerreurs = "Bon allez...Un petit effort...";
-		while (!inputOk) {	
-			try {
-				
-				int nb = this.traiterReponseQuestionChiffreAttendu(questionCasNominal,questionSiErreur, texteSiTropDerreurs, cptErr);
-				this.verifierNbJoueurs(nb);	
-				this.nbJoueurs= nb;
-				inputOk=true;
-			} catch (IllegalArgumentException e1){
-				cptErr++;
-				inputOk=false;
-			} catch(InputMismatchException e2) {
-				cptErr++;
-				inputOk=false;
-				
-			}
-		}
-	}
-	
-	/**
-	 * @param questionCasNominal
-	 * @param questionSiErreur
-	 * @param msgTropdErreurs
-	 * @param cptErr
-	 * @return
-	 * Methode generique pour recuperer la saisie de l'utilisateur sous forme d'entier
-	 */
-	private int traiterReponseQuestionChiffreAttendu(String questionCasNominal, String questionSiErreur, String msgTropdErreurs, int cptErr) {
-		int nb=0;
-		//Si l'utilisateur s'est trompe trop de fois, afficher un message
-		if (cptErr==0) {
-			nb=this.poserQuestionJoueurInt(questionCasNominal);
-		}
-		else {
-			if(cptErr>4) {
-				System.out.println(msgTropdErreurs);
-			}
-			nb=this.poserQuestionJoueurInt(questionSiErreur);
-		}
-		return nb;
-	}
+    public void definirNbJoueurs() {
+        // Ecrire les messages destinés aux joueurs
+        System.out.println("--- Inscription des joueurs ---\n\n");
+        boolean inputOk = false;
+        int cptErr = 0;
+        while (!inputOk) {
+            try {
+                String question = poserQuestionNombreDeJoueurs(cptErr);
+                int nbJoueurs = poserQuestionJoueurInt(question);
+                if (verifierNbJoueurs(nbJoueurs)) {
+                    this.nbJoueurs = nbJoueurs;
+                }
+                inputOk = true;
+            } catch (IllegalArgumentException e) {
+                cptErr++;
+            }
+        }
+    }
+
+    private String poserQuestionNombreDeJoueurs(int repetitionDeLaQuestion) {
+        String question;
+        if (repetitionDeLaQuestion == 0) {
+            question = MessagesJeu.questionNbJoueurs1;
+        } else if (repetitionDeLaQuestion <= 4) {
+            question = MessagesJeu.questionNbJoueursERR;
+        } else {
+            question = MessagesJeu.texteSiTropDerreurs;
+        }
+        return question;
+    }
+   
 	
 
 	/**
 	 * @param nb
 	 * @throws IllegalArgumentException genere une exception si l'utilisateur saisit un nb de joueurs invalide
 	 */
-	protected void verifierNbJoueurs(int nb) throws IllegalArgumentException {
+	protected boolean verifierNbJoueurs(int nb) throws IllegalArgumentException {
 		if (nb < 2 || nb > 6) {
 			throw new IllegalArgumentException("Format de reponse invalide");
 		}
-		this.nbJoueurs = nb;
+		return true;
 	}
 
 	/**
@@ -132,31 +114,7 @@ public class PartieDeMonopoly {
 
 
 	
-
-	/**
-	 * @param question
-	 * @return recupere la reponse pour une question donnee sous forme de chaine
-	 */
-	public String poserQuestionJoueurChaine(String question) {
-		String reponse = "";
-		System.out.println(question + "\n");
-		Scanner scanner = new Scanner(System.in);
-		reponse = scanner.nextLine();
-		return reponse;
-	}
-
-	/**
-	 * @param question
-	 * @return recupere la reponse pour une question donnee sous forme d'entier
-	 */
-	public int poserQuestionJoueurInt(String question) {
-		int reponse;
-		System.out.println(question + "\n");
-		Scanner scannerInt = new Scanner(System.in);
-		reponse = scannerInt.nextInt();
-		// scanner.close();
-		return reponse;
-	}
+	// ---------- Methodes relatives a la generation et distribution des pions --------------
 
 	/**
 	 * Genere les pions et les attribue aux joueurs
@@ -191,24 +149,21 @@ public class PartieDeMonopoly {
 			Thread.sleep(1000);
 			
 			this.afficherLesPions(pionsDispo);
-			int numPion;
 			int cptErr = 0;
-			String questionCasNominal =">>> "+ j.getNom()+ ", veuillez choisir votre pion : (saisir le chiffre correspondant)";
-			String questionSiErreur = ">>> Saisie incorrecte. Veuillez saisir le chiffre correspondant à votre choix de personnage. : ";
-			String texteSiTropDerreurs = "Bon allez...Un petit effort...";
 			boolean inputOk = false;
 			
 			while(!inputOk) {
 				try {
-					numPion = this.traiterReponseQuestionChiffreAttendu(questionCasNominal, questionSiErreur, texteSiTropDerreurs, cptErr)-1;
-					this.verifierNumPionOK(numPion, pionsDispo);
-					System.out.println("OK ! \n");
-					Thread.sleep(1000);
-					j.setPion(pionsDispo.get(numPion));
-					pionsDispo.remove(numPion);
-					inputOk = true;
+	                String question = poserQuestionChoixPion(cptErr);
+	                int choixPion = this.poserQuestionJoueurInt(">>> "+ j.getNom()+", "+question)-1;
+	                if (this.verifierNumPionOK(choixPion, pionsDispo)) {
+	                	System.out.println("OK ! \n");
+						Thread.sleep(1000);
+						j.setPion(pionsDispo.get(choixPion));
+						pionsDispo.remove(choixPion);
+	                }		
+	                inputOk = true;
 				} catch (Exception e) {
-					inputOk = false;
 					cptErr ++;
 				}
 			}
@@ -216,62 +171,88 @@ public class PartieDeMonopoly {
 		}
 
 		Thread.sleep(1000);
-		System.out.println("... Creation des joueurs ...");
+		System.out.println("... Creation des joueurs et de leurs pions ...");
 		this.afficherBarreChargement();
 		this.afficherJoueursEtPions();
 	}
+	
+   
+
+    /**
+     * @param repetitionDeLaQuestion
+     * @return
+     * genere les questions pour le choix des pions
+     */
+    private String poserQuestionChoixPion(int repetitionDeLaQuestion) {
+        String question;
+        if (repetitionDeLaQuestion == 0) {
+            question = MessagesJeu.questionChoixPion1;
+        } else if (repetitionDeLaQuestion <= 4) {
+            question = MessagesJeu.questionChoixPionERR;
+        } else {
+            question = MessagesJeu.texteSiTropDerreurs;
+        }
+        return question;
+    }
 
 
 
-	private void verifierNumPionOK(int numeroPionChoisi, ArrayList<Pion> pionsDispo) throws IllegalArgumentException {
+	/**
+	 * @param numeroPionChoisi
+	 * @param pionsDispo
+	 * @return
+	 * @throws IllegalArgumentException
+	 * Verifie que l'utilisateur a saisi un numero de pion qui correspond bien a un pion disponible
+	 */
+	private boolean verifierNumPionOK(int numeroPionChoisi, ArrayList<Pion> pionsDispo) throws IllegalArgumentException {
 		if (numeroPionChoisi < 0 || numeroPionChoisi >= pionsDispo.size()) {
 			throw new IllegalArgumentException("Format de reponse invalide.");
 		}
+		return true;
 	}
 
 
-	private void afficherLesPions(ArrayList<Pion> pionsDispos) {
-		System.out.println(">>> Pions disponibles :\n");
-		for (int i = 0; i < pionsDispos.size(); i++) {
-			System.out.println((i + 1) + " - " + pionsDispos.get(i).getTypePion().afficherPion());
-		}
-		System.out.println("\n\n");
+
+
+
+	
+	// ---------- Methodes de dialogue avec l'utilisateur -------------
+		
+	/**
+	 * @param question
+	 * @return recupere la reponse pour une question donnee sous forme de chaine
+	 */
+	public String poserQuestionJoueurChaine(String question) {
+		String reponse = "";
+		System.out.println(question + "\n");
+		Scanner scanner = new Scanner(System.in);
+		reponse = scanner.nextLine();
+		return reponse;
 	}
 
-	private void afficherJoueursEtPions() {
-		// Ecrire les messages destinés aux joueurs
-		System.out.println("--- LISTE DES JOUEURS ---\n\n");
-		for (Joueur j : this.joueurs) {
-			System.out.println("- " + j.toString());
-		}
-	}
-
-	private EPion pionSelonChiffreChoisi(int chiffre) {
-		EPion p = EPion.Gandalf;// Valeur par defaut
-		switch (chiffre) {
-		case 1:
-			p = EPion.Gandalf;
-			break;
-		case 2:
-			p = EPion.Frodon;
-			break;
-		case 3:
-			p = EPion.Aragorn;
-			break;
-		case 4:
-			p = EPion.Legolas;
-			break;
-		case 5:
-			p = EPion.Gimli;
-			break;
-		case 6:
-			p = EPion.Galadriel;
-		}
-		return p;
-	}
+	/**
+	 * @param question
+	 * @return recupere la reponse pour une question donnee sous forme d'entier
+	 */
+	  public int poserQuestionJoueurInt(String question) {
+	        System.out.println(question + "\n");
+	        Scanner scannerInt = new Scanner(System.in);
+	        int reponse = -1;
+	        try {
+	            reponse = scannerInt.nextInt();
+	        } catch (InputMismatchException e) {
+	            throw new IllegalArgumentException("Merci de saisir un nombre !");
+	        }
+	        // scanner.close();
+	        return reponse;
+	    }
 	
 	// ---------- Methodes d'affichage -------------
 	
+	/**
+	 * @throws InterruptedException
+	 * Affichage convivial d'un chargement
+	 */
 	public void afficherBarreChargement() throws InterruptedException {
 		System.out.print(". ");
 		Thread.sleep(100);
@@ -286,17 +267,30 @@ public class PartieDeMonopoly {
 		System.out.print(". \n\n");
 		Thread.sleep(100);
 
-
-
-		
 	}
-
-	public String afficherJoueurs() {
-		String aff = "--- Liste des joueurs ---\n\n";
+	
+	/**
+	 *affiche les joueurs et leur pion associe 
+	 */
+	private void afficherJoueursEtPions() {
+		// Ecrire les messages destinés aux joueurs
+		System.out.println("--- LISTE DES JOUEURS ---\n\n");
 		for (Joueur j : this.joueurs) {
-			aff += j.toString() + "\n";
+			System.out.println("- " + j.toString());
 		}
-		return aff;
 	}
+	
+	/**
+	 * @param pionsDispos
+	 * Affiche les pions selon leur disponibilite
+	 */
+	private void afficherLesPions(ArrayList<Pion> pionsDispos) {
+		System.out.println(">>> Pions disponibles :\n");
+		for (int i = 0; i < pionsDispos.size(); i++) {
+			System.out.println((i + 1) + " - " + pionsDispos.get(i).getTypePion().afficherPion());
+		}
+		System.out.println("\n\n");
+	}
+
 
 }

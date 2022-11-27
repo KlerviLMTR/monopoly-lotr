@@ -60,7 +60,7 @@ public class Plateau {
         this.cartesPeuple.add(c13);
         this.cartesPeuple.add(c14);
         this.cartesPeuple.add(c15);
-        this.cartesEvenement.add(c16);
+        this.cartesPeuple.add(c16);
 	}
 
 	private void genererCartesEvenement() {
@@ -82,8 +82,7 @@ public class Plateau {
         Carte c14 = new CarteDeplacement("Carte Evenement","Rendez-vous sur la Montagne du Destin.", this.getCaseNumero(40));
         Carte c15 = new CarteAllerEnPrison("Carte Evenement","Allez en Prison. Avancez tout droit en Prison. Ne passez pas par la case Départ. Ne recevez pas 200€.");
         Carte c16 = new CarteSortirDePrison("Carte Evenement", "Vous êtes libéré(e) de prison");
-     
-        
+         
         // Ajout des cartes dans le paquet
         this.cartesEvenement.add(c1);
         this.cartesEvenement.add(c2);
