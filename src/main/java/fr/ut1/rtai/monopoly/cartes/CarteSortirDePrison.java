@@ -13,11 +13,11 @@ public class CarteSortirDePrison extends Carte {
 	public void actionCarte(Joueur j, Plateau p) {
 		if (this.getTitre().equals("Carte Peuple")){
 			p.getCartesPeuple().remove(0);
-			j.setNbCartesSortiePrison(true);
+			j.setPossedeCartesSortiePrisonPeuple(true);
 		}
 		else {
 			p.getCartesEvenement().remove(0);
-			j.setNbCartesSortiePrison(true);
+			j.setPossedeCartesSortiePrisonEvenement(true);
 		}
 	}
 

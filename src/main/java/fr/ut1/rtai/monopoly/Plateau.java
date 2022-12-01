@@ -27,16 +27,25 @@ public class Plateau {
 		tmpHash.put(ECouleurCase.vert, 3);
 		tmpHash.put(ECouleurCase.bleu, 2);
 		NBLOTPARCOULEUR = Collections.unmodifiableMap(tmpHash);
+	
 	}
 	
 	private ArrayList<Case> cases; //choix d'une ArrayList car suite de cases ordonnees
 	private ArrayList<Carte> cartesPeuple;
 	private ArrayList<Carte> cartesEvenement;
+	private ArrayList<Territoire> territoires; // servira pour la gestion de l'anneau unique
 
 
 	public Plateau() {
 
 		this.genererCasesPlateau();
+		this.territoires = new ArrayList<Territoire>();
+		for(Case c: this.cases) {
+			if(c instanceof Territoire) {
+				this.territoires.add((Territoire) c);
+			}
+		}
+		
 		this.genererCartesPeuple();
 		this.genererCartesEvenement();
 		for (Carte c : this.cartesEvenement) {
@@ -45,6 +54,11 @@ public class Plateau {
 		for (Carte c : this.cartesPeuple) {
 			c.setPlateau(this);
 		}
+		
+		// positionner l'anneau sur le plateau
+		this.territoires.get(0).positionnerAnneauUnique();
+		
+		
 	}
 
 	private void genererCartesPeuple() {

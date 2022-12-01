@@ -12,7 +12,7 @@ public class CarteAllerEnPrison extends Carte {
 	@Override
 	public void actionCarte(Joueur j, Plateau p) {
 		j.estMisEnPrison();
-		j.getPion().avancer(10);
+		j.getPion().avancerPion(10);
 		super.estPiocheeEtRemiseAuFondDuPaquet();
 	}
 

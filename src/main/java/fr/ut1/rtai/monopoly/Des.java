@@ -6,8 +6,10 @@ import java.util.Random;
  *
  */
 public class Des {
-	int chiffreDe1;
-	int chiffreDe2;
+	private int chiffreDe1;
+	private int chiffreDe2;
+	private int lancerTotal;
+	
 	/** 
 	 * Compte si l'oeil de Sauron a ete tire une ou deux fois lors d'un lancer 
 	 */
@@ -79,8 +81,12 @@ public class Des {
 			this.estUnDouble=false;
 		
 		}
+		this.lancerTotal = chiffre1 + chiffre2 ;
 	}
 	
+	public int getLancerTotal() {
+		return this.lancerTotal;
+	}
 	
 	/**
 	 * verifie si le lancer courant est un double

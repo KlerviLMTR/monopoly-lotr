@@ -20,11 +20,7 @@ class PartieDeMonopolyTests {
 		this.p=null;
 	}
 
-	@Test
-	public void testCreationJoueursNbJoueursEntre2et6() {
-		this.p.verifierNbJoueurs(3);
-		assertEquals(this.p.getNbJoueurs(),3);
-	}
+
 	
 	@Test
 	public void testCreationJoueursNbJoueursIncorrect() {
@@ -34,10 +30,10 @@ class PartieDeMonopolyTests {
 	}
 	
 	@Test
-	public void testCreationJoueursNomsEtPionParDefaut() {
+	public void testCreationJoueursNoms() {
 		this.p.genererJoueurs(3,new String[]{"Toto","Titi","Tutu"});
-		assertEquals(this.p.getJoueurs().get(1).getNom(),"Titi");
-		assertEquals(this.p.getJoueurs().get(1).getNomPion(),"Gandalf");
+		assertTrue(this.p.getJoueurs().get(1).getNom().equals("Titi"));
+
 
 	}
 	

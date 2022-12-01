@@ -61,5 +61,15 @@ public class CaseTest {
 		assertEquals(2000, ((Territoire)(this.p.getCaseNumero(40))).getTableDesLoyers()[5]);
 
 	}
+	
+	/**
+	 *
+	 */
+	@Test 
+	public void testNumCase() {
+		assertEquals(2, this.p.getCaseNumero(3).getNumCase());
+	}
+	
+	
 
 }

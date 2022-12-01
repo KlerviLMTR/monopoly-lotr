@@ -35,6 +35,7 @@ public class Joueur {
 		this.monturesPossedees = new HashSet<Monture>();
 		this.territoiresPossedes = new HashSet<Territoire>();
 		this.batonsDeMagicienPossedes = new HashSet<BatonDeMagicien>();
+		this.solde=1500;
 	}
 	
 	
@@ -66,7 +67,7 @@ public class Joueur {
 		return this.pion.getTypePion().name();
 	}
 	
-	public boolean isEstEnPrison() {
+	public boolean estEnPrison() {
 		return this.estEnPrison;
 	}
 
@@ -74,17 +75,24 @@ public class Joueur {
 		return this.pion;
 	}
 	
-	public boolean getNbCartesSortiePrisonPeuple() {
+	public boolean possedeUneCarteSortiePrison() {
+		return this.possedeCarteSortiePrisonEvenement || this.possedeCarteSortiePrisonPeuple;
+	}
+	
+	public boolean getPossedeCartesSortiePrisonPeuple() {
 		return this.possedeCarteSortiePrisonPeuple;
 	}
-	public boolean getNbCartesSortiePrisonEvenement() {
+	public boolean getPossedeCartesSortiePrisonEvenement() {
 		return this.possedeCarteSortiePrisonEvenement;
 	}
 
-	public void setNbCartesSortiePrison(boolean b) {
+	public void setPossedeCartesSortiePrisonPeuple(boolean b) {
 		this.possedeCarteSortiePrisonPeuple = b;
 	}
 	
+	public void setPossedeCartesSortiePrisonEvenement(boolean b) {
+		this.possedeCarteSortiePrisonEvenement = b;
+	}
 	//  --------  Méthodes du joueur ----------
 	
 	public void piocherUneCartePeuple() {
@@ -95,7 +103,7 @@ public class Joueur {
 		this.solde += pouvoir;
 	}
 
-	public void perdrePouvoir(int pouvoir) {
+	public void perdreDuPouvoir(int pouvoir) {
 		this.solde -= pouvoir;
 
 	}
@@ -178,13 +186,12 @@ public class Joueur {
 		this.estEnPrison = true;
 	}
 
-	public boolean getEstEmprisonne() {
-		return this.estEnPrison;
-	}
 	
 	public String toString() {
 		return this.nom + " dans le rôle de "+ this.pion.getTypePion().afficherPion();
 	}
+
+
 
 
 	

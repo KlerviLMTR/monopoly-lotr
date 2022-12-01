@@ -53,6 +53,15 @@ public class DesTest {
 	}
 	
 	/**
+	 *Teste si le compteur "oeil de Sauron" est bien initialise a 7
+	 */
+	@Test
+	public void testLancerTotal() {
+		this.des.traiterResultatLancerDes(1, 4);
+		assertEquals(this.des.getLancerTotal(),5);
+	}
+	
+	/**
 	 *Teste si le compteur "oeil de Sauron" vaut 1 apres un lancer 1 - *
 	 */
 	@Test

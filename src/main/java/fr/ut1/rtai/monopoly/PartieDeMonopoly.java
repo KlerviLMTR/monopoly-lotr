@@ -159,7 +159,7 @@ public class PartieDeMonopoly {
 			while(!inputOk) {
 				try {
 	                String question = poserQuestionChoixPion(cptErr);
-	                int choixPion = this.poserQuestionJoueurInt(">>> "+ j.getNom()+", "+question)-1;
+	                int choixPion = PartieDeMonopoly.poserQuestionJoueurInt(">>> "+ j.getNom()+", "+question)-1;
 	                if (this.verifierNumPionOK(choixPion, pionsDispo)) {
 	                	System.out.println("OK ! \n");
 						Thread.sleep(1000);
@@ -226,7 +226,7 @@ public class PartieDeMonopoly {
 	 * @param question
 	 * @return recupere la reponse pour une question donnee sous forme de chaine
 	 */
-	public String poserQuestionJoueurChaine(String question) {
+	public static String poserQuestionJoueurChaine(String question) {
 		String reponse = "";
 		System.out.println(question + "\n");
 		Scanner scanner = new Scanner(System.in);
@@ -238,7 +238,7 @@ public class PartieDeMonopoly {
 	 * @param question
 	 * @return recupere la reponse pour une question donnee sous forme d'entier
 	 */
-	  public int poserQuestionJoueurInt(String question) {
+	  public static int poserQuestionJoueurInt(String question) {
 	        System.out.println(question + "\n");
 	        Scanner scannerInt = new Scanner(System.in);
 	        int reponse = -1;
@@ -250,7 +250,34 @@ public class PartieDeMonopoly {
 	        // scanner.close();
 	        return reponse;
 	    }
+	  
+	  
 	
+	  
+	  public static String poserQuestionReponseOuiOuNon(String question) {
+		  Scanner scanner = new Scanner(System.in);
+		  String rep;
+		  System.out.println(question);
+		  rep = scanner.nextLine();
+
+		  int compteurReponsesFausses = 0;
+		  while(!rep.toUpperCase().equals("OUI")&& !rep.toUpperCase().equals("NON")){
+			  compteurReponsesFausses++;
+			  if (compteurReponsesFausses > 4) {
+				  System.out.println(MessagesJeu.texteSiTropDerreurs);
+				  rep = scanner.nextLine();
+			  }
+			  else {
+				  System.out.println("Veuillez répondre par oui ou par non. :");
+				  rep = scanner.nextLine();
+			  }
+
+		  }
+
+		  return rep;
+	  }
+	  
+	 
 	// ---------- Methodes d'affichage -------------
 	
 	/**

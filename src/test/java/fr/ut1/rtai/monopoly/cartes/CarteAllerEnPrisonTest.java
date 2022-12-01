@@ -40,13 +40,13 @@ public class CarteAllerEnPrisonTest {
 	
 	@Test
 	public void testEstEnPrisonAvant() {
-		assertFalse(j.isEstEnPrison());
+		assertFalse(j.estEnPrison());
 	}
 	
 	@Test
 	public void testEstEnPrisonApres() {
 		c.actionCarte(j, p);
-		assertTrue(j.isEstEnPrison());
+		assertTrue(j.estEnPrison());
 	}
 	
 	@Test
