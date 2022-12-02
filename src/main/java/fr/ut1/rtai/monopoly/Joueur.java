@@ -110,6 +110,11 @@ public class Joueur {
 	public void piocherUneCartePeuple() {
 		this.plateau.getCartesPeuple().get(0).actionCarte(this);
 	}
+	
+	public void piocherUneCarteEvenement() {
+		this.plateau.getCartesEvenement().get(0).actionCarte(this);
+	}
+
 
 	public void gagnerduPouvoir(int pouvoir) {
 		this.solde += pouvoir;
