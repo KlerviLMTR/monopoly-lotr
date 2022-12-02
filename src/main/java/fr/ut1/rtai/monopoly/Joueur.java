@@ -93,6 +93,18 @@ public class Joueur {
 	public void setPossedeCartesSortiePrisonEvenement(boolean b) {
 		this.possedeCarteSortiePrisonEvenement = b;
 	}
+	
+	public Set<Monture> getMonturesPossedees(){
+		return this.monturesPossedees;
+	}
+	public Set<BatonDeMagicien> getBatonsDeMagicienPossedes(){
+		return this.batonsDeMagicienPossedes;
+	}
+	public Set<Territoire> getTerritoiresPossedees(){
+		return this.territoiresPossedes;
+	}
+	
+	
 	//  --------  Méthodes du joueur ----------
 	
 	public void piocherUneCartePeuple() {
@@ -108,6 +120,16 @@ public class Joueur {
 
 	}
 	
+	/**
+	 * @param c
+	 * @return
+	 * Verifie que le joueur possede ou non une case donnee
+	 */
+	public boolean possedeCase(Case c) {
+		return this.territoiresPossedes.contains(c) || this.monturesPossedees.contains(c) || this.batonsDeMagicienPossedes.contains(c);
+	
+	}
+	
 	public int getNbMonturesPossedees() {
 		return this.monturesPossedees.size();
 	}
@@ -116,6 +138,9 @@ public class Joueur {
 		return this.batonsDeMagicienPossedes.size();
 	}
 	
+	public int getNbTerritoiresPossedes() {
+		return this.territoiresPossedes.size();
+	}
 	
 	/**
 	 *Precondition : possede au moins 1 carte sortie de prison 
@@ -163,19 +188,19 @@ public class Joueur {
 	}
 	
 	/**
-	 * @param c
+	 * @param case1
 	 * Permet au joueur d'acheter une case donnee.
 	 */
-	public void acheterCase(CasePropriete c) {
-		c.setProprietaire(this);
-		if (c instanceof Monture) {
-			this.monturesPossedees.add((Monture) c);
+	public void acheterCase(CasePropriete case1) {
+		case1.setProprietaire(this);
+		if (case1 instanceof Monture) {
+			this.monturesPossedees.add((Monture) case1);
 		}
-		else if (c instanceof Territoire) {
-			this.territoiresPossedes.add((Territoire) c);
+		else if (case1 instanceof Territoire) {
+			this.territoiresPossedes.add((Territoire) case1);
 		}
 		else {
-			this.batonsDeMagicienPossedes.add((BatonDeMagicien) c);
+			this.batonsDeMagicienPossedes.add((BatonDeMagicien) case1);
 		}
 	}
 	

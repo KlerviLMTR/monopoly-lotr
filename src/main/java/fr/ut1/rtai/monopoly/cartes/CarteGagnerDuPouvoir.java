@@ -1,7 +1,6 @@
 package fr.ut1.rtai.monopoly.cartes;
 
 import fr.ut1.rtai.monopoly.Joueur;
-import fr.ut1.rtai.monopoly.Plateau;
 
 public class CarteGagnerDuPouvoir extends Carte {
 	
@@ -13,7 +12,7 @@ public class CarteGagnerDuPouvoir extends Carte {
     }
 
 	@Override
-	public void actionCarte(Joueur j, Plateau p) {
+	public void actionCarte(Joueur j) {
 		System.out.println("Completez moi! ...");
 		super.estPiocheeEtRemiseAuFondDuPaquet();
 

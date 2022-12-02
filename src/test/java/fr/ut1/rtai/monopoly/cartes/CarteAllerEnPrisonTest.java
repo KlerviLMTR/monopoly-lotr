@@ -20,6 +20,7 @@ public class CarteAllerEnPrisonTest {
 	public void setUp() throws Exception {
 		this.p = new Plateau();
 		this.c = new CarteAllerEnPrison("Carte prison", "Allez en prison");
+		this.c.setPlateau(p);
 		this.j = new Joueur("Toto");
 		this.j.setPion(new Pion(EPion.Aragorn));
 	}
@@ -34,8 +35,8 @@ public class CarteAllerEnPrisonTest {
 	
 	@Test
 	public void testPositionPionJoueurMisEnPrison() {
-		c.actionCarte(j, p);
-		assertEquals(10,j.getPion().getNumCase());
+		c.actionCarte(j);
+		assertEquals(11,j.getPion().getNumCase());
 	}
 	
 	@Test
@@ -45,13 +46,13 @@ public class CarteAllerEnPrisonTest {
 	
 	@Test
 	public void testEstEnPrisonApres() {
-		c.actionCarte(j, p);
+		c.actionCarte(j);
 		assertTrue(j.estEnPrison());
 	}
 	
 	@Test
 	public void verifNbToursPrisonInit() {
-		c.actionCarte(j, p);
+		c.actionCarte(j);
 		assertEquals(0, j.getNbToursEnPrison());
 	}
 

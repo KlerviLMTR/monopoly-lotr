@@ -16,7 +16,7 @@ public abstract class Carte {
 	
 	
 	
-	public abstract void actionCarte(Joueur j, Plateau p);
+	public abstract void actionCarte(Joueur j);
 	
 	public void estPiocheeEtRemiseAuFondDuPaquet() {
 		if (this.getTitre().equals("Carte Peuple")){
@@ -30,9 +30,13 @@ public abstract class Carte {
 	}
 	
 
-
+	// ------ Getters et setters utiles -----
 	public void setPlateau(Plateau p ) {
 		this.p=p;
+	}
+	
+	public Plateau getPlateau() {
+		return this.p;
 	}
 
 	public String getTitre() {
@@ -42,6 +46,8 @@ public abstract class Carte {
 	public String getDesc() {
 		return this.description;
 	}
+	
+	//--------------------------------------------
 
 
 	@Override

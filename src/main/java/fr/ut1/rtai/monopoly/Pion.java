@@ -44,7 +44,7 @@ public class Pion {
 	 */
 	public void avancerPion(int nbCases) {
 		this.passageCaseDepart = false;
-		int nbTotal = this.getNumCase() + nbCases+1;
+		int nbTotal = this.getNumCase() + nbCases;
 		this.numeroCase = nbTotal % 40;
 		if (nbTotal > 40) {
 			this.passageCaseDepart = true;

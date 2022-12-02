@@ -6,10 +6,13 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import fr.ut1.rtai.monopoly.cases.CasePropriete;
+
 public class JoueurTest {
 	private Plateau p;
 	private Pion pion;
 	private Joueur j;
+
 	
 	@Before
 	public void setUp() throws Exception {
@@ -90,4 +93,40 @@ public class JoueurTest {
 		assertTrue(this.j.estEnPrison());
 		assertEquals(this.j.getNbToursEnPrison(),0);
 	}
+	
+
+	
+	@Test
+	public void testAcheterBreeTailleSetTerritoire() {
+		this.j.acheterCase((CasePropriete) this.p.getCaseNumero(9));
+		assertEquals(this.j.getNbBatonsDeMagicienPossedes(),0);
+		assertEquals(this.j.getNbMonturesPossedees(),0);
+		assertEquals(this.j.getNbTerritoiresPossedes(),1);
+	}
+	
+	@Test
+	public void testAcheterBillTailleSetMonture() {
+		this.j.acheterCase((CasePropriete) this.p.getCaseNumero(6));
+		assertEquals(this.j.getNbBatonsDeMagicienPossedes(),0);
+		assertEquals(this.j.getNbMonturesPossedees(),1);
+		assertEquals(this.j.getNbTerritoiresPossedes(),0);
+	}
+	
+	@Test
+	public void testAcheterBatonGandalfTailleSetBatons() {
+		this.j.acheterCase((CasePropriete) this.p.getCaseNumero(13));
+		assertEquals(this.j.getNbBatonsDeMagicienPossedes(),1);
+		assertEquals(this.j.getNbMonturesPossedees(),0);
+		assertEquals(this.j.getNbTerritoiresPossedes(),0);
+	}
+	
+
+	@Test
+	public void testPossedeCaseGripoil() {
+		this.j.acheterCase((CasePropriete)this.p.getCaseNumero(36));
+		assertTrue(this.j.possedeCase(this.p.getCaseNumero(36)));
+		assertFalse(this.j.possedeCase(this.p.getCaseNumero(2)));
+
+	}
+	
 }

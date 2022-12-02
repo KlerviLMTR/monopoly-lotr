@@ -41,5 +41,6 @@ public class PionTest {
 		this.des.traiterResultatLancerDes(3, 2);
 		this.p.avancerPion(this.des.getLancerTotal());
 		assertEquals(4, this.plateau.getCaseNumero(5).getNumCase());
+		assertEquals(this.plateau.getCases().get(this.p.getNumCase()).getNomCase(), "Bill le Poney");
 	}
 }

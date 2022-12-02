@@ -14,7 +14,7 @@ public class CartePerdreDuPouvoir extends Carte {
 	}
 
 	@Override
-	public void actionCarte(Joueur j, Plateau p) {
+	public void actionCarte(Joueur j) {
 		System.out.println("Completez moi! ...");
 
 		super.estPiocheeEtRemiseAuFondDuPaquet();
