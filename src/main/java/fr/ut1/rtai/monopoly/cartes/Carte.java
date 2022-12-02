@@ -1,6 +1,7 @@
 package fr.ut1.rtai.monopoly.cartes;
 
 import fr.ut1.rtai.monopoly.Joueur;
+import fr.ut1.rtai.monopoly.PartieDeMonopoly;
 import fr.ut1.rtai.monopoly.Plateau;
 
 public abstract class Carte {
@@ -8,6 +9,8 @@ public abstract class Carte {
 	private String titre;
 	private String description;
 	private Plateau p;
+	private PartieDeMonopoly partie;
+	
 
 	public Carte(String titre, String description) {
 		this.titre = titre;
@@ -33,6 +36,10 @@ public abstract class Carte {
 	// ------ Getters et setters utiles -----
 	public void setPlateau(Plateau p ) {
 		this.p=p;
+	}
+	
+	public void setPartieDeMonopoly(PartieDeMonopoly p) {
+		this.partie=p;
 	}
 	
 	public Plateau getPlateau() {

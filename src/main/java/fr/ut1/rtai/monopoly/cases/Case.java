@@ -1,10 +1,12 @@
 package fr.ut1.rtai.monopoly.cases;
 
 import fr.ut1.rtai.monopoly.Joueur;
+import fr.ut1.rtai.monopoly.PartieDeMonopoly;
 
 public abstract class Case {
 	private String intitule;
 	private int numCase;
+	private PartieDeMonopoly partie;
 	
 	public Case(String intitule) {
 		this.intitule=intitule;
@@ -22,6 +24,10 @@ public abstract class Case {
 	
 	public String getNomCase() {
 		return this.intitule;
+	}
+	
+	public void setPartieDeMonopoly(PartieDeMonopoly p) {
+		this.partie=p;
 	}
 
 	

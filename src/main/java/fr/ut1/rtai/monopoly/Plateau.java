@@ -29,12 +29,12 @@ public class Plateau {
 		NBLOTPARCOULEUR = Collections.unmodifiableMap(tmpHash);
 	
 	}
-	
+	private PartieDeMonopoly partie;
 	private ArrayList<Case> cases; //choix d'une ArrayList car suite de cases ordonnees
 	private ArrayList<Carte> cartesPeuple;
 	private ArrayList<Carte> cartesEvenement;
 	private ArrayList<Territoire> territoires; // servira pour la gestion de l'anneau unique
-
+	
 
 	public Plateau() {
 
@@ -252,6 +252,9 @@ public class Plateau {
 		return this.cartesEvenement;
 	}
 
+	public void setPartieDeMonopoly(PartieDeMonopoly p) {
+		this.partie=p;
+	}
 
 
 	/**

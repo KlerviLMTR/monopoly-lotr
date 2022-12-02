@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class PartieDeMonopoly {
 	private Plateau p;
-	private ArrayList<Joueur> joueurs;
+	private static ArrayList<Joueur> joueurs;
 	private int nbJoueurs;
 
 	public PartieDeMonopoly() throws InterruptedException {

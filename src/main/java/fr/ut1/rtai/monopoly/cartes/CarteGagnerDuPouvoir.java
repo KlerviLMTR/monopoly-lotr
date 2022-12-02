@@ -13,8 +13,18 @@ public class CarteGagnerDuPouvoir extends Carte {
 
 	@Override
 	public void actionCarte(Joueur j) {
-		System.out.println("Completez moi! ...");
+		//Lire la description au joueur
+		System.out.println(this);
+		j.gagnerduPouvoir(this.montantGagne);
 		super.estPiocheeEtRemiseAuFondDuPaquet();
-
+	}
+	
+	public void traiterCarteAnniv(Joueur j) {
+		if (this.getDesc().equals("C’est votre anniversaire : chaque joueur vous donne 10 de pouvoir.")) {
+		}
+	}
+	
+	public String toString() {
+		return this.getDesc();
 	}
 }
