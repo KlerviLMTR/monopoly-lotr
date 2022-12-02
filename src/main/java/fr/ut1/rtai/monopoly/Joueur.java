@@ -108,9 +108,9 @@ public class Joueur {
 	//  --------  Méthodes du joueur ----------
 	
 	public void piocherUneCartePeuple() {
-		this.plateau.getCartesPeuple().get(0).actionCarte(this, this.plateau);
+		this.plateau.getCartesPeuple().get(0).actionCarte(this);
 	}
-	
+
 	public void gagnerduPouvoir(int pouvoir) {
 		this.solde += pouvoir;
 	}

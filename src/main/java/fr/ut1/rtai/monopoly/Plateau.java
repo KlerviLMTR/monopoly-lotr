@@ -249,7 +249,7 @@ public class Plateau {
 	}
 	
 	public ArrayList<Carte> getCartesEvenement(){
-		return this.cartesPeuple;
+		return this.cartesEvenement;
 	}
 
 
