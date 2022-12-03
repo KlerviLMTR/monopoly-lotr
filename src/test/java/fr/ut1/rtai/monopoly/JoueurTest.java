@@ -97,7 +97,7 @@ public class JoueurTest {
 
 	
 	@Test
-	public void testAcheterBreeTailleSetTerritoire() {
+	public void testAcheterBreeTailleSetTerritoire() throws InterruptedException {
 		this.j.acheterCase((CasePropriete) this.p.getCaseNumero(9));
 		assertEquals(this.j.getNbBatonsDeMagicienPossedes(),0);
 		assertEquals(this.j.getNbMonturesPossedees(),0);
@@ -105,7 +105,7 @@ public class JoueurTest {
 	}
 	
 	@Test
-	public void testAcheterBillTailleSetMonture() {
+	public void testAcheterBillTailleSetMonture() throws InterruptedException {
 		this.j.acheterCase((CasePropriete) this.p.getCaseNumero(6));
 		assertEquals(this.j.getNbBatonsDeMagicienPossedes(),0);
 		assertEquals(this.j.getNbMonturesPossedees(),1);
@@ -113,7 +113,7 @@ public class JoueurTest {
 	}
 	
 	@Test
-	public void testAcheterBatonGandalfTailleSetBatons() {
+	public void testAcheterBatonGandalfTailleSetBatons() throws InterruptedException {
 		this.j.acheterCase((CasePropriete) this.p.getCaseNumero(13));
 		assertEquals(this.j.getNbBatonsDeMagicienPossedes(),1);
 		assertEquals(this.j.getNbMonturesPossedees(),0);
@@ -122,7 +122,7 @@ public class JoueurTest {
 	
 
 	@Test
-	public void testPossedeCaseGripoil() {
+	public void testPossedeCaseGripoil() throws InterruptedException {
 		this.j.acheterCase((CasePropriete)this.p.getCaseNumero(36));
 		assertTrue(this.j.possedeCase(this.p.getCaseNumero(36)));
 		assertFalse(this.j.possedeCase(this.p.getCaseNumero(2)));
@@ -139,4 +139,6 @@ public class JoueurTest {
 		
 	}
 	
+	
+
 }

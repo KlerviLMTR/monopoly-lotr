@@ -9,17 +9,18 @@ public class Application {
 
 	public static void main(String[] args) throws InterruptedException {
 	
+		//tester la generation des joueurs
 //		PartieDeMonopoly partie = new PartieDeMonopoly();
 //		partie.definirNbJoueurs();
 //		System.out.println(partie.getNbJoueurs());
 //		partie.creerLesJoueurs();
-//		partie.genererPions();		
-//		Joueur j = new Joueur("toto");
-//		Territoire c27 = new Territoire("Forêt de Fangorn", ECouleurCase.jaune,260,130,150, new int[] {22,110,330,800,975,1150});
-//		j.acheterCase(c27);
-//		System.out.println(c27.getProprietaire());
-		Plateau p = new Plateau();
+//		partie.genererPions();	
+		
+		
+		
+		//tester la gestion des cases : (construs territoires pas encore gérés)
 
+		Plateau p = new Plateau();
 		Joueur j = new Joueur("toto");
 		System.out.println(j.getSolde());
 		p.getCaseNumero(13).actionCase(j);
@@ -30,6 +31,7 @@ public class Application {
 		System.out.println(j.getSolde());
 		System.out.println(j2.getSolde());
 
+// Tester vite fait les cartes :
 //		Joueur j = new Joueur("toto");
 //		Plateau p = new Plateau();
 //		j.setPion(new Pion(EPion.Aragorn));

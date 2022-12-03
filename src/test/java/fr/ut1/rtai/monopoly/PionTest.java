@@ -43,4 +43,23 @@ public class PionTest {
 		assertEquals(4, this.plateau.getCaseNumero(5).getNumCase());
 		assertEquals(this.plateau.getCases().get(this.p.getNumCase()).getNomCase(), "Bill le Poney");
 	}
+	
+	
+	//Oui je sais le lancer de dés est absurde
+	@Test
+	public void testAvancerDe35Cases() {
+		this.des.traiterResultatLancerDes(30,5 );
+		this.p.avancerPion(this.des.getLancerTotal());
+		assertEquals( "Gripoil",this.plateau.getCases().get(this.p.getNumCase()).getNomCase());
+	}
+	
+	//Oui je sais le lancer de dés est absurde
+	@Test
+	public void testAvancerDe35Plus() {
+		this.des.traiterResultatLancerDes(30,5 );
+		this.p.avancerPion(this.des.getLancerTotal());
+		this.des.traiterResultatLancerDes(3,3 );
+		this.p.avancerPion(this.des.getLancerTotal());
+		assertEquals("Cul-De-Sac",this.plateau.getCases().get(this.p.getNumCase()).getNomCase());
+	}
 }
