@@ -43,6 +43,7 @@ public class Monture extends CasePropriete {
 				this.gererLaMonturePossedee(j);
 			}
 			else {
+		
 				int montantAPayer = (int) (this.getValeurHypothequee()*1.1);
 				System.out.println(MessagesJeu.descCaseMontureHyp) ;
 				PartieDeMonopoly.affichageMessageDelai(15, ">>> Vous pouvez lever l'hypothèque pour  "+ montantAPayer +" ୩. Que voulez vous faire ?\n");
@@ -50,8 +51,14 @@ public class Monture extends CasePropriete {
 			}
 		}
 		else {
-			PartieDeMonopoly.affichageMessageDelai(15,">>> Cette monture est la propriété de " + this.getProprietaire()+ ". Vous lui devez "+ this.getLoyerActuel()+" ୩.\n");
-			j.payerJoueur(this.getProprietaire(), this.getLoyerActuel());
+			if (!this.estEnHypotheque()) {
+				PartieDeMonopoly.affichageMessageDelai(15,">>> Cette monture est la propriété de " + this.getProprietaire()+ ". Vous lui devez "+ this.getLoyerActuel()+" ୩.\n");
+				j.payerJoueur(this.getProprietaire(), this.getLoyerActuel());
+			}
+			else {
+				PartieDeMonopoly.affichageMessageDelai(15,">>> Cette monture est la propriété de " + this.getProprietaire()+ ", mais est hypothéquée. Vous ne perdez pas de pouvoir.\n");		
+			}
+			
 		}
 	}
 	
