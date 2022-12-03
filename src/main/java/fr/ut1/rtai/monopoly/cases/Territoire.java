@@ -139,7 +139,8 @@ public class Territoire extends CasePropriete {
     	return !this.possedeForteresse && this.nbPlacesFortes==0;
     }
 
-    // --- Fonctions d'affichage ---
+    // -------------------- Méthodes d'affichage des territoires ----------------------
+    
     public String afficherMenuConstructions() {
     	String aff="--- Gestion de la propriété  \""+ this.getNomCase() + "\" --- \n";
     	if (this.estTerrainVide()) {
@@ -155,6 +156,18 @@ public class Territoire extends CasePropriete {
     	}
     	return aff;
     }
+
+	@Override
+	public String afficherTabLoyers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void afficherCase() throws InterruptedException {
+		// TODO Auto-generated method stub
+		
+	}
     
 
     

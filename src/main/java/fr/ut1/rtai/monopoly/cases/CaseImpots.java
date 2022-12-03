@@ -16,4 +16,10 @@ public class CaseImpots extends Case {
 		
 	}
 
+	@Override
+	public void afficherCase() throws InterruptedException {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

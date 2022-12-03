@@ -18,8 +18,9 @@ public class Application {
 //		Territoire c27 = new Territoire("Forêt de Fangorn", ECouleurCase.jaune,260,130,150, new int[] {22,110,330,800,975,1150});
 //		j.acheterCase(c27);
 //		System.out.println(c27.getProprietaire());
-		Monture m = new Monture("toto");
-		System.out.println(m);
+		Plateau p = new Plateau();
+		Joueur j = new Joueur("toto");
+		p.getCaseNumero(6).afficherCase(j);
 		
 //		Joueur j = new Joueur("toto");
 //		Plateau p = new Plateau();

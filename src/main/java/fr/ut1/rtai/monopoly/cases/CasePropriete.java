@@ -7,6 +7,7 @@ public abstract class CasePropriete extends Case {
 	
 	private int coutAchat;
 	private int valeurHypotheque;
+	private int loyerActuel;
 	private Joueur proprietaire;
 
 	
@@ -14,6 +15,7 @@ public abstract class CasePropriete extends Case {
         super(nom);
         this.coutAchat=coutAchat;
         this.valeurHypotheque=valeurHypotheque;
+        this.loyerActuel=this.coutAchat;
     }
     
     
@@ -22,6 +24,10 @@ public abstract class CasePropriete extends Case {
     
     public void setProprietaire(Joueur j) {
     	this.proprietaire = j;
+    }
+    
+    public int getLoyerActuel() {
+    	return this.loyerActuel;
     }
     
     public int getCoutAchat() {
@@ -48,8 +54,5 @@ public abstract class CasePropriete extends Case {
     // --------------- Methodes d'affichage des cases propriété ---------
     public abstract String afficherTabLoyers(); 
     
-    public String toString() {
-		String aff = super.toString()+ "\n\n               "+ MessagesJeu.descriptionCaseMonture+"\n\n               - 💰 🐴Prix : "+ this.getCoutAchat()+" Җ ";		
-		return aff;
-    }
+
 }

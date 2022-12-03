@@ -21,4 +21,10 @@ public class CaseDepart extends Case {
 		return null;
 	}
 
+	@Override
+	public void afficherCase() throws InterruptedException {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

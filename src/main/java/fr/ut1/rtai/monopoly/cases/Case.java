@@ -43,9 +43,8 @@ public abstract class Case {
 	 */
 	public abstract void actionCase(Joueur j);
 	
-	/**
-	 *Affichage d'une case
-	 */
-	public abstract String toString();
+	public abstract void afficherCase() throws InterruptedException;
+
+	
 
 }

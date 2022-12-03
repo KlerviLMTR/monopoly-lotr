@@ -13,6 +13,12 @@ public class CasePeuple extends Case {
 		
 	}
 
+	@Override
+	public void afficherCase() throws InterruptedException {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 
 }
