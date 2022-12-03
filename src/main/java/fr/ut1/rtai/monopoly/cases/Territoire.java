@@ -123,8 +123,6 @@ public class Territoire extends CasePropriete {
     
     
     
-    
-    
 	public void proposerDestructionConstruction() {
 		
 	}

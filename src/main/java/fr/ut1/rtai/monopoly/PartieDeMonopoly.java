@@ -84,15 +84,15 @@ public class PartieDeMonopoly {
 		// Pour chaque joueur, lui demander son nom
 		String[] nomsJoueurs = new String[this.nbJoueurs];
 		for (int i = 0; i < this.nbJoueurs; i++) {
-			String nomJ = this.poserQuestionJoueurChaine(">>> Quel sera le nom du joueur " + (i + 1) + " ? :");
-			String validation = this.poserQuestionJoueurChaine(">>> " + nomJ + ", c'est bien ça ? (oui/non) :");
+			String nomJ = PartieDeMonopoly.poserQuestionJoueurChaine(">>> Quel sera le nom du joueur " + (i + 1) + " ? :");
+			String validation = PartieDeMonopoly.poserQuestionJoueurChaine(">>> " + nomJ + ", c'est bien ça ? (oui/non) :");
 			while (!validation.toUpperCase().equals("OUI")) {
 				if (!validation.toUpperCase().equals("NON")) {
-					validation = this.poserQuestionJoueurChaine("Veuillez répondre par oui ou par non. :");
+					validation = PartieDeMonopoly.poserQuestionJoueurChaine("Veuillez répondre par oui ou par non. :");
 				} else {
-					nomJ = this.poserQuestionJoueurChaine(
+					nomJ = PartieDeMonopoly.poserQuestionJoueurChaine(
 							">>> OK, quel  nom préférez vous pour le joueur " + (i + 1) + " ? :");
-					validation = this.poserQuestionJoueurChaine(nomJ + ", c'est bien ça ? (oui/non) :");
+					validation = PartieDeMonopoly.poserQuestionJoueurChaine(nomJ + ", c'est bien ça ? (oui/non) :");
 				}
 			}
 			nomsJoueurs[i] = nomJ;

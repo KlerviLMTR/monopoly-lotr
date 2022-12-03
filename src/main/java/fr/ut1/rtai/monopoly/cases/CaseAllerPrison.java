@@ -13,5 +13,11 @@ public class CaseAllerPrison extends Case {
 		System.out.println("Oh non ! Vous vous êtes faits prendre par une bande d'Uruks de l'Isengard! Vous êtes amené en prison pour 3 tours.");
 	}
 
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

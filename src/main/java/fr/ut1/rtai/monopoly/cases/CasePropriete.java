@@ -1,6 +1,7 @@
 package fr.ut1.rtai.monopoly.cases;
 
 import fr.ut1.rtai.monopoly.Joueur;
+import fr.ut1.rtai.monopoly.MessagesJeu;
 
 public abstract class CasePropriete extends Case {
 	
@@ -37,5 +38,18 @@ public abstract class CasePropriete extends Case {
 
 
     
-    // --------------- Methodes utilitaires des 
+    // --------------- Methodes utilitaires des cases propriété --------
+    
+    public void proposerAchatCase(String message) {
+    	System.out.println(message);
+    	
+    }
+    
+    // --------------- Methodes d'affichage des cases propriété ---------
+    public abstract String afficherTabLoyers(); 
+    
+    public String toString() {
+		String aff = super.toString()+ "\n\n               "+ MessagesJeu.descriptionCaseMonture+"\n\n               - 💰 🐴Prix : "+ this.getCoutAchat()+" Җ ";		
+		return aff;
+    }
 }

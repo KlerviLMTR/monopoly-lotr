@@ -46,9 +46,6 @@ public abstract class Case {
 	/**
 	 *Affichage d'une case
 	 */
-	public String toString() {
-		return "[case n°"+Integer.valueOf(this.numCase+1) +" - "+ this.intitule+"]";
-	}
-	
+	public abstract String toString();
 
 }
