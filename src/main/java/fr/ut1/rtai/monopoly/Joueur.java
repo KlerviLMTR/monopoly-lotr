@@ -116,12 +116,12 @@ public class Joueur {
 	}
 
 
-	public void gagnerduPouvoir(int pouvoir) {
+	public void gagnerduPouvoir(double pouvoir) {
 		this.solde += pouvoir;
 	}
 
-	public void perdreDuPouvoir(int pouvoir) {
-		this.solde -= pouvoir;
+	public void perdreDuPouvoir(double montantAPayer) {
+		this.solde -= montantAPayer;
 
 	}
 	

@@ -80,7 +80,15 @@ public abstract class CasePropriete extends Case {
     
     
     // --------------- Methodes d'affichage des cases propriété ---------
-    public abstract void afficherTabLoyers(); 
+    public abstract void afficherTabLoyers();
+
+
+	public void leverLHypotheque(Joueur j) {
+		double montantAPayer = this.valeurHypotheque*1.1;
+		System.out.println("Vous levez l'hypothèque sur "+ this.getNomCase()+ " pour "+ (int)montantAPayer+" ୩.\n");
+		j.perdreDuPouvoir(montantAPayer);
+		this.estHypothequee=false;
+	} 
     
 
 }

@@ -10,6 +10,9 @@ public class MessagesJeu {
 	public static String questionChoixPion1="Veuillez choisir votre pion. (saisir le chiffre correspondant)";
 	public static String questionChoixPionERR="Vous avez saisi une valeur incorrecte. Veuillez saisir le chiffre correspondant au personnage souhaité. :";
 	public static String constructionPF="Vous construisez une place forte.";
+	public static String descCaseMontureHyp ="Cette monture vous appartient mais est hypothéquée. Vous n'en percevrez donc pas les loyers.\n";
+	public static String descCaseBatHyp ="Ce bâton de Magicien vous appartient mais est hypothéqué. Vous n'en percevrez donc pas les loyers.\n";
+	public static String descCaseTerrHyp ="Ce territoire vous appartient mais est hypothéqué. Vous n'en percevrez donc pas les loyers.\n";
 
 	public static String descriptionCaseMonture = "             Case propriété de type Monture, achetable.\n";
 	public static String descriptionCaseBatons = "             Case propriété de type Bâton de Magicien, achetable.";
@@ -28,6 +31,7 @@ public class MessagesJeu {
 	public static String afficherMenuTerritoireLibre="\n                    1 - Revendiquer les terres\n                    2 - Consulter la table des loyers\n";
 
 	public static String afficherMenuMontureAJoueur="\n                    1 - Hypothéquer la monture\n                    2 - Consulter la table des loyers\n                    3 - Ne rien faire\n";
+	public static String afficherMenuPropHypo="\n                    1 - Lever l'hypothèque\n                    2 - Ne rien faire\n";
 	public static String afficherMenuBatoneAJoueur="\n                    1 - Hypothéquer le bâton\n                    2 - Consulter la table des loyers\n                    3 - Ne rien faire\n";
 	public static String afficherMenuTerresAJoueur="\n                    1 - Hypothéquer le terrain\n                    2 - Consulter la table des loyers\n                    3 - Ne rien faire\n";
 

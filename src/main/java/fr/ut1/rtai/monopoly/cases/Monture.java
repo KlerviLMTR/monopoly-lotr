@@ -27,10 +27,17 @@ public class Monture extends CasePropriete {
 			PartieDeMonopoly.affichageMessageDelai(15, MessagesJeu.questionMontureAPersonne+ this.getCoutAchat()+ " ୩ ?");	
 		}
 		else if (this.getProprietaire()==j) {
-			System.out.println("                         Loyer actuel :" + this.getLoyerActuel()+ " ୩\n                         ------------\n");
-			PartieDeMonopoly.affichageMessageDelai(15, MessagesJeu.caseMonturePropOK);
-			System.out.println(MessagesJeu.afficherMenuMontureAJoueur);
-			this.gererLaMonturePossedee(j);
+			if (!this.estEnHypotheque()) {
+				System.out.println("                         Loyer actuel :" + this.getLoyerActuel()+ " ୩\n                         -------------------\n");
+				PartieDeMonopoly.affichageMessageDelai(15, MessagesJeu.caseMonturePropOK);
+				this.gererLaMonturePossedee(j);
+			}
+			else {
+				int montantAPayer = (int) (this.getValeurHypothequee()*1.1);
+				System.out.println(MessagesJeu.descCaseMontureHyp) ;
+				PartieDeMonopoly.affichageMessageDelai(15, ">>> Vous pouvez lever l'hypothèque pour  "+ montantAPayer +" ୩. Que voulez vous faire ?\n");
+				this.gererLaMonturePossedee(j);
+			}
 		}
 		else {
 			PartieDeMonopoly.affichageMessageDelai(15,"                         Cette monture est la propriété de " + this.getProprietaire()+ ". Vous lui devez "+ this.getLoyerActuel()+" ୩.\n");
@@ -49,10 +56,15 @@ public class Monture extends CasePropriete {
 			if (!premierAff) {
 				PartieDeMonopoly.afficherBarreChargement();
 				PartieDeMonopoly.afficherBarreChargement();
-				System.out.println("Que voulez vous faire ensuite ?");
-				System.out.println(MessagesJeu.afficherMenuMontureAJoueur);
+				System.out.println("\n>>> Que voulez vous faire ensuite ?");
 			}
 			try {
+				if(this.estEnHypotheque()) {
+					System.out.println(MessagesJeu.afficherMenuPropHypo);
+				}
+				else {
+					System.out.println(MessagesJeu.afficherMenuMontureAJoueur);
+				}
 				String question = super.poserQuestionChoixMenus(cptErr,premierAff);
 				choixMenu = PartieDeMonopoly.poserQuestionJoueurInt(">>> "+question);
 				if (this.verifierNumMenuMontureNonLibre(choixMenu)) {
@@ -77,24 +89,44 @@ public class Monture extends CasePropriete {
 	}
 	
 	private boolean verifierNumMenuMontureNonLibre(int numChoisi) throws IllegalArgumentException {
-		if (numChoisi < 1 || numChoisi > 3) {
-			throw new IllegalArgumentException("Numéro choisi invalide.");
+		if (!this.estEnHypotheque()) {
+			if (numChoisi < 1 || numChoisi > 3) {
+				throw new IllegalArgumentException("Numéro choisi invalide.");
+			}
+		}
+		else {
+			if (numChoisi < 1 || numChoisi > 2) {
+				throw new IllegalArgumentException("Numéro choisi invalide.");
+			}
 		}
 		return true;
 	}
 	
 	public boolean traiterChoixMenuMontureAuJoueur(Joueur j, int choixMenu, boolean tourFini) throws InterruptedException {
-		switch(choixMenu){
-		case 1:
-			super.mettreEnHypotheque(j);
-			tourFini=true;
-			break;
-		case 2:
-			this.afficherTabLoyers();
-			break;
-		case 3:
-			System.out.println(MessagesJeu.choixNeRienFaire);
-			tourFini=true;
+		if (this.estEnHypotheque()) {
+			switch(choixMenu){
+				case 1:
+					super.leverLHypotheque(j);
+					tourFini=true;
+					break;
+				case 2:
+					System.out.println(MessagesJeu.choixNeRienFaire);
+					tourFini=true;
+			}
+		}
+		else {
+			switch(choixMenu){
+			case 1:
+				super.mettreEnHypotheque(j);
+				tourFini=true;
+				break;
+			case 2:
+				this.afficherTabLoyers();
+				break;
+			case 3:
+				System.out.println(MessagesJeu.choixNeRienFaire);
+				tourFini=true;
+			}
 		}
 		return tourFini;
 
@@ -127,7 +159,14 @@ public class Monture extends CasePropriete {
 	
 	@Override
     public void afficherCase() throws InterruptedException {
-		String aff = MessagesJeu.affichageSepCase+"\nCase n°"+Integer.valueOf(getNumCase()+1)+ "                   🐴 "+this.getNomCase()+" 🐴\n" + MessagesJeu.affichageSepCase;
+		String aff;
+		if (!this.estEnHypotheque()) {
+			aff = MessagesJeu.affichageSepCase+"\nCase n°"+Integer.valueOf(getNumCase()+1)+ "                   🐴 "+this.getNomCase()+" 🐴\n" + MessagesJeu.affichageSepCase;
+
+		}
+		else {
+			aff = MessagesJeu.affichageSepCase+"\nCase n°"+Integer.valueOf(getNumCase()+1)+ "        🐴 "+this.getNomCase()+" 🐴 - EN HYPOTHEQUE \n" + MessagesJeu.affichageSepCase;
+		}
 		System.out.println(aff);
 		
     }
