@@ -41,7 +41,7 @@ public abstract class Case {
 	/**
 	 *Methode a implementer dans les classes filles definissant l'action a effectuer sur la case 
 	 */
-	public abstract void actionCase(Joueur j);
+	public abstract void actionCase(Joueur j) throws InterruptedException;
 	
 	public abstract void afficherCase() throws InterruptedException;
 

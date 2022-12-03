@@ -15,9 +15,8 @@ public class BatonDeMagicien extends CasePropriete {
 	}
 
 	@Override
-	public String afficherTabLoyers() {
+	public void afficherTabLoyers() {
 		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

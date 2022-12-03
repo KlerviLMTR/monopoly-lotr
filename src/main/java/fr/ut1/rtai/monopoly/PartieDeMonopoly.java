@@ -211,7 +211,7 @@ public class PartieDeMonopoly {
 	 */
 	private boolean verifierNumPionOK(int numeroPionChoisi, ArrayList<Pion> pionsDispo) throws IllegalArgumentException {
 		if (numeroPionChoisi < 0 || numeroPionChoisi >= pionsDispo.size()) {
-			throw new IllegalArgumentException("Format de reponse invalide.");
+			throw new IllegalArgumentException("Numéro choisi invalide.");
 		}
 		return true;
 	}
@@ -284,27 +284,15 @@ public class PartieDeMonopoly {
 	 * @throws InterruptedException
 	 * Affichage convivial d'un chargement
 	 */
-	public void afficherBarreChargement() throws InterruptedException {
-		System.out.print(". ");
-		Thread.sleep(100);
-		System.out.print(". ");
-		Thread.sleep(100);
-		System.out.print(". ");
-		Thread.sleep(100);
-		System.out.print(". ");
-		Thread.sleep(100);
-		System.out.print(". ");
-		Thread.sleep(100);
-		System.out.print(". \n\n");
-		Thread.sleep(100);
-
+	public static void afficherBarreChargement() throws InterruptedException {
+		PartieDeMonopoly.affichageMessageDelai(100, ". . . . .");
 	}
 	
-	public static void affichageMessageDelai(int delay, String s) {
+	public static void affichageMessageDelai(int delai, String s) {
 	    try {
 	        for (char c : s.toCharArray()) {
 	            System.out.print(c);  // print characters without newline
-	            Thread.sleep(delay);  // wait for some milli seconds
+	            Thread.sleep(delai);  // wait for some milli seconds
 	        }
 	    } catch (InterruptedException e) {
 	    }

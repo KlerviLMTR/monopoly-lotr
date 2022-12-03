@@ -9,6 +9,7 @@ public abstract class CasePropriete extends Case {
 	private int valeurHypotheque;
 	private int loyerActuel;
 	private Joueur proprietaire;
+	private boolean estHypothequee;
 
 	
     public CasePropriete(String nom, int coutAchat, int valeurHypotheque) {
@@ -16,12 +17,15 @@ public abstract class CasePropriete extends Case {
         this.coutAchat=coutAchat;
         this.valeurHypotheque=valeurHypotheque;
         this.loyerActuel=this.coutAchat;
+        this.estHypothequee=false;
     }
     
     
     // -------- GETTERS ET SETTERS UTILES --------
   
-    
+    public boolean estEnHypotheque() {
+    	return this.estHypothequee;
+    }
     public void setProprietaire(Joueur j) {
     	this.proprietaire = j;
     }
@@ -51,8 +55,32 @@ public abstract class CasePropriete extends Case {
     	
     }
     
+	public void declencherPaiement(Joueur j) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	protected void mettreEnHypotheque(Joueur j) {
+		System.out.println("Vous mettez "+this.getNomCase()+ " en hypothèque pour "+ this.getValeurHypothequee()+" ୩.\n");
+		this.estHypothequee=true;
+		j.gagnerduPouvoir(this.valeurHypotheque);
+	}
+	
+    protected String poserQuestionChoixMenus(int repetitionDeLaQuestion, boolean premierAff) {
+        String question;
+        if (repetitionDeLaQuestion == 0) {
+            question = MessagesJeu.questionMenu1;
+        } else if (repetitionDeLaQuestion <= 4) {
+            question = MessagesJeu.questionMenuErr;
+        } else {
+            question = MessagesJeu.texteSiTropDerreurs;
+        }
+        return question;
+    }
+    
+    
     // --------------- Methodes d'affichage des cases propriété ---------
-    public abstract String afficherTabLoyers(); 
+    public abstract void afficherTabLoyers(); 
     
 
 }

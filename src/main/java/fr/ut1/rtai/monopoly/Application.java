@@ -20,7 +20,13 @@ public class Application {
 //		System.out.println(c27.getProprietaire());
 		Plateau p = new Plateau();
 		Joueur j = new Joueur("toto");
-		p.getCaseNumero(6).afficherCase(j);
+		System.out.println(j.getSolde());
+		System.out.println(((CasePropriete) p.getCaseNumero(6)).estEnHypotheque());
+		j.acheterCase((CasePropriete) p.getCaseNumero(6));
+		p.getCaseNumero(6).actionCase(j);
+		System.out.println(((CasePropriete) p.getCaseNumero(6)).estEnHypotheque());
+		System.out.println(j.getSolde());
+
 		
 //		Joueur j = new Joueur("toto");
 //		Plateau p = new Plateau();

@@ -19,19 +19,25 @@ public class MessagesJeu {
 	public static String questionMontureAPersonne="Cette monture n'a encore été apprivoisée par personne. Voulez vous l'apprivoiser pour  ";
 	public static String questionBatonAPersonne="Ce bâton n'a encore été revendiqué par personne. Voulez l'obtenir pour ";
 	
-	public static String caseMonturePropOK = "             Cette Monture vous appartient. Vous profitez de ce tour pour faire une longue balade à cheval.\n";
-	public static String caseBatonPropOK = "             Ce bâton vous appartient. Vous profitez de ce tour pour vous essayer aux arts des Arcanes.";
-	public static String caseTerritoirePropOK = "             Ces terres vous appartiennent. Vous profitez de ce tour pour vous détendre.";
+	public static String caseMonturePropOK = ">>> Cette Monture vous appartient. Que voulez vous faire ?.\n";
+	public static String caseBatonPropOK = ">>> Ce bâton vous appartient. Que voulez vous faire ?.";
+	public static String caseTerritoirePropOK = ">>> Ces terres vous appartiennent. Que voulez vous faire ?.";
 	
-	public static String afficherMenuMontureLibre="\n                         1 - Apprivoiser la monture\n                         2 - Consulter la table des loyers\n";
-	public static String afficherMenuBatonLibre="\n                         1 - Obtenir le bâton\n                         2 - Consulter la table des loyers\n";
-	public static String afficherMenuTerritoireLibre="\n                         1 - Revendiquer les terres\n                         2 - Consulter la table des loyers\n";
+	public static String afficherMenuMontureLibre="\n                    1 - Apprivoiser la monture\n                    2 - Consulter la table des loyers\n";
+	public static String afficherMenuBatonLibre="\n                    1 - Obtenir le bâton\n                    2 - Consulter la table des loyers\n";
+	public static String afficherMenuTerritoireLibre="\n                    1 - Revendiquer les terres\n                    2 - Consulter la table des loyers\n";
 
-	public static String afficherMenuMontureAJoueur="\n                         1 - Hypothéquer la monture\n                         2 - Consulter la table des loyers\n                         3 - Ne rien faire\n";
-	public static String afficherMenuBatoneAJoueur="\n                         1 - Hypothéquer le bâton\n                         2 - Consulter la table des loyers\n                         3 - Ne rien faire\n";
-	public static String afficherMenuTerresAJoueur="\n                         1 - Hypothéquer le terrain\n                         2 - Consulter la table des loyers\n                         3 - Ne rien faire\n";
+	public static String afficherMenuMontureAJoueur="\n                    1 - Hypothéquer la monture\n                    2 - Consulter la table des loyers\n                    3 - Ne rien faire\n";
+	public static String afficherMenuBatoneAJoueur="\n                    1 - Hypothéquer le bâton\n                    2 - Consulter la table des loyers\n                    3 - Ne rien faire\n";
+	public static String afficherMenuTerresAJoueur="\n                    1 - Hypothéquer le terrain\n                    2 - Consulter la table des loyers\n                    3 - Ne rien faire\n";
 
+	public static String questionMenu1 = "Votre choix :";
+	public static String questionMenu2 = "Que voulez vous faire ensuite ? :";
+	public static String questionMenuErr = "Vous avez saisi un nombre invalide. Veuillez le saisir à nouveau :";
 	
+	public static String tabLoyerMontures= "                    - 1 monture possédée : 25 de pouvoir\n                    - 2 montures possédées : 50 ୩\n                    - 3 montures possédées: 100 ୩\n                    - 4 montures possédées : 200 ୩ ";
+	public static String tabLoyerMagiciens= "                      --- Loyers --- \n\n>>> Obtenez les deux bâtons de magiciens pour voir les loyers augmenter !\\n                         - 1 bâton possédé : Le loyer à payer est de 4x le montant des dés\\n                         - 2 bâtons possédés : Le loyer à payer est de 10x le montant des dés";
+
 	public static String constructionF="Vous construisez une forteresse.";
 	public static String choixNeRienFaire="Vous décidez de ne rien faire.";
 	public static String affichageSepCase="\n※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※\n";
