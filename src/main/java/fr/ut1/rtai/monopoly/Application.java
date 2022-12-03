@@ -19,18 +19,16 @@ public class Application {
 //		j.acheterCase(c27);
 //		System.out.println(c27.getProprietaire());
 		Plateau p = new Plateau();
+
 		Joueur j = new Joueur("toto");
 		System.out.println(j.getSolde());
-		System.out.println(((CasePropriete) p.getCaseNumero(6)).estEnHypotheque());
-		j.acheterCase((CasePropriete) p.getCaseNumero(6));
 		p.getCaseNumero(6).actionCase(j);
-		System.out.println(((CasePropriete) p.getCaseNumero(6)).estEnHypotheque());
+		Joueur j2 = new Joueur("titi");
 		System.out.println(j.getSolde());
-		p.getCaseNumero(6).actionCase(j);
+		p.getCaseNumero(6).actionCase(j2);
 		System.out.println(j.getSolde());
-		System.out.println(((CasePropriete) p.getCaseNumero(6)).estEnHypotheque());
+		System.out.println(j2.getSolde());
 
-		
 //		Joueur j = new Joueur("toto");
 //		Plateau p = new Plateau();
 //		j.setPion(new Pion(EPion.Aragorn));

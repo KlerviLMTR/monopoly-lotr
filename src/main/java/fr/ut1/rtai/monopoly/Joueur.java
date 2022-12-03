@@ -192,21 +192,43 @@ public class Joueur {
 		
 	}
 	
+	public void estMisFaillite(int montantDette) {
+		this.estEnFaillite = true;
+		this.declencherProcedureDeFaillite(montantDette);
+	}
+	
+	//TODO: A completer ...
+	private void declencherProcedureDeFaillite(int montantDette) {
+		System.out.println("Vous avez perdu.");
+	}
+
+
 	/**
 	 * @param case1
 	 * Permet au joueur d'acheter une case donnee.
 	 */
 	public void acheterCase(CasePropriete case1) {
-		case1.setProprietaire(this);
-		if (case1 instanceof Monture) {
-			this.monturesPossedees.add((Monture) case1);
-		}
-		else if (case1 instanceof Territoire) {
-			this.territoiresPossedes.add((Territoire) case1);
+		if (this.solde >= case1.getCoutAchat()) {
+			case1.setProprietaire(this);
+			if (case1 instanceof Monture) {
+				this.monturesPossedees.add((Monture) case1);
+			}
+			else if (case1 instanceof Territoire) {
+				this.territoiresPossedes.add((Territoire) case1);
+			}
+			else {
+				this.batonsDeMagicienPossedes.add((BatonDeMagicien) case1);
+			}
+			this.perdreDuPouvoir(case1.getCoutAchat());
 		}
 		else {
-			this.batonsDeMagicienPossedes.add((BatonDeMagicien) case1);
+			PartieDeMonopoly.affichageMessageDelai(15,". . . Vous n'avez pas assez d'argent !");
 		}
+	}
+	
+	public void payerJoueur(Joueur j, int montant) {
+		this.perdreDuPouvoir(montant);
+		j.gagnerduPouvoir(montant);
 	}
 	
 
@@ -218,8 +240,16 @@ public class Joueur {
 
 	
 	public String toString() {
-		return this.nom + " dans le rôle de "+ this.pion.getTypePion().afficherPion();
+		String aff=this.nom;
+		if (this.pion != null) {
+			aff+=" dans le rôle de "+ this.pion.getTypePion().afficherPion();
+
+		}
+		return aff;
 	}
+
+
+
 
 
 

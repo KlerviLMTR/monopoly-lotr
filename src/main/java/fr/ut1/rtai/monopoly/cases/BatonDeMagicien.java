@@ -27,4 +27,5 @@ public class BatonDeMagicien extends CasePropriete {
 
 
 
+
 }

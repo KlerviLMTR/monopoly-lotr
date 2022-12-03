@@ -129,4 +129,14 @@ public class JoueurTest {
 
 	}
 	
+	@Test
+	public void testPayerJoueurMontant25() {
+		Joueur j2 = new Joueur("titi");
+		this.j.payerJoueur(j2,25);
+		assertEquals(1475,this.j.getSolde());
+		assertEquals(1525,j2.getSolde());
+
+		
+	}
+	
 }

@@ -10,11 +10,20 @@ import fr.ut1.rtai.monopoly.Pion;
 public class Monture extends CasePropriete {
 	
 	private int[] loyers;
+	private int loyerActuel;
 	
 	public Monture(String nom) {
 		super(nom, 200, 100);
 		this.loyers= new int[] {25,50,100,200};
+		this.loyerActuel=this.loyers[0];
 	}
+	
+	public int getLoyerActuel() {
+		return this.loyerActuel;
+	}
+	
+	// --------- Methodes des montures --------------
+	
 
 	@Override
 	public void actionCase(Joueur j) throws InterruptedException {
@@ -25,6 +34,7 @@ public class Monture extends CasePropriete {
 			System.out.println(MessagesJeu.descriptionCaseMonture+"\n                         Prix : "+this.getCoutAchat()+ " ୩\n                         ------------\n");
 			//declencher la procedure d'achat
 			PartieDeMonopoly.affichageMessageDelai(15, MessagesJeu.questionMontureAPersonne+ this.getCoutAchat()+ " ୩ ?");	
+			this.proposerAchatCase(j);
 		}
 		else if (this.getProprietaire()==j) {
 			if (!this.estEnHypotheque()) {
@@ -40,12 +50,56 @@ public class Monture extends CasePropriete {
 			}
 		}
 		else {
-			PartieDeMonopoly.affichageMessageDelai(15,"                         Cette monture est la propriété de " + this.getProprietaire()+ ". Vous lui devez "+ this.getLoyerActuel()+" ୩.\n");
-			this.declencherPaiement(j);
+			PartieDeMonopoly.affichageMessageDelai(15,">>> Cette monture est la propriété de " + this.getProprietaire()+ ". Vous lui devez "+ this.getLoyerActuel()+" ୩.\n");
+			j.payerJoueur(this.getProprietaire(), this.getLoyerActuel());
+		}
+	}
+	
+	private void proposerAchatCase(Joueur j) throws InterruptedException {
+		int cptErr = 0;
+		boolean premierAff = true;
+		boolean inputOk = false;
+		boolean tourFini = false;
+		int choixMenu=0;
+		while (!inputOk && !tourFini) {
+			try {
+				if (!premierAff) {
+					PartieDeMonopoly.afficherBarreChargement();
+					PartieDeMonopoly.afficherBarreChargement();
+					System.out.println("\n>>> Que voulez vous faire ensuite ?");
+				}
+				System.out.println(MessagesJeu.afficherMenuMontureLibre);
+				String question = super.poserQuestionChoixMenus(cptErr,premierAff);
+				choixMenu = PartieDeMonopoly.poserQuestionJoueurInt(">>> "+question);
+				if (this.verifierNumMenuMontureLibre(choixMenu)) {	
+					tourFini=this.traiterChoixMenuMontureLibre(j,choixMenu, tourFini);
+
+				}
+				premierAff=false;
+			}
+			catch (IllegalArgumentException e) {
+				cptErr++;
+			}
 		}
 	}
 	
 	
+	private boolean traiterChoixMenuMontureLibre(Joueur j, int choixMenu, boolean tourFini) {
+		switch(choixMenu) {
+			case 1:
+				j.acheterCase(this);
+				tourFini=true;
+				break;
+			case 2:
+				this.afficherTabLoyers();
+				break;
+			case 3:
+				System.out.println(MessagesJeu.choixNeRienFaire);
+				tourFini=true;
+		}
+		return tourFini;
+	}
+
 	private void gererLaMonturePossedee(Joueur j) throws InterruptedException {
 		int cptErr = 0;
 		boolean premierAff = true;
@@ -82,7 +136,7 @@ public class Monture extends CasePropriete {
 	
 	
 	private boolean verifierNumMenuMontureLibre(int numChoisi) throws IllegalArgumentException {
-		if (numChoisi < 1 || numChoisi >= 2) {
+		if (numChoisi < 1 || numChoisi > 3) {
 			throw new IllegalArgumentException("Numéro choisi invalide.");
 		}
 		return true;
@@ -135,17 +189,6 @@ public class Monture extends CasePropriete {
 	// ------------ Methodes d'affichage des Montures --------------
 	
 
-
-	
-	
-	public void montureAQuelquunDautre() {
-		
-	}
-
-	public void gererSaMonture() {
-		
-	}
-	
 
 
 	public void afficherTabLoyers() {

@@ -7,8 +7,8 @@ public abstract class CasePropriete extends Case {
 	
 	private int coutAchat;
 	private int valeurHypotheque;
-	private int loyerActuel;
 	private Joueur proprietaire;
+	private int loyerActuel;
 	private boolean estHypothequee;
 
 	
@@ -16,12 +16,12 @@ public abstract class CasePropriete extends Case {
         super(nom);
         this.coutAchat=coutAchat;
         this.valeurHypotheque=valeurHypotheque;
-        this.loyerActuel=this.coutAchat;
         this.estHypothequee=false;
     }
     
     
     // -------- GETTERS ET SETTERS UTILES --------
+
   
     public boolean estEnHypotheque() {
     	return this.estHypothequee;
@@ -29,8 +29,12 @@ public abstract class CasePropriete extends Case {
     public void setProprietaire(Joueur j) {
     	this.proprietaire = j;
     }
+        
+    public void setLoyerActuel(int loyer) {
+    	this.loyerActuel=loyer;
+    }
     
-    public int getLoyerActuel() {
+    public int getLoyerActuel(){
     	return this.loyerActuel;
     }
     
@@ -55,9 +59,17 @@ public abstract class CasePropriete extends Case {
     	
     }
     
+    //TODO : faire mieux ...
 	public void declencherPaiement(Joueur j) {
-		// TODO Auto-generated method stub
-		
+		// --> pour l'instant : on considere que si le joueur n'a plus assez d'argent pour payer, il est en faillite 
+		if (j.getSolde()< this.getLoyerActuel()) {
+			System.out.println("Vous n'avez pas assez pour payer !");
+			j.estMisFaillite(this.loyerActuel);
+		}
+		else {
+			j.payerJoueur(this.proprietaire, this.loyerActuel);
+			System.out.println("Vous payez un loyer de "+ this.loyerActuel + " à "+ this.getProprietaire()+".");
+		}
 	}
 	
 	protected void mettreEnHypotheque(Joueur j) {

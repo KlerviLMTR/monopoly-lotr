@@ -26,7 +26,7 @@ public class MessagesJeu {
 	public static String caseBatonPropOK = ">>> Ce bâton vous appartient. Que voulez vous faire ?.";
 	public static String caseTerritoirePropOK = ">>> Ces terres vous appartiennent. Que voulez vous faire ?.";
 	
-	public static String afficherMenuMontureLibre="\n                    1 - Apprivoiser la monture\n                    2 - Consulter la table des loyers\n";
+	public static String afficherMenuMontureLibre="\n                    1 - Apprivoiser la monture\n                    2 - Consulter la table des loyers\n                    3 - Ne rien faire\n";
 	public static String afficherMenuBatonLibre="\n                    1 - Obtenir le bâton\n                    2 - Consulter la table des loyers\n";
 	public static String afficherMenuTerritoireLibre="\n                    1 - Revendiquer les terres\n                    2 - Consulter la table des loyers\n";
 

@@ -14,6 +14,7 @@ public class Territoire extends CasePropriete {
 	private ECouleurCase couleur;
 	private int nbPlacesFortes;
 	private boolean possedeForteresse;
+	private int loyerActuel;
 	private boolean possedeAnneauUnique;
 	
 	public Territoire(String nom,ECouleurCase coul,int coutAchat,int valHyp, int coutConstru, int[] loyers) {
@@ -24,6 +25,7 @@ public class Territoire extends CasePropriete {
 		this.nbPlacesFortes=0;
 		this.possedeForteresse=false;
 		this.possedeAnneauUnique=false;
+		this.loyerActuel=this.tableDesLoyers[0];
 	}
 	
 	// --------- Getters et setters utiles --------
@@ -38,6 +40,11 @@ public class Territoire extends CasePropriete {
 
 	public int getCoutConstruction() {
 		return this.coutConstruction;
+	}
+	
+	@Override
+	public int getLoyerActuel() {
+		return this.loyerActuel;
 	}
 
 	@Override
@@ -168,6 +175,8 @@ public class Territoire extends CasePropriete {
 		// TODO Auto-generated method stub
 		
 	}
+
+
     
 
     
