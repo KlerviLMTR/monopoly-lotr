@@ -47,10 +47,7 @@ public class Territoire extends CasePropriete {
 		return this.loyerActuel;
 	}
 
-	@Override
-	public void actionCase(Joueur j) {
-		
-	}
+
 	
     public boolean getPossedeForteresse() {
     	return this.possedeForteresse;
@@ -171,11 +168,18 @@ public class Territoire extends CasePropriete {
 	}
 
 	@Override
-	public void afficherCase() throws InterruptedException {
-		// TODO Auto-generated method stub
-		
-	}
+    public void afficherCase() throws InterruptedException {
+		String aff;
+		if (!this.estEnHypotheque()) {
+			aff = MessagesJeu.affichageSepCase+"\nCase n°"+Integer.valueOf(getNumCase()+1)+ "                   🏠 "+this.getNomCase()+" 🏠 \n" + MessagesJeu.affichageSepCase;
 
+		}
+		else {
+			aff = MessagesJeu.affichageSepCase+"\nCase n°"+Integer.valueOf(getNumCase()+1)+ "        🏠 "+this.getNomCase()+" 🏠 - EN HYPOTHEQUE \n" + MessagesJeu.affichageSepCase;
+		}
+		System.out.println(aff);
+		
+    }
 
     
 

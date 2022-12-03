@@ -22,7 +22,7 @@ public class Application {
 
 		Joueur j = new Joueur("toto");
 		System.out.println(j.getSolde());
-		p.getCaseNumero(6).actionCase(j);
+		p.getCaseNumero(2).actionCase(j);
 		p.getCaseNumero(6).actionCase(j);
 		Joueur j2 = new Joueur("titi");
 		System.out.println(j.getSolde());

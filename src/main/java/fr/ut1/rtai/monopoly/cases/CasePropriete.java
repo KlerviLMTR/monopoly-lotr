@@ -2,6 +2,7 @@ package fr.ut1.rtai.monopoly.cases;
 
 import fr.ut1.rtai.monopoly.Joueur;
 import fr.ut1.rtai.monopoly.MessagesJeu;
+import fr.ut1.rtai.monopoly.PartieDeMonopoly;
 
 public abstract class CasePropriete extends Case {
 	
@@ -17,6 +18,78 @@ public abstract class CasePropriete extends Case {
         this.coutAchat=coutAchat;
         this.valeurHypotheque=valeurHypotheque;
         this.estHypothequee=false;
+    }
+    
+    public void actionCase(Joueur j) throws InterruptedException {
+    	//Dans tous les cas, afficher la case
+    			this.afficherCase();
+    			//Si la case n'est a personne, afficher le message descriptif
+    			if(this.getProprietaire()==null) {
+    				if (this instanceof Monture) {
+    					System.out.println(MessagesJeu.descriptionCaseMonture+"\n                         Prix : "+this.getCoutAchat()+ " ୩\n                         ------------\n");
+        				//declencher la procedure d'achat
+        				PartieDeMonopoly.affichageMessageDelai(15, MessagesJeu.questionMontureAPersonne+ this.getCoutAchat()+ " ୩ ?");	
+    				}
+    				else if (this instanceof BatonDeMagicien) {
+    					System.out.println(MessagesJeu.descriptionCaseBatons+"\n                         Prix : "+this.getCoutAchat()+ " ୩\n                         ------------\n");
+        				//declencher la procedure d'achat
+        				PartieDeMonopoly.affichageMessageDelai(15, MessagesJeu.questionBatonAPersonne+ this.getCoutAchat()+ " ୩ ?");	
+    				}
+    				else if (this instanceof Territoire) {
+    					System.out.println(MessagesJeu.descriptionCaseTerritoire+"\n                         Prix : "+this.getCoutAchat()+ " ୩\n                         ------------\n");
+        				//declencher la procedure d'achat
+        				PartieDeMonopoly.affichageMessageDelai(15, MessagesJeu.questionTerrainAPersonne+ this.getCoutAchat()+ " ୩ ?");	
+    				}
+    				this.proposerAchatCase(j);
+
+    			}
+    			else if (this.getProprietaire()==j) {
+    				if (!this.estEnHypotheque()) {
+    					System.out.println("                         Loyer actuel :" + this.getLoyerActuel()+ " ୩\n                         -------------------\n");
+    					PartieDeMonopoly.affichageMessageDelai(15, MessagesJeu.caseMonturePropOK);
+    					this.gererLaPropriete(j);
+    				}
+    				else {
+    					int montantAPayer = (int) (this.getValeurHypothequee()*1.1);
+    					if (this instanceof Monture) {
+    						System.out.println(MessagesJeu.descCaseMontureHyp) ;
+    					}
+    					else if (this instanceof BatonDeMagicien) {
+    						System.out.println(MessagesJeu.descCaseBatHyp) ;
+    					}
+        				else if (this instanceof Territoire) {
+    						System.out.println(MessagesJeu.descCaseTerrHyp) ;
+        				}
+    					PartieDeMonopoly.affichageMessageDelai(15, ">>> Vous pouvez lever l'hypothèque pour  "+ montantAPayer +" ୩. Que voulez vous faire ?\n");
+    					this.gererLaPropriete(j);
+    				}
+    			}
+    			else {
+    				if (!this.estEnHypotheque()) {
+    					if (this instanceof Monture) {
+        					PartieDeMonopoly.affichageMessageDelai(15,">>> Cette monture est la propriété de " + this.getProprietaire()+ ". Vous lui devez "+ this.getLoyerActuel()+" ୩.\n");
+    					}
+    					else if (this instanceof BatonDeMagicien) {
+        					PartieDeMonopoly.affichageMessageDelai(15,">>> Ce bâton est la propriété de " + this.getProprietaire()+ ". Vous lui devez "+ this.getLoyerActuel()+" ୩.\n");
+    					}
+        				else if (this instanceof Territoire) {
+        					PartieDeMonopoly.affichageMessageDelai(15,">>> Ce territoire est la propriété de " + this.getProprietaire()+ ". Vous lui devez "+ this.getLoyerActuel()+" ୩.\n");
+        				}
+    					j.payerJoueur(this.getProprietaire(), this.getLoyerActuel());
+    				}
+    				else {
+    					if (this instanceof Monture) {
+        					PartieDeMonopoly.affichageMessageDelai(15,">>> Cette monture est la propriété de " + this.getProprietaire()+ ", mais est hypothéquée. Vous ne perdez pas de pouvoir.\n");		
+    					}
+    					else if (this instanceof BatonDeMagicien) {
+        					PartieDeMonopoly.affichageMessageDelai(15,">>> Ce bâton est la propriété de " + this.getProprietaire()+ ", mais est hypothéqué. Vous ne perdez pas de pouvoir.\n");		
+    					}
+        				else if (this instanceof Territoire) {
+        					PartieDeMonopoly.affichageMessageDelai(15,">>> Ce territoire est la propriété de " + this.getProprietaire()+ ", mais est hypothéqué. Vous ne perdez pas de pouvoir.\n");		
+        				}
+    				}
+    				
+    			}
     }
     
     
@@ -56,8 +129,157 @@ public abstract class CasePropriete extends Case {
     
     public void proposerAchatCase(String message) {
     	System.out.println(message);
-    	
     }
+    
+    
+    public void proposerAchatCase(Joueur j) throws InterruptedException {
+		int cptErr = 0;
+		boolean premierAff = true;
+		boolean inputOk = false;
+		boolean tourFini = false;
+		int choixMenu=0;
+		while (!inputOk && !tourFini) {
+			try {
+				if (!premierAff) {
+					PartieDeMonopoly.afficherBarreChargement();
+					PartieDeMonopoly.afficherBarreChargement();
+					System.out.println("\n>>> Que voulez vous faire ensuite ?");
+				}
+				if (this instanceof Monture) {
+					System.out.println(MessagesJeu.afficherMenuMontureLibre);
+				}
+				else if (this instanceof Territoire) {
+					System.out.println(MessagesJeu.afficherMenuTerritoireLibre);
+				}
+				else {
+					System.out.println(MessagesJeu.afficherMenuBatonLibre);		
+				}
+				String question = this.poserQuestionChoixMenus(cptErr,premierAff);
+				choixMenu = PartieDeMonopoly.poserQuestionJoueurInt(">>> "+question);
+				if (this.verifierNumMenuPropLibre(choixMenu)) {	
+					tourFini=this.traiterChoixMenuPropLibre(j,choixMenu, tourFini);
+
+				}
+				premierAff=false;
+			}
+			catch (IllegalArgumentException e) {
+				cptErr++;
+			}
+		}
+	}
+    
+    
+	private boolean traiterChoixMenuPropLibre(Joueur j, int choixMenu, boolean tourFini) {
+		switch(choixMenu) {
+			case 1:
+				j.acheterCase(this);
+				tourFini=true;
+				break;
+			case 2:
+				this.afficherTabLoyers();
+				break;
+			case 3:
+				System.out.println(MessagesJeu.choixNeRienFaire);
+				tourFini=true;
+		}
+		return tourFini;
+	}
+    
+    private boolean verifierNumMenuPropLibre(int numChoisi) throws IllegalArgumentException {
+		if (numChoisi < 1 || numChoisi > 3) {
+			throw new IllegalArgumentException("Numéro choisi invalide.");
+		}
+		return true;
+	}
+    
+    public void gererLaPropriete(Joueur j) throws InterruptedException {
+		int cptErr = 0;
+		boolean premierAff = true;
+		boolean inputOk = false;
+		boolean tourFini = false;
+		int choixMenu=0;
+		while (!inputOk && !tourFini) {
+			if (!premierAff) {
+				PartieDeMonopoly.afficherBarreChargement();
+				PartieDeMonopoly.afficherBarreChargement();
+				System.out.println("\n>>> Que voulez vous faire ensuite ?");
+			}
+			try {
+				if(this.estEnHypotheque()) {
+					System.out.println(MessagesJeu.afficherMenuPropHypo);
+				}
+				else {
+					if (this instanceof Monture) {
+						System.out.println(MessagesJeu.afficherMenuMontureAJoueur);
+					}
+					else if (this instanceof BatonDeMagicien) {
+						System.out.println(MessagesJeu.afficherMenuBatonAJoueur);
+					}
+					else {
+						System.out.println(MessagesJeu.afficherMenuTerresAJoueur);
+					}
+				}
+				String question = this.poserQuestionChoixMenus(cptErr,premierAff);
+				choixMenu = PartieDeMonopoly.poserQuestionJoueurInt(">>> "+question);
+				if (this.verifierNumMenuPropNonLibre(choixMenu)) {
+					tourFini=this.traiterChoixMenuPropAuJoueur(j,choixMenu, tourFini);
+				}
+				premierAff=false;
+			}
+			catch (IllegalArgumentException e) {
+				cptErr++;
+			}
+		}
+	}
+	
+    
+	
+	private boolean verifierNumMenuPropNonLibre(int numChoisi) throws IllegalArgumentException {
+		if (!this.estEnHypotheque()) {
+			if (numChoisi < 1 || numChoisi > 3) {
+				throw new IllegalArgumentException("Numéro choisi invalide.");
+			}
+		}
+		else {
+			if (numChoisi < 1 || numChoisi > 2) {
+				throw new IllegalArgumentException("Numéro choisi invalide.");
+			}
+		}
+		return true;
+	}
+	
+	public boolean traiterChoixMenuPropAuJoueur(Joueur j, int choixMenu, boolean tourFini) throws InterruptedException {
+		if (this.estEnHypotheque()) {
+			switch(choixMenu){
+				case 1:
+					this.leverLHypotheque(j);
+					tourFini=true;
+					break;
+				case 2:
+					System.out.println(MessagesJeu.choixNeRienFaire);
+					tourFini=true;
+			}
+		}
+		else {
+			switch(choixMenu){
+			case 1:
+				this.mettreEnHypotheque(j);
+				tourFini=true;
+				break;
+			case 2:
+				this.afficherTabLoyers();
+				break;
+			case 3:
+				System.out.println(MessagesJeu.choixNeRienFaire);
+				tourFini=true;
+			}
+		}
+		return tourFini;
+
+	}
+    
+    
+    
     
     //TODO : faire mieux ...
 	public void declencherPaiement(Joueur j) {

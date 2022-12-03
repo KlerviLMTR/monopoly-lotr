@@ -32,7 +32,7 @@ public class MessagesJeu {
 
 	public static String afficherMenuMontureAJoueur="\n                    1 - Hypothéquer la monture\n                    2 - Consulter la table des loyers\n                    3 - Ne rien faire\n";
 	public static String afficherMenuPropHypo="\n                    1 - Lever l'hypothèque\n                    2 - Ne rien faire\n";
-	public static String afficherMenuBatoneAJoueur="\n                    1 - Hypothéquer le bâton\n                    2 - Consulter la table des loyers\n                    3 - Ne rien faire\n";
+	public static String afficherMenuBatonAJoueur="\n                    1 - Hypothéquer le bâton\n                    2 - Consulter la table des loyers\n                    3 - Ne rien faire\n";
 	public static String afficherMenuTerresAJoueur="\n                    1 - Hypothéquer le terrain\n                    2 - Consulter la table des loyers\n                    3 - Ne rien faire\n";
 
 	public static String questionMenu1 = "Votre choix :";
@@ -40,7 +40,7 @@ public class MessagesJeu {
 	public static String questionMenuErr = "Vous avez saisi un nombre invalide. Veuillez le saisir à nouveau :";
 	
 	public static String tabLoyerMontures= "                    - 1 monture possédée : 25 de pouvoir\n                    - 2 montures possédées : 50 ୩\n                    - 3 montures possédées: 100 ୩\n                    - 4 montures possédées : 200 ୩ ";
-	public static String tabLoyerMagiciens= "                      --- Loyers --- \n\n>>> Obtenez les deux bâtons de magiciens pour voir les loyers augmenter !\\n                         - 1 bâton possédé : Le loyer à payer est de 4x le montant des dés\\n                         - 2 bâtons possédés : Le loyer à payer est de 10x le montant des dés";
+	public static String tabLoyerMagiciens= "                       - 1 bâton possédé : Le loyer à payer est de 4x le montant des dés\\n                         - 2 bâtons possédés : Le loyer à payer est de 10x le montant des dés";
 
 	public static String constructionF="Vous construisez une forteresse.";
 	public static String choixNeRienFaire="Vous décidez de ne rien faire.";

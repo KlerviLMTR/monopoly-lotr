@@ -13,6 +13,7 @@ public abstract class Case {
 		this.numCase=-1; //valeur par defaut choisie avant definition du numero de case par le plateau
 	}
 	
+	
 	/**
 	 * @param numero
 	 * Affecte le numero de la case. Methode appelee une seule fois par le plateau lors de l'initialisation
