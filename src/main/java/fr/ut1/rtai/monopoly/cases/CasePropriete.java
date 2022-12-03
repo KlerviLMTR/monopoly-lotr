@@ -169,7 +169,7 @@ public abstract class CasePropriete extends Case {
 	}
     
     
-	private boolean traiterChoixMenuPropLibre(Joueur j, int choixMenu, boolean tourFini) {
+	private boolean traiterChoixMenuPropLibre(Joueur j, int choixMenu, boolean tourFini) throws InterruptedException {
 		switch(choixMenu) {
 			case 1:
 				j.acheterCase(this);

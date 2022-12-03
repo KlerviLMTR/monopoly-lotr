@@ -11,9 +11,6 @@ public class BatonDeMagicien extends CasePropriete {
 	}
 
 
-	
-
-	
 
 	@Override
 	public void afficherTabLoyers() {

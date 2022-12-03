@@ -206,8 +206,9 @@ public class Joueur {
 	/**
 	 * @param case1
 	 * Permet au joueur d'acheter une case donnee.
+	 * @throws InterruptedException 
 	 */
-	public void acheterCase(CasePropriete case1) {
+	public void acheterCase(CasePropriete case1) throws InterruptedException {
 		if (this.solde >= case1.getCoutAchat()) {
 			case1.setProprietaire(this);
 			if (case1 instanceof Monture) {
@@ -220,6 +221,9 @@ public class Joueur {
 				this.batonsDeMagicienPossedes.add((BatonDeMagicien) case1);
 			}
 			this.perdreDuPouvoir(case1.getCoutAchat());
+			System.out.println("Vous achetez "+ case1.getNomCase()+" pour "+case1.getCoutAchat()+" ୩.");
+			Thread.sleep(2000);
+
 		}
 		else {
 			PartieDeMonopoly.affichageMessageDelai(15,". . . Vous n'avez pas assez d'argent !");
