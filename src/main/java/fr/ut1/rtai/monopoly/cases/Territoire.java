@@ -17,6 +17,7 @@ public class Territoire extends CasePropriete {
 	private int loyerActuel;
 	private boolean possedeAnneauUnique;
 	
+	
 	public Territoire(String nom,ECouleurCase coul,int coutAchat,int valHyp, int coutConstru, int[] loyers) {
 		super(nom,coutAchat, valHyp);
 		this.coutConstruction=coutConstru;

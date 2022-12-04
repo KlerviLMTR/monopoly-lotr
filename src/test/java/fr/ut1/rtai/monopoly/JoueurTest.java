@@ -95,39 +95,39 @@ public class JoueurTest {
 	}
 	
 
-	
-	@Test
-	public void testAcheterBreeTailleSetTerritoire() throws InterruptedException {
-		this.j.acheterCase((CasePropriete) this.p.getCaseNumero(9));
-		assertEquals(this.j.getNbBatonsDeMagicienPossedes(),0);
-		assertEquals(this.j.getNbMonturesPossedees(),0);
-		assertEquals(this.j.getNbTerritoiresPossedes(),1);
-	}
-	
-	@Test
-	public void testAcheterBillTailleSetMonture() throws InterruptedException {
-		this.j.acheterCase((CasePropriete) this.p.getCaseNumero(6));
-		assertEquals(this.j.getNbBatonsDeMagicienPossedes(),0);
-		assertEquals(this.j.getNbMonturesPossedees(),1);
-		assertEquals(this.j.getNbTerritoiresPossedes(),0);
-	}
-	
-	@Test
-	public void testAcheterBatonGandalfTailleSetBatons() throws InterruptedException {
-		this.j.acheterCase((CasePropriete) this.p.getCaseNumero(13));
-		assertEquals(this.j.getNbBatonsDeMagicienPossedes(),1);
-		assertEquals(this.j.getNbMonturesPossedees(),0);
-		assertEquals(this.j.getNbTerritoiresPossedes(),0);
-	}
-	
-
-	@Test
-	public void testPossedeCaseGripoil() throws InterruptedException {
-		this.j.acheterCase((CasePropriete)this.p.getCaseNumero(36));
-		assertTrue(this.j.possedeCase(this.p.getCaseNumero(36)));
-		assertFalse(this.j.possedeCase(this.p.getCaseNumero(2)));
-
-	}
+	//TODO Commentées à cause des sleep, mais fonctionnelles , à décommenter pour tests de non régression 
+//	@Test
+//	public void testAcheterBreeTailleSetTerritoire() throws InterruptedException {
+//		this.j.acheterCase((CasePropriete) this.p.getCaseNumero(9));
+//		assertEquals(this.j.getNbBatonsDeMagicienPossedes(),0);
+//		assertEquals(this.j.getNbMonturesPossedees(),0);
+//		assertEquals(this.j.getNbTerritoiresPossedes(),1);
+//	}
+//	
+//	@Test
+//	public void testAcheterBillTailleSetMonture() throws InterruptedException {
+//		this.j.acheterCase((CasePropriete) this.p.getCaseNumero(6));
+//		assertEquals(this.j.getNbBatonsDeMagicienPossedes(),0);
+//		assertEquals(this.j.getNbMonturesPossedees(),1);
+//		assertEquals(this.j.getNbTerritoiresPossedes(),0);
+//	}
+//	
+//	@Test
+//	public void testAcheterBatonGandalfTailleSetBatons() throws InterruptedException {
+//		this.j.acheterCase((CasePropriete) this.p.getCaseNumero(13));
+//		assertEquals(this.j.getNbBatonsDeMagicienPossedes(),1);
+//		assertEquals(this.j.getNbMonturesPossedees(),0);
+//		assertEquals(this.j.getNbTerritoiresPossedes(),0);
+//	}
+//	
+//
+//	@Test
+//	public void testPossedeCaseGripoil() throws InterruptedException {
+//		this.j.acheterCase((CasePropriete)this.p.getCaseNumero(36));
+//		assertTrue(this.j.possedeCase(this.p.getCaseNumero(36)));
+//		assertFalse(this.j.possedeCase(this.p.getCaseNumero(2)));
+//
+//	}
 	
 	@Test
 	public void testPayerJoueurMontant25() {
@@ -138,6 +138,62 @@ public class JoueurTest {
 
 		
 	}
+	
+	@Test
+	public void testCompterMonturesPossedeesAvantAchat() {	
+		assertEquals(0,this.j.estPropDeNbMontures());
+	}
+	
+//	@Test 
+//	public void testCompterDeuxMontures() throws InterruptedException {
+//		j.acheterCase(this.p.getCaseNumero(6));// Bill
+//		j.acheterCase(this.p.getCaseNumero(16));//Asfaloth
+//		assertEquals(2, this.j.estPropDeNbMontures());
+//	}
+	
+	@Test
+	public void testCompterBatonsPossedeesAvantAchat() {
+		assertEquals(0,this.j.estPropdeNbBatons());
+	}
+	
+//	@Test 
+//	public void testCompterDeuxBatons() throws InterruptedException {
+//		j.acheterCase(this.p.getCaseNumero(13));// Bill
+//		j.acheterCase(this.p.getCaseNumero(29));//Asfaloth
+//		assertEquals(2, this.j.estPropdeNbBatons());
+//	}
+	
+	@Test
+	public void testCompterTerrainsSurLotPossedesAvantAchat() {
+		assertEquals(0,j.compterLotParCouleur(ECouleurCase.blanc));
+	}
+	@Test
+	public void testCompterPasPropDeToutLeLotAvantAchat() {
+		assertFalse(j.estPropDeTousLesLotsCoul(ECouleurCase.blanc));
+	}
+	
+//	@Test
+//	public void testCompterTerrainsSurLotPossede1Achat() throws InterruptedException {
+//		j.acheterCase(this.p.getCaseNumero(7));// Bac de brandebouc
+//		assertEquals(1,j.compterLotParCouleur(ECouleurCase.blanc));
+//	}
+	
+//	@Test
+//	public void testCompterPasPropDeToutLeLotAvantTousLesAchats() throws InterruptedException {
+//		j.acheterCase(this.p.getCaseNumero(7));// Bac de brandebouc
+//		assertFalse(j.estPropDeTousLesLotsCoul(ECouleurCase.blanc));
+//	}
+	
+	@Test
+	public void estPropdeTousLesTerrains() throws InterruptedException {
+		j.acheterCase(this.p.getCaseNumero(7));// Bac de brandebouc
+		j.acheterCase(this.p.getCaseNumero(9));// Bac de brandebouc
+		j.acheterCase(this.p.getCaseNumero(10));// Bac de brandebouc
+		assertEquals(3,j.compterLotParCouleur(ECouleurCase.blanc));
+		assertTrue(j.estPropDeTousLesLotsCoul(ECouleurCase.blanc));
+	}
+	
+	
 	
 	
 

@@ -107,6 +107,51 @@ public class Joueur {
 	
 	//  --------  Méthodes du joueur ----------
 	
+	/**
+	 * compte le nombre de montures possédées
+	 * @return
+	 */
+	public int estPropDeNbMontures() {
+		return this.monturesPossedees.size();
+	}
+	
+	/**
+	 * compte le nombre de bâtons possédés
+	 * @return
+	 */
+	public int estPropdeNbBatons() {
+		return this.batonsDeMagicienPossedes.size();
+	}
+	
+	/**
+	 * vérifie si le joueur est propriétaire de tous les lots d'une couleur donnée
+	 * @param c
+	 * @return
+	 */
+	public boolean estPropDeTousLesLotsCoul(ECouleurCase c) {
+		return this.compterLotParCouleur(c)== this.plateau.NBLOTPARCOULEUR.get(c);
+	}
+	
+	/**
+	 * Compte le nombre de lots possédés par le joueur pour une couleur donnée
+	 * @param c
+	 * @return
+	 */
+	public int compterLotParCouleur(ECouleurCase c) {
+		int cptCoul=0;
+		for (Territoire t : this.territoiresPossedes) {
+			if(t.getCouleurCase()==c) {
+				cptCoul++;
+			}
+		}
+		return cptCoul;
+	}
+	
+	public void afficherLesProprietes() {
+		
+	}
+
+	
 	public void piocherUneCartePeuple() {
 		this.plateau.getCartesPeuple().get(0).actionCarte(this);
 	}
@@ -208,25 +253,29 @@ public class Joueur {
 	 * Permet au joueur d'acheter une case donnee.
 	 * @throws InterruptedException 
 	 */
-	public void acheterCase(CasePropriete case1) throws InterruptedException {
-		if (this.solde >= case1.getCoutAchat()) {
-			case1.setProprietaire(this);
-			if (case1 instanceof Monture) {
-				this.monturesPossedees.add((Monture) case1);
-			}
-			else if (case1 instanceof Territoire) {
-				this.territoiresPossedes.add((Territoire) case1);
+	public void acheterCase(Case case1) throws InterruptedException {
+		if (case1 instanceof CasePropriete) {
+		
+			if (this.solde >= ((CasePropriete)case1).getCoutAchat()) {
+				((CasePropriete)case1).setProprietaire(this);
+				if (case1 instanceof Monture) {
+					this.monturesPossedees.add((Monture) case1);
+				}
+				else if (case1 instanceof Territoire) {
+					this.territoiresPossedes.add((Territoire) case1);
+				}
+				else {
+					this.batonsDeMagicienPossedes.add((BatonDeMagicien) case1);
+				}
+				this.perdreDuPouvoir(((CasePropriete)case1).getCoutAchat());
+				System.out.println("Vous achetez "+ case1.getNomCase()+" pour "+((CasePropriete)case1).getCoutAchat()+" ୩.");
+				Thread.sleep(2000);
+	
 			}
 			else {
-				this.batonsDeMagicienPossedes.add((BatonDeMagicien) case1);
+				PartieDeMonopoly.affichageMessageDelai(15,". . . Vous n'avez pas assez d'argent !");
 			}
-			this.perdreDuPouvoir(case1.getCoutAchat());
-			System.out.println("Vous achetez "+ case1.getNomCase()+" pour "+case1.getCoutAchat()+" ୩.");
-			Thread.sleep(2000);
-
-		}
-		else {
-			PartieDeMonopoly.affichageMessageDelai(15,". . . Vous n'avez pas assez d'argent !");
+		
 		}
 	}
 	
