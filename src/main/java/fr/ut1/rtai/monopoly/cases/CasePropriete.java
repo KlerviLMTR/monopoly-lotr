@@ -21,22 +21,20 @@ public abstract class CasePropriete extends Case {
     }
     
     public void actionCase(Joueur j) throws InterruptedException {
+    	
     	//Dans tous les cas, afficher la case
     			this.afficherCase();
     			//Si la case n'est a personne, afficher le message descriptif
     			if(this.getProprietaire()==null) {
     				if (this instanceof Monture) {
-    					System.out.println(MessagesJeu.descriptionCaseMonture+"\n                         Prix : "+this.getCoutAchat()+ " ୩\n                         ------------\n");
         				//declencher la procedure d'achat
         				PartieDeMonopoly.affichageMessageDelai(15, MessagesJeu.questionMontureAPersonne+ this.getCoutAchat()+ " ୩ ?");	
     				}
     				else if (this instanceof BatonDeMagicien) {
-    					System.out.println(MessagesJeu.descriptionCaseBatons+"\n                         Prix : "+this.getCoutAchat()+ " ୩\n                         ------------\n");
         				//declencher la procedure d'achat
         				PartieDeMonopoly.affichageMessageDelai(15, MessagesJeu.questionBatonAPersonne+ this.getCoutAchat()+ " ୩ ?");	
     				}
     				else if (this instanceof Territoire) {
-    					System.out.println(MessagesJeu.descriptionCaseTerritoire+"\n                         Prix : "+this.getCoutAchat()+ " ୩\n                         ------------\n");
         				//declencher la procedure d'achat
         				PartieDeMonopoly.affichageMessageDelai(15, MessagesJeu.questionTerrainAPersonne+ this.getCoutAchat()+ " ୩ ?");	
     				}
@@ -44,9 +42,19 @@ public abstract class CasePropriete extends Case {
 
     			}
     			else if (this.getProprietaire()==j) {
+    		    	//Verifier les possessions du proprio et adapter le loyer en consequence
+    		    	
     				if (!this.estEnHypotheque()) {
-    					System.out.println("                         Loyer actuel :" + this.getLoyerActuel()+ " ୩\n                         -------------------\n");
-    					PartieDeMonopoly.affichageMessageDelai(15, MessagesJeu.caseMonturePropOK);
+    					System.out.println("                    Loyer actuel :" + this.getLoyerActuel()+ " ୩\n                         -------------------\n");
+    					if (this instanceof Monture) {
+        					PartieDeMonopoly.affichageMessageDelai(15, MessagesJeu.caseMonturePropOK);
+    					}
+    					else if (this instanceof BatonDeMagicien) {
+        					PartieDeMonopoly.affichageMessageDelai(15, MessagesJeu.caseBatonPropOK);
+    					}
+        				else if (this instanceof Territoire) {
+        					PartieDeMonopoly.affichageMessageDelai(15, MessagesJeu.caseTerritoirePropOK);
+        				}
     					this.gererLaPropriete(j);
     				}
     				else {
@@ -65,6 +73,8 @@ public abstract class CasePropriete extends Case {
     				}
     			}
     			else {
+    		    	//Verifier les possessions du proprio et adapter le loyer en consequence
+  
     				if (!this.estEnHypotheque()) {
     					if (this instanceof Monture) {
         					PartieDeMonopoly.affichageMessageDelai(15,">>> Cette monture est la propriété de " + this.getProprietaire()+ ". Vous lui devez "+ this.getLoyerActuel()+" ୩.\n");
@@ -95,10 +105,13 @@ public abstract class CasePropriete extends Case {
     
     // -------- GETTERS ET SETTERS UTILES --------
 
-  
-    public boolean estEnHypotheque() {
+
+
+	public boolean estEnHypotheque() {
     	return this.estHypothequee;
     }
+    
+  
     public void setProprietaire(Joueur j) {
     	this.proprietaire = j;
     }
@@ -160,6 +173,7 @@ public abstract class CasePropriete extends Case {
 					tourFini=this.traiterChoixMenuPropLibre(j,choixMenu, tourFini);
 
 				}
+				Thread.sleep(2000);
 				premierAff=false;
 			}
 			catch (IllegalArgumentException e) {
@@ -200,7 +214,7 @@ public abstract class CasePropriete extends Case {
 		int choixMenu=0;
 		while (!inputOk && !tourFini) {
 			if (!premierAff) {
-				PartieDeMonopoly.afficherBarreChargement();
+				Thread.sleep(3000);
 				PartieDeMonopoly.afficherBarreChargement();
 				System.out.println("\n>>> Que voulez vous faire ensuite ?");
 			}
@@ -209,15 +223,7 @@ public abstract class CasePropriete extends Case {
 					System.out.println(MessagesJeu.afficherMenuPropHypo);
 				}
 				else {
-					if (this instanceof Monture) {
-						System.out.println(MessagesJeu.afficherMenuMontureAJoueur);
-					}
-					else if (this instanceof BatonDeMagicien) {
-						System.out.println(MessagesJeu.afficherMenuBatonAJoueur);
-					}
-					else {
-						System.out.println(MessagesJeu.afficherMenuTerresAJoueur);
-					}
+					this.afficherMenuPropAJoueur();
 				}
 				String question = this.poserQuestionChoixMenus(cptErr,premierAff);
 				choixMenu = PartieDeMonopoly.poserQuestionJoueurInt(">>> "+question);
@@ -231,10 +237,13 @@ public abstract class CasePropriete extends Case {
 			}
 		}
 	}
+    
+    public abstract void afficherMenuPropAJoueur();
+    
 	
     
 	
-	private boolean verifierNumMenuPropNonLibre(int numChoisi) throws IllegalArgumentException {
+	public boolean verifierNumMenuPropNonLibre(int numChoisi) throws IllegalArgumentException {
 		if (!this.estEnHypotheque()) {
 			if (numChoisi < 1 || numChoisi > 3) {
 				throw new IllegalArgumentException("Numéro choisi invalide.");

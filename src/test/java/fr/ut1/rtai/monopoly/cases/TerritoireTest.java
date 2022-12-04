@@ -9,11 +9,13 @@ import org.junit.Test;
 
 import fr.ut1.rtai.monopoly.ECouleurCase;
 import fr.ut1.rtai.monopoly.Joueur;
+import fr.ut1.rtai.monopoly.Plateau;
 
 public class TerritoireTest {
 	private Territoire fanghorn ;
 	private Joueur j1 ;
 	private Joueur j2 ;
+
 	
 	@Before
 	public void setUp() throws Exception {
@@ -37,17 +39,13 @@ public class TerritoireTest {
 	
 	@Test
 	public void testNbPFApresConstruUnePF() {
+		this.fanghorn.setProprietaire(this.j1);
 		this.fanghorn.construirePlaceForte();
 		assertEquals(1,this.fanghorn.getNbPlacesFortes());
 		assertFalse(this.fanghorn.getPossedeForteresse());
 	}
 	
-	@Test
-	public void testConstruForteresse() {
-		this.fanghorn.construireForteresse();
-		assertEquals(0, this.fanghorn.getNbPlacesFortes());
-		assertTrue(this.fanghorn.getPossedeForteresse());
-	}
+
 	
 	@Test
 	public void testEstTerrainVideInit() {
@@ -56,14 +54,11 @@ public class TerritoireTest {
 	
 	@Test
 	public void testEstTerrainNonVideApresConstruPF() {
+		this.fanghorn.setProprietaire(this.j1);
 		this.fanghorn.construirePlaceForte();
 		assertFalse(this.fanghorn.estTerrainVide());
 	}
-	@Test
-	public void testEstTerrainNonVideApresConstruForteresse() {
-		this.fanghorn.construireForteresse();
-		assertFalse(this.fanghorn.estTerrainVide());
-	}
+
 	
 	
 	@Test
@@ -77,5 +72,20 @@ public class TerritoireTest {
 		assertSame(this.j1, this.fanghorn.getProprietaire());
 		assertNotSame(this.j2, this.fanghorn.getProprietaire());
 	}
+	
+	
+	@Test
+	public void testEstTerrainVide() {
+		assertTrue(this.fanghorn.estTerrainVide());
+	}
+	
+	@Test
+	public void testEstTerrainNonVide() {
+		this.fanghorn.setProprietaire(this.j1);
+		this.fanghorn.construirePlaceForte();
+		assertFalse(this.fanghorn.estTerrainVide());
+	}
+	
+
 	
 }

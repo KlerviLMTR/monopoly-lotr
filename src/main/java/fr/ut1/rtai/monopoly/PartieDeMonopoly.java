@@ -8,6 +8,7 @@ public class PartieDeMonopoly {
 	private Plateau p;
 	private static ArrayList<Joueur> joueurs;
 	private int nbJoueurs;
+	public static int lancerDeDesCourant;
 
 	public PartieDeMonopoly() throws InterruptedException {
 		// Ecrire les messages destinés aux joueurs

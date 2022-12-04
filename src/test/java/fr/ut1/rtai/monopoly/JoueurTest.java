@@ -193,6 +193,13 @@ public class JoueurTest {
 		assertTrue(j.estPropDeTousLesLotsCoul(ECouleurCase.blanc));
 	}
 	
+	public void estPropdeTousLesTerrains2() throws InterruptedException {
+		j.acheterCase(this.p.getCaseNumero(2));//  Cul de sac
+		j.acheterCase(this.p.getCaseNumero(4));// Ferme
+		assertEquals(2,j.compterLotParCouleur(ECouleurCase.violet));
+		assertTrue(j.estPropDeTousLesLotsCoul(ECouleurCase.violet));
+	}
+	
 	
 	
 	

@@ -221,6 +221,20 @@ public class Joueur {
 	}
 	
 	
+	public boolean estTerrainHypothequeSurLot(ECouleurCase c) {
+		boolean hypothequeTrouvee = false;
+		for (Territoire t : this.territoiresPossedes) {
+			if (t.getCouleurCase() == c) {
+				if(t.estEnHypotheque()) {
+					hypothequeTrouvee = true;
+				}
+			}
+			
+		}
+		return hypothequeTrouvee;
+	}
+	
+	
 	/**
 	 * @param c
 	 * @return
@@ -253,31 +267,93 @@ public class Joueur {
 	 * Permet au joueur d'acheter une case donnee.
 	 * @throws InterruptedException 
 	 */
-	public void acheterCase(Case case1) throws InterruptedException {
+	public void acheterCase(Case case1){
 		if (case1 instanceof CasePropriete) {
 		
 			if (this.solde >= ((CasePropriete)case1).getCoutAchat()) {
 				((CasePropriete)case1).setProprietaire(this);
 				if (case1 instanceof Monture) {
 					this.monturesPossedees.add((Monture) case1);
+					System.out.println("Vous achetez "+ case1.getNomCase()+" pour "+((CasePropriete)case1).getCoutAchat()+" ୩.");
+					if (this.getNbMonturesPossedees()>1) {
+						this.setLoyersMonturesPossedees();
+						PartieDeMonopoly.affichageMessageDelai(15,". . . Les loyers de vos montures augmentent !\n");
+					}
 				}
 				else if (case1 instanceof Territoire) {
 					this.territoiresPossedes.add((Territoire) case1);
+					System.out.println("Vous achetez "+ case1.getNomCase()+" pour "+((CasePropriete)case1).getCoutAchat()+" ୩.");
+					if (this.estPropDeTousLesLotsCoul(((Territoire)case1).getCouleurCase())){
+						PartieDeMonopoly.affichageMessageDelai(15,". . . Vous êtes propriétaire de tous les terrains de cette couleur ! Les loyers issus des terrains nus sont multipliés par 2.\n");
+						this.setLoyersterrainsNusSiTousPossedes(((Territoire)case1).getCouleurCase());
+					}
 				}
 				else {
+					System.out.println("Vous achetez "+ case1.getNomCase()+" pour "+((CasePropriete)case1).getCoutAchat()+" ୩.");
 					this.batonsDeMagicienPossedes.add((BatonDeMagicien) case1);
+					System.out.println("Vous achetez "+ case1.getNomCase()+" pour "+((CasePropriete)case1).getCoutAchat()+" ୩.");
+					if (this.estPropdeNbBatons()==2) {
+						PartieDeMonopoly.affichageMessageDelai(15,". . . Vous avez obtenu tous les bâtons ! Attendez vous à percevoir des loyers magiques !\n");
+					}
+
 				}
 				this.perdreDuPouvoir(((CasePropriete)case1).getCoutAchat());
-				System.out.println("Vous achetez "+ case1.getNomCase()+" pour "+((CasePropriete)case1).getCoutAchat()+" ୩.");
-				Thread.sleep(2000);
+
+
+
+				
 	
 			}
 			else {
-				PartieDeMonopoly.affichageMessageDelai(15,". . . Vous n'avez pas assez d'argent !");
+				PartieDeMonopoly.affichageMessageDelai(15,". . . Vous n'avez pas assez de pouvoir !");
 			}
 		
 		}
 	}
+	
+	
+	private void setLoyersMonturesPossedees() {
+		for (Monture m : this.monturesPossedees) {
+			m.setLoyerActuel(this.calculerLoyerMontures(m));
+		}
+	}
+	
+	private void setLoyersterrainsNusSiTousPossedes(ECouleurCase c) {
+		int cpt =0;
+		for (Territoire t : this.territoiresPossedes) {
+			if(t.getCouleurCase()==c) {
+				if (t.estTerrainVide()) {
+					int nouveauLoyer = t.getLoyerActuel()*2;			
+					t.setLoyerActuel(nouveauLoyer);
+					cpt++;
+
+				}
+			}
+		}
+	}
+	
+	
+	private int calculerLoyerMontures(Monture case1) {
+		int loyer=0;
+	
+		switch(this.estPropDeNbMontures()) {
+		case 1:
+			loyer = case1.getLoyers()[0];
+			break;
+		case 2:
+			loyer = case1.getLoyers()[1];
+			break;
+		case 3:
+			loyer = case1.getLoyers()[2];
+			break;
+		case 4:
+			loyer = case1.getLoyers()[3];
+		}
+		return loyer;
+	}
+		
+
+
 	
 	public void payerJoueur(Joueur j, int montant) {
 		this.perdreDuPouvoir(montant);
@@ -293,12 +369,7 @@ public class Joueur {
 
 	
 	public String toString() {
-		String aff=this.nom;
-		if (this.pion != null) {
-			aff+=" dans le rôle de "+ this.pion.getTypePion().afficherPion();
-
-		}
-		return aff;
+		return this.nom;
 	}
 
 

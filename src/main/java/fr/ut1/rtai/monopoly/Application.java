@@ -22,14 +22,17 @@ public class Application {
 
 		Plateau p = new Plateau();
 		Joueur j = new Joueur("toto");
+		j.setPion(new Pion(EPion.Galadriel));
 		System.out.println(j.getSolde());
-		p.getCaseNumero(13).actionCase(j);
 		p.getCaseNumero(6).actionCase(j);
+		p.getCaseNumero(16).actionCase(j);
 		Joueur j2 = new Joueur("titi");
+		j2.setPion(new Pion(EPion.Legolas));
+
 		System.out.println(j.getSolde());
 		p.getCaseNumero(6).actionCase(j2);
 		System.out.println(j.getSolde());
-		System.out.println(j2.getSolde());
+
 
 // Tester vite fait les cartes :
 //		Joueur j = new Joueur("toto");
