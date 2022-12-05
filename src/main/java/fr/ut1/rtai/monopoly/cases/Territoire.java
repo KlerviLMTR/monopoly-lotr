@@ -92,7 +92,7 @@ public class Territoire extends CasePropriete {
      * @return
      */
     public boolean peutConstruireConstru() {
-    	return this.getProprietaire().estTerrainHypothequeSurLot(this.couleur);
+    	return !this.getProprietaire().estTerrainHypothequeSurLot(this.couleur);
     }
     
     public boolean peutConstruireForteresse() {
@@ -118,7 +118,7 @@ public class Territoire extends CasePropriete {
 			}
 		}
 		else {
-    		PartieDeMonopoly.affichageMessageDelai(15, ". . . Vous devez être propriété de tous les lots de couleur "+ this.couleur + " pour pouvoir construire une forteresse.");					
+    		PartieDeMonopoly.affichageMessageDelai(15, ". . . Vous devez être propriétaire de tous les lots de couleur "+ this.couleur + " pour pouvoir construire une forteresse.");					
 		}
 		
 	}
@@ -153,7 +153,7 @@ public class Territoire extends CasePropriete {
     
     public void vendreForteresse() {
     	if (!this.possedeForteresse) {
-    		PartieDeMonopoly.affichageMessageDelai(15, ". . . Mais vous n'avez pas de forteresse à vendre.");
+    		PartieDeMonopoly.affichageMessageDelai(15, ". . . Mais vous n'avez pas de forteresse à détruire.");
     	}
     	else {
     		this.possedeForteresse=false;
@@ -181,9 +181,6 @@ public class Territoire extends CasePropriete {
     	}
     	
     }
-
-    // -------------------- Méthodes d'affichage des territoires ----------------------
-    
     
     public void setLoyerActuelSelonNbPF() {
     	switch(this.nbPlacesFortes) {
@@ -204,12 +201,18 @@ public class Territoire extends CasePropriete {
     	}
     }
 
+    // -------------------- Méthodes d'affichage des territoires ----------------------
+    
+    
+
+
 	@Override
 	public void afficherTabLoyers() {
 		System.out.println("                              --- Loyers --- \n\n" );
-		System.out.println("                 Loyer actuel :"+ this.loyerActuel+" ୩\n" );
+		System.out.println("                         Loyer actuel :"+ this.loyerActuel+" ୩\n" );
 		PartieDeMonopoly.affichageMessageDelai(15, ">>> Obtenez toutes les terrains du lot de la même couleur pour voir les loyers de terrains nus augmenter !\n");
-		System.out.println(MessagesJeu.tabLoyerMontures);
+		System.out.println("                    - terrain nu : "+ this.tableDesLoyers[0] +" ୩\n                    - 1 place forte : "+this.tableDesLoyers[1]+" ୩\n                    - 2 places fortes : "+this.tableDesLoyers[2]+" ୩\n                    - 3 places fortes : "+this.tableDesLoyers[3]+" ୩\n                    - 4 places fortes : "+this.tableDesLoyers[4]+" ୩\n                    - 1 forteresse : "+ this.tableDesLoyers[5]+ " ୩\n");
+
 	}
 	
 	
@@ -301,19 +304,17 @@ public class Territoire extends CasePropriete {
     public void afficherCase() throws InterruptedException {
 		String aff = MessagesJeu.affichageSepCase+"\nCase n°"+Integer.valueOf(getNumCase()+1);
 		if (this.getProprietaire()==null) {
-			aff +=  "                   🏠 "+this.getNomCase()+" 🏠 - LIBRE            "+this.couleur+"\n" + MessagesJeu.affichageSepCase + MessagesJeu.descriptionCaseTerritoire+"\n                         Prix : "+this.getCoutAchat()+ " ୩\n                         ------------\n";
+			aff +=  "                   🏠 "+this.getNomCase()+" 🏠 - LIBRE                         "+this.couleur+"\n" + MessagesJeu.affichageSepCase + MessagesJeu.descriptionCaseTerritoire+"\n                         Prix : "+this.getCoutAchat()+ " ୩\n                         ------------\n";
 		}
 	
 		else {
 				if (this.estEnHypotheque()) {
-					aff +="        🏠 "+this.getNomCase()+" 🏠 - EN HYPOTHEQUE            "+this.couleur+"\n" + MessagesJeu.affichageSepCase + "\n                      Propriétaire : "+this.getProprietaire().getNomPion()+"\n";
+					aff +="        🏠 "+this.getNomCase()+" 🏠 - EN HYPOTHEQUE                  "+this.couleur+"\n" + MessagesJeu.affichageSepCase + "\n                      Propriétaire : "+this.getProprietaire().getNomPion()+"\n";
 				}
 				else {
-						aff +="            🏠 "+this.getNomCase()+" 🏠 - "+ this.getProprietaire().getNomPion().toUpperCase()+"     "+ this.couleur+"\n" + MessagesJeu.affichageSepCase + "\n                      Propriétaire : "+this.getProprietaire()+"\n";			
+						aff +="            🏠 "+this.getNomCase()+" 🏠 - "+ this.getProprietaire().getNomPion().toUpperCase()+"                      "+ this.couleur+"\n" + MessagesJeu.affichageSepCase + "\n                      Propriétaire : "+this.getProprietaire()+"\n";			
 					}
-				if(this.getProprietaire().estPropDeTousLesLotsCoul(this.couleur)){
-					aff +="\n★ Tous les lots de cette couleurs sont possédés par "+this.getProprietaire()+". Les loyers des terrains nus sont doublés. ★\n                        ------------\n";
-				}
+
 				if (this.nbPlacesFortes==1) {
 						aff +="\n                             🏠              \n                        ------------\n";
 				}
@@ -329,7 +330,16 @@ public class Territoire extends CasePropriete {
 				else if(this.possedeForteresse) {
 					aff +="\n                          🏰            \n                        ------------\n";
 				}
+				if (!this.estEnHypotheque()) {
+					aff += "                      Loyer actuel : "+this.loyerActuel+" ୩.\n";
+				}
 
+				else {
+					aff +="                      Loyer : 0 ୩.\n";      
+				}
+				if(this.getProprietaire().estPropDeTousLesLotsCoul(this.couleur)){
+					aff +="\n★ Tous les lots de cette couleur sont possédés par "+this.getProprietaire()+". Les loyers des terrains nus sont doublés. ★\n";
+				}
 				
 			}
 		System.out.println(aff);

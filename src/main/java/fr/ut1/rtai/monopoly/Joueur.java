@@ -296,7 +296,6 @@ public class Joueur {
 					}
 				}
 				else {
-					System.out.println("Vous achetez "+ case1.getNomCase()+" pour "+((CasePropriete)case1).getCoutAchat()+" ୩.");
 					this.batonsDeMagicienPossedes.add((BatonDeMagicien) case1);
 					System.out.println("Vous achetez "+ case1.getNomCase()+" pour "+((CasePropriete)case1).getCoutAchat()+" ୩.");
 					if (this.estPropdeNbBatons()==2) {

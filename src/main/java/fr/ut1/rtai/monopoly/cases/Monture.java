@@ -43,7 +43,7 @@ public class Monture extends CasePropriete {
 
 	public void afficherTabLoyers() {
 		System.out.println("                              --- Loyers --- \n\n" );
-		System.out.println("                 Loyer actuel :"+ this.loyerActuel+" ୩\n" );
+		System.out.println("                          Loyer actuel :"+ this.loyerActuel+" ୩\n" );
  
 		PartieDeMonopoly.affichageMessageDelai(15, ">>> Obtenez toutes les montures pour voir les loyers augmenter !\n");
 		System.out.println(MessagesJeu.tabLoyerMontures);
@@ -84,6 +84,7 @@ public class Monture extends CasePropriete {
 				else {
 					aff +="                         Loyer : 0 ୩.\n";      
 				}
+
 			}
 		System.out.println(aff);
 		}

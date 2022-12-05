@@ -19,14 +19,14 @@ public class BatonDeMagicien extends CasePropriete {
 		System.out.println(MessagesJeu.tabLoyerMagiciens);
 	}
 	
-	
-	public void calculerLeLoyerActuel() {
+
+	public void calculerLeLoyerActuel(int lancerDeDesCourant) {
 		switch(this.getProprietaire().estPropdeNbBatons()) {
 			case 1:
-				this.setLoyerActuel(PartieDeMonopoly.lancerDeDesCourant*4);
+				this.setLoyerActuel(lancerDeDesCourant*4);
 				break;
 			case 2:
-				this.setLoyerActuel(PartieDeMonopoly.lancerDeDesCourant*10);
+				this.setLoyerActuel(lancerDeDesCourant*10);
 				break;
 		}
 	}

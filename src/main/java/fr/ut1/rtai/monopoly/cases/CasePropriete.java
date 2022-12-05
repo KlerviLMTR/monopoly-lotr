@@ -46,7 +46,7 @@ public abstract class CasePropriete extends Case {
     		    	//Verifier les possessions du proprio et adapter le loyer en consequence
     		    	
     				if (!this.estEnHypotheque()) {
-    					System.out.println("                    Loyer actuel :" + this.getLoyerActuel()+ " ୩\n                         -------------------\n");
+    					System.out.println("                           Loyer actuel :" + this.getLoyerActuel()+ " ୩\n                         -------------------\n");
     					if (this instanceof Monture) {
         					PartieDeMonopoly.affichageMessageDelai(15, MessagesJeu.caseMonturePropOK);
     					}
@@ -142,10 +142,7 @@ public abstract class CasePropriete extends Case {
     
     // --------------- Methodes utilitaires des cases propriété --------
     
-    public void proposerAchatCase(String message) {
-    	System.out.println(message);
-    }
-    
+
     
     public void proposerAchatCase(Joueur j) throws InterruptedException {
 		int cptErr = 0;
@@ -156,7 +153,7 @@ public abstract class CasePropriete extends Case {
 		while (!inputOk && !tourFini) {
 			try {
 				if (!premierAff) {
-					PartieDeMonopoly.afficherBarreChargement();
+					Thread.sleep(3000);
 					PartieDeMonopoly.afficherBarreChargement();
 					System.out.println("\n>>> Que voulez vous faire ensuite ?");
 				}
