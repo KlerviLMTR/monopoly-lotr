@@ -152,8 +152,9 @@ public abstract class CasePropriete extends Case {
 		while (!inputOk && !tourFini) {
 			try {
 				if (!premierAff) {
-					Thread.sleep(3000);
-					PartieDeMonopoly.afficherBarreChargement();
+					if (cptErr==0) {
+						PartieDeMonopoly.afficherBarreChargement();
+					}
 					System.out.println("\n>>> Que voulez vous faire ensuite ?");
 				}
 				if (this instanceof Monture) {
@@ -169,10 +170,10 @@ public abstract class CasePropriete extends Case {
 				choixMenu = PartieDeMonopoly.poserQuestionJoueurInt(">>> "+question);
 				if (this.verifierNumMenuPropLibre(choixMenu)) {	
 					tourFini=this.traiterChoixMenuPropLibre(j,choixMenu, tourFini);
-
+					premierAff=false;
+					cptErr =0;
 				}
-				Thread.sleep(2000);
-				premierAff=false;
+				
 			}
 			catch (IllegalArgumentException e) {
 				cptErr++;
@@ -186,13 +187,19 @@ public abstract class CasePropriete extends Case {
 			case 1:
 				j.acheterCase(this);
 				tourFini=true;
+				Thread.sleep(1500);
+
 				break;
 			case 2:
 				this.afficherTabLoyers();
+				Thread.sleep(2000);
+
 				break;
 			case 3:
 				System.out.println(MessagesJeu.choixNeRienFaire);
 				tourFini=true;
+				Thread.sleep(1500);
+
 		}
 		return tourFini;
 	}
@@ -213,7 +220,9 @@ public abstract class CasePropriete extends Case {
 		while (!inputOk && !tourFini) {
 			if (!premierAff) {
 				Thread.sleep(3000);
-				PartieDeMonopoly.afficherBarreChargement();
+				if(cptErr==0) {
+					PartieDeMonopoly.afficherBarreChargement();			
+				}
 				System.out.println("\n>>> Que voulez vous faire ensuite ?");
 			}
 			try {
@@ -229,6 +238,7 @@ public abstract class CasePropriete extends Case {
 					tourFini=this.traiterChoixMenuPropAuJoueur(j,choixMenu, tourFini);
 				}
 				premierAff=false;
+				cptErr =0;
 			}
 			catch (IllegalArgumentException e) {
 				cptErr++;
@@ -261,6 +271,7 @@ public abstract class CasePropriete extends Case {
 				case 1:
 					this.leverLHypotheque(j);
 					tourFini=true;
+					Thread.sleep(1500);
 					break;
 				case 2:
 					System.out.println(MessagesJeu.choixNeRienFaire);
@@ -271,10 +282,12 @@ public abstract class CasePropriete extends Case {
 			switch(choixMenu){
 			case 1:
 				this.mettreEnHypotheque(j);
+				Thread.sleep(1500);
 				tourFini=true;
 				break;
 			case 2:
 				this.afficherTabLoyers();
+				Thread.sleep(2000);
 				break;
 			case 3:
 				System.out.println(MessagesJeu.choixNeRienFaire);

@@ -217,7 +217,7 @@ public class Territoire extends CasePropriete {
 	
 	
 	public void afficherMenuPropAJoueur() {
-		String menu="\n                    1 - Hypothéquer le terrain\n                    2 - Consulter la table des loyers\n                    3 - Construire une place forte pour "+this.coutConstruction+" ୩\n                    4 - Construire une forteresse pour "+this.coutConstruction+" ୩ + 4 places fortes\n                    5 - Détruire une place forte pour "+this.prixConstruVendue +" ୩\n                    6 - Détruire la forteresse pour "+this.prixConstruVendue+" ୩\n                    7 - Ne rien faire\n";
+		String menu="\n                       Ⰴ Loyer actuel :"+this.loyerActuel+ " ୩ Ⰴ\n\n                    1 - Hypothéquer le terrain\n                    2 - Consulter la table des loyers\n                    3 - Construire une place forte pour "+this.coutConstruction+" ୩\n                    4 - Construire une forteresse pour "+this.coutConstruction+" ୩ + 4 places fortes\n                    5 - Détruire une place forte pour "+this.prixConstruVendue +" ୩\n                    6 - Détruire la forteresse pour "+this.prixConstruVendue+" ୩\n                    7 - Ne rien faire\n";
 		System.out.println(menu);
 	}
 	
@@ -306,15 +306,15 @@ public class Territoire extends CasePropriete {
     public void afficherCase() throws InterruptedException {
 		String aff = MessagesJeu.affichageSepCase+"\nCase n°"+Integer.valueOf(getNumCase()+1);
 		if (this.getProprietaire()==null) {
-			aff +=  "                   🏠 "+this.getNomCase()+" 🏠 - LIBRE                         "+this.couleur+"\n" + MessagesJeu.affichageSepCase + MessagesJeu.descriptionCaseTerritoire+"\n                         Prix : "+this.getCoutAchat()+ " ୩\n                         ------------\n";
+			aff +=  "                           🏠 "+this.getNomCase()+" 🏠 - LIBRE                         "+this.couleur+"\n" + MessagesJeu.affichageSepCase +"\n          "+ MessagesJeu.descriptionCaseTerritoire+"\n                                   Prix : "+this.getCoutAchat()+ " ୩\n\n                         ----------------------------\n";
 		}
 	
 		else {
 				if (this.estEnHypotheque()) {
-					aff +="        🏠 "+this.getNomCase()+" 🏠 - EN HYPOTHEQUE                  "+this.couleur+"\n" + MessagesJeu.affichageSepCase + "\n                                   Propriétaire : "+this.getProprietaire().getNomPion()+"\n";
+					aff +="                🏠 "+this.getNomCase()+" 🏠 - EN HYPOTHEQUE                  "+this.couleur+"\n" + MessagesJeu.affichageSepCase + "\n                                   Propriétaire : "+this.getProprietaire().getNomPion()+"\n";
 				}
 				else {
-						aff +="            🏠 "+this.getNomCase()+" 🏠 - "+ this.getProprietaire().getNomPion().toUpperCase()+"                      "+ this.couleur+"\n" + MessagesJeu.affichageSepCase + "\n                      Propriétaire : "+this.getProprietaire()+"\n";			
+						aff +="                    🏠 "+this.getNomCase()+" 🏠 - "+ this.getProprietaire().getNomPion().toUpperCase()+"                      "+ this.couleur+"\n" + MessagesJeu.affichageSepCase + "\n                                    Propriétaire : "+this.getProprietaire()+"\n";			
 					}
 
 				if (this.nbPlacesFortes==1) {

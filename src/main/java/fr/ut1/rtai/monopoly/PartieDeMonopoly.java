@@ -344,5 +344,4 @@ public class PartieDeMonopoly {
 		System.out.println("\n\n");
 	}
 
-
 }
