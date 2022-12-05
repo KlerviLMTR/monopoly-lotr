@@ -28,7 +28,7 @@ class CarteGagnerEtPerdreDuPouvoirTest {
 
 	//Tests des cartes gagnerPouvoir nominal
 	@Test
-	void testGagneDuPouvoirNominal() {
+	void testGagneDuPouvoirNominal() throws InterruptedException {
 		j.piocherUneCartePeuple();
 		assertEquals(1510,this.j.getSolde());
 		j.piocherUneCarteEvenement();

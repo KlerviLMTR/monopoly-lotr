@@ -1,6 +1,7 @@
 package fr.ut1.rtai.monopoly.cartes;
 
 import fr.ut1.rtai.monopoly.Joueur;
+import fr.ut1.rtai.monopoly.MessagesJeu;
 import fr.ut1.rtai.monopoly.PartieDeMonopoly;
 import fr.ut1.rtai.monopoly.Plateau;
 
@@ -12,6 +13,11 @@ public abstract class Carte {
 	private PartieDeMonopoly partie;
 	
 
+	/**
+	 * Construire une carte (non instanciable)
+	 * @param titre
+	 * @param description
+	 */
 	public Carte(String titre, String description) {
 		this.titre = titre;
 		this.description = description;
@@ -19,7 +25,12 @@ public abstract class Carte {
 	
 	
 	
-	public abstract void actionCarte(Joueur j);
+	/**
+	 * Définit l'action de la carte. Implémentée dans chacun des types de carte.
+	 * @param j
+	 * @throws InterruptedException
+	 */
+	public abstract void actionCarte(Joueur j) throws InterruptedException;
 	
 	public void estPiocheeEtRemiseAuFondDuPaquet() {
 		if (this.getTitre().equals("Carte Peuple")){
@@ -54,11 +65,24 @@ public abstract class Carte {
 		return this.description;
 	}
 	
-	//--------------------------------------------
+	//-----------------  Methodes d'affichage des cartes ---------------------------
 
-
+	public void afficherCarte() {
+		System.out.println(this);
+		PartieDeMonopoly.affichageMessageDelai(15, "\" "+ description+" \"\n");
+	}
+	
 	@Override
 	public String toString() {
-		return "Carte [titre=" + titre + ", description=" + description + "]";
+		String aff= "\n"+MessagesJeu.affichageSepCarte;
+			
+		if (this.titre.equals("Carte Peuple")) {
+			aff+= " Ⰴ 🧍 "+ this.titre + " 🧍 Ⰴ "; 
+		}
+		else {
+			aff+= " Ⰴ ⚔ "+ this.titre + " ⚔ Ⰴ "; 
+		}
+		aff+=MessagesJeu.affichageSepCarte+"\n\n";
+		return aff;
 	}
 }

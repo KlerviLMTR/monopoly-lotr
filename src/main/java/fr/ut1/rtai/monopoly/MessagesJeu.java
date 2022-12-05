@@ -44,7 +44,7 @@ public class MessagesJeu {
 	public static String constructionF="Vous construisez une forteresse.";
 	public static String choixNeRienFaire="Vous décidez de ne rien faire.";
 	public static String affichageSepCase="\n※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※\n";
-
+	public static String affichageSepCarte=" ჻ ჻ ჻ ჻ ჻ ჻ ჻ ჻ ჻ ჻ ჻ ჻ ჻ ჻";
 
 
 }

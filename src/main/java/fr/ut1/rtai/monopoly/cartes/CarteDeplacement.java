@@ -13,7 +13,10 @@ public class CarteDeplacement extends Carte {
 	}
 	@Override
 	public void actionCarte(Joueur j) {
+		this.afficherCarte();
+
 		System.out.println("Completez moi! ...");
 		super.estPiocheeEtRemiseAuFondDuPaquet();
 	}
+
 }

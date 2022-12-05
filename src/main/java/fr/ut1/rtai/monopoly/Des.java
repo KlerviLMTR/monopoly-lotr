@@ -1,4 +1,5 @@
 package fr.ut1.rtai.monopoly;
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -92,7 +93,7 @@ public class Des {
 	 * verifie si le lancer courant est un double
 	 * @return
 	 */
-	public boolean isEstUnDouble() {
+	public boolean estUnDouble() {
 		return this.estUnDouble;
 	}
 	
@@ -118,12 +119,78 @@ public class Des {
 		return this.nbOeilDeSauron;
 	}
 	
+	private static String afficherDes(int de) {
+		String s = "";
+		switch (de) {
+		case 1:
+		
+	        s = 
+	            "+-------+" + "\n" +
+	            "|       |" + "\n" +
+	            "|   o   |" + "\n" +
+	            "|       |" + "\n" +
+	            "+-------+";
+	        break; 
+		case 2 :
+			s = 
+                "+-------+" + "\n" +
+                "| o     |" + "\n" +
+                "|       |" + "\n" +
+                "|     o |" + "\n" +
+                "+-------+";
+        	break;
+		case 3 :
+
+        	s = 
+                "+-------+" + "\n" +
+                "| o     |" + "\n" +
+                "|   o   |" + "\n" +
+                "|     o |" + "\n" +
+                "+-------+";
+        break; 
+
+		case 4 :
+
+			s = 
+                "+-------+" + "\n" +
+                "| o   o |" + "\n" +
+                "|       |" + "\n" +
+                "| o   o |" + "\n" +
+                "+-------+";
+        break; 
+
+		case 5 :
+
+			s = 
+            "+-------+" + "\n" +
+            "| o   o |" + "\n" +
+            "|   o   |" + "\n" +
+            "| o   o |" + "\n" +
+            "+-------+";
+        break; 
+
+		case 6 :
+
+			s = 
+            "+-------+" + "\n" +
+            "| o   o |" + "\n" +
+            "| o   o |" + "\n" +
+            "| o   o |" + "\n" +
+            "+-------+";
+		}
+		return s;
+    }
+
+	public void afficherLeLancher() {
+		System.out.println(this.afficherDes(this.chiffreDe1));
+		System.out.println(this.afficherDes(this.chiffreDe2));
+	}
 
 	/**
 	 *Affiche la valeur du lancer de des actuel
 	 */
 	public String toString() {
-		return "Lancer : "+ this.chiffreDe1+" + "+this.chiffreDe2;
+		return "Lancer : "+ this.chiffreDe1+" + "+this.chiffreDe2+ " ! ";
 	}
 
 

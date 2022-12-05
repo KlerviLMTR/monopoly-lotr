@@ -8,17 +8,23 @@ public class PartieDeMonopoly {
 	private Plateau p;
 	private static ArrayList<Joueur> joueurs;
 	private int nbJoueurs;
-	public static int lancerDeDesCourant;
-
+	private Des des;
+	
+	
 	public PartieDeMonopoly() throws InterruptedException {
 		// Ecrire les messages destinés aux joueurs
 		System.out.println("\n--- CREATION DE LA PARTIE DE MONOPOLY ---\n\n");
-		this.afficherBarreChargement();
+		PartieDeMonopoly.afficherBarreChargement();
 		// Creer le plateau
 		this.p = new Plateau();
+		this.des = new Des();
 	}
 
 	// ---------- Getters et setters utiles --------------
+	
+	public Des getDes() {
+		return this.des;
+	}
 
 	public int getNbJoueurs() {
 		return this.nbJoueurs;
@@ -98,9 +104,10 @@ public class PartieDeMonopoly {
 			}
 			nomsJoueurs[i] = nomJ;
 			this.genererJoueurs(this.nbJoueurs, nomsJoueurs);
-			//donner le plateau courant aux joueurs
+			//donner le plateau et la partie courant.e aux joueurs
 			for (Joueur j : this.joueurs) {
 				j.setPlateau(this.p);
+				j.setPartie(this);
 			}
 		}
 	}
@@ -218,6 +225,20 @@ public class PartieDeMonopoly {
 	}
 	
 
+	// -------- Méthodes utilitaires ---------------------------------
+	public void lancerDesJoueur(Joueur j) throws InterruptedException {
+		this.des.lancerLesDes();
+		affichageMessageDelai(15,">>> " +j.getNom()+ " lance les dés . . .");
+		this.des.afficherLeLancher();
+		this.afficherLancerDes();
+
+
+
+	}
+	
+	public void afficherLancerDes() {
+		System.out.println(this.des);
+	}
 
 
 	

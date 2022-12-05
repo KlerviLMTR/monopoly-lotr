@@ -6,6 +6,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import fr.ut1.rtai.monopoly.Des;
 import fr.ut1.rtai.monopoly.Joueur;
 import fr.ut1.rtai.monopoly.Plateau;
 
@@ -13,9 +14,11 @@ class CarteTest {
 	
 	private Plateau p ;
 	private Joueur j;
+
 	
 	@BeforeEach
 	void setUp() throws Exception {
+
 		this.p= new Plateau();
 		this.j=new Joueur("Toto");
 		this.j.setPlateau(p);
@@ -41,7 +44,7 @@ class CarteTest {
 	}
 	
 	@Test
-	public void testJoueurPiocheCartePeuple() {
+	public void testJoueurPiocheCartePeuple() throws InterruptedException {
 		this.j.piocherUneCartePeuple();
 		assertEquals(16,this.p.getCartesEvenement().size());
 		assertEquals(16,this.p.getCartesPeuple().size());
@@ -52,7 +55,7 @@ class CarteTest {
 		
 	}
 	@Test
-	public void testJoueurPiocheCarteEvenement() {
+	public void testJoueurPiocheCarteEvenement() throws InterruptedException {
 		this.j.piocherUneCarteEvenement();
 		assertEquals(16,this.p.getCartesEvenement().size());
 		assertEquals(16,this.p.getCartesPeuple().size());

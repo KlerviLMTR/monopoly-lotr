@@ -25,7 +25,8 @@ public class Joueur {
 	private int nbToursPrison;
 	private boolean estEnFaillite;
 	private Plateau plateau;
-	
+	private PartieDeMonopoly partie;
+
 	public Joueur(String nom) {
 		this.nom=nom;
 		this.estEnPrison=false;
@@ -43,6 +44,10 @@ public class Joueur {
 
 	public int getSolde() {
 		return solde;
+	}
+	
+	public void setPartie(PartieDeMonopoly p) {
+		this.partie=p;
 	}
 	
 	public int getNbToursEnPrison() {
@@ -152,11 +157,11 @@ public class Joueur {
 	}
 
 	
-	public void piocherUneCartePeuple() {
+	public void piocherUneCartePeuple() throws InterruptedException {
 		this.plateau.getCartesPeuple().get(0).actionCarte(this);
 	}
 	
-	public void piocherUneCarteEvenement() {
+	public void piocherUneCarteEvenement() throws InterruptedException {
 		this.plateau.getCartesEvenement().get(0).actionCarte(this);
 	}
 
@@ -192,15 +197,18 @@ public class Joueur {
 		return this.territoiresPossedes.size();
 	}
 	
+	public boolean possedeCarteSortiePrison() {
+		return this.possedeCarteSortiePrisonEvenement || this.possedeCarteSortiePrisonPeuple;
+	}
+	
 	/**
 	 *Precondition : possede au moins 1 carte sortie de prison 
 	 * @throws InterruptedException 
 	 */
 	public void utiliserCarteSortiePrison() throws InterruptedException {
-		if(this.possedeCarteSortiePrisonEvenement || this.possedeCarteSortiePrisonPeuple) {
 			System.out.println("Vous utilisez votre carte Sortie de prison et vous évadez ! ");
 			Thread.sleep(1000);
-			System.out.println("Vous replacez la carte dans son  paquet.");
+			PartieDeMonopoly.affichageMessageDelai(15, ". . . Vous replacez la carte dans son paquet.");
 			this.estEnPrison = false;
 			
 			if (this.possedeCarteSortiePrisonEvenement){
@@ -213,12 +221,11 @@ public class Joueur {
 				this.possedeCarteSortiePrisonPeuple=false;
 				this.plateau.getCartesPeuple().add(new CarteSortirDePrison("Carte Peuple", "Vous vous évadez de prison. Vous pouvez conserver cette carte et vous en servir à tout moment."));
 			}
-		}
-		else {
-			System.out.println("Vous ne disposez pas de carte sortie de prison.");
-		}
 
 	}
+
+
+	
 	
 	
 	public boolean estTerrainHypothequeSurLot(ECouleurCase c) {
@@ -351,21 +358,73 @@ public class Joueur {
 		}
 		return loyer;
 	}
+	
+
 		
 
 
 	
 	public void payerJoueur(Joueur j, int montant) {
+		if (this.solde<montant) {
+			PartieDeMonopoly.affichageMessageDelai(15, ". . . Mais vous n'avez pas assez de pouvoir ! Vous êtes mis en faillite.");
+			this.estEnFaillite=true;
+		}
 		this.perdreDuPouvoir(montant);
 		j.gagnerduPouvoir(montant);
 	}
 	
 
 	
+	
 	public void estMisEnPrison() {
 		this.nbToursPrison = 0;
 		this.estEnPrison = true;
 	}
+	
+	/**
+	 * Traite les differents tours passes en prison
+	 * @param lancerDes
+	 * @throws InterruptedException
+	 */
+	public void sejournerEnPrison() throws InterruptedException {
+		if (this.estEnPrison) {
+			if (this.nbToursPrison<3 ) {
+				PartieDeMonopoly.affichageMessageDelai(15, "Vous êtes en prison.");
+				//Si le joueur possede une carte sortie de prison, l'utiliser
+				if(this.possedeCarteSortiePrison()) {
+					this.utiliserCarteSortiePrison();
+					System.out.println("\n"+this.getPion().getTypePion()+ " s'enfuit à toute vitesse !");		
+				}
+				else {
+					PartieDeMonopoly.affichageMessageDelai(15, "\nVous lancez les dés pour tenter de sortir de prison.");
+					this.partie.lancerDesJoueur(this);
+					Thread.sleep(1500);
+
+					if (this.partie.getDes().estUnDouble()){
+						PartieDeMonopoly.affichageMessageDelai(15, "\nVous avez obtenu un double! Fuyez vite !");
+						this.estEnPrison=false;
+						this.nbToursPrison=0;
+						System.out.println("\n"+this.getPion().getTypePion()+ " s'évade de prison.");
+					}
+					else {
+						PartieDeMonopoly.affichageMessageDelai(15, "\n Raté...");
+						System.out.println("\n"+this.getPion().getTypePion()+ " reste croupir en prison.");
+						this.nbToursPrison++;
+			
+					}
+					
+				}					
+			}else {
+				PartieDeMonopoly.affichageMessageDelai(15, "\nVous avez purgé votre peine de 3 tours. Vous pourrez jouer au prochain tour.");
+				System.out.println(this.getPion().getTypePion()+ " sort enfin de prison.");
+				this.estEnPrison=false;
+	
+			}
+		}
+		
+			
+	}
+
 
 	
 	public String toString() {

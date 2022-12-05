@@ -11,9 +11,11 @@ public class CarteAllerEnPrison extends Carte {
 
 	@Override
 	public void actionCarte(Joueur j) {
+		this.afficherCarte();
 		j.estMisEnPrison();
 		j.getPion().avancerPion(10);
 		super.estPiocheeEtRemiseAuFondDuPaquet();
 	}
+
 
 }

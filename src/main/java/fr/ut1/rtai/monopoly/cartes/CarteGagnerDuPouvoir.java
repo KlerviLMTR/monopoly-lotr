@@ -12,11 +12,12 @@ public class CarteGagnerDuPouvoir extends Carte {
     }
 
 	@Override
-	public void actionCarte(Joueur j) {
-		//Lire la description au joueur
-		System.out.println(this);
+	public void actionCarte(Joueur j) throws InterruptedException {
+		this.afficherCarte();
 		j.gagnerduPouvoir(this.montantGagne);
+		System.out.println(">>> Vous gagnez "+this.montantGagne+" ୩.");
 		super.estPiocheeEtRemiseAuFondDuPaquet();
+		Thread.sleep(2000);
 	}
 	
 	public void traiterCarteAnniv(Joueur j) {
@@ -24,7 +25,6 @@ public class CarteGagnerDuPouvoir extends Carte {
 		}
 	}
 	
-	public String toString() {
-		return this.getDesc();
-	}
+
+
 }

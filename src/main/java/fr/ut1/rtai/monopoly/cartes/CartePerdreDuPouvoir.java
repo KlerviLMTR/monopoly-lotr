@@ -14,11 +14,14 @@ public class CartePerdreDuPouvoir extends Carte {
 	}
 
 	@Override
-	public void actionCarte(Joueur j) {
-		System.out.println("Completez moi! ...");
-
+	public void actionCarte(Joueur j) throws InterruptedException {
+		this.afficherCarte();
+		j.perdreDuPouvoir(this.montantAPayer);
+		System.out.println(">>> Vous perdez "+this.montantAPayer+" ୩.");
 		super.estPiocheeEtRemiseAuFondDuPaquet();
-
+		Thread.sleep(2000);
 	}
+
+
 
 }

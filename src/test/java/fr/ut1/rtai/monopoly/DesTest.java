@@ -108,7 +108,7 @@ public class DesTest {
 	public void testEstUnDoubleVrai() {
 		this.des.lancerLesDes();
 		this.des.traiterResultatLancerDes(2, 2);
-		assertTrue(this.des.isEstUnDouble());
+		assertTrue(this.des.estUnDouble());
 	}
 	
 	/**
@@ -118,7 +118,7 @@ public class DesTest {
 	public void testEstUnDoubleFaux() {
 		this.des.lancerLesDes();
 		this.des.traiterResultatLancerDes(3, 2);
-		assertFalse(this.des.isEstUnDouble());
+		assertFalse(this.des.estUnDouble());
 	}
 	
 

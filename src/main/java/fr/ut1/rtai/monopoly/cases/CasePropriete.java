@@ -41,6 +41,7 @@ public abstract class CasePropriete extends Case {
     				this.proposerAchatCase(j);
 
     			}
+    			//Si le joueur tombe sur une de ses propriétés
     			else if (this.getProprietaire()==j) {
     		    	//Verifier les possessions du proprio et adapter le loyer en consequence
     		    	
@@ -72,6 +73,7 @@ public abstract class CasePropriete extends Case {
     					this.gererLaPropriete(j);
     				}
     			}
+    			//Si la case n'est pas au joueur
     			else {
     		    	//Verifier les possessions du proprio et adapter le loyer en consequence
   

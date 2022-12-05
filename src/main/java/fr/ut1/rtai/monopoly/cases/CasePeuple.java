@@ -1,6 +1,7 @@
 package fr.ut1.rtai.monopoly.cases;
 
 import fr.ut1.rtai.monopoly.Joueur;
+import fr.ut1.rtai.monopoly.PartieDeMonopoly;
 
 public class CasePeuple extends Case {
 
@@ -9,8 +10,12 @@ public class CasePeuple extends Case {
     }
 
 	@Override
-	public void actionCase(Joueur j) {
-		
+	public void actionCase(Joueur j) throws InterruptedException {
+		this.afficherCase();
+		PartieDeMonopoly.affichageMessageDelai(15, j.getPion() + " arrive sur une case peuple. Vous piochez une carte évènement.\n");
+		Thread.sleep(1000);
+		PartieDeMonopoly.afficherBarreChargement();
+		j.piocherUneCartePeuple();
 	}
 
 	@Override
