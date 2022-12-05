@@ -28,6 +28,8 @@ public class Application {
 		
 		j2.setPion(new Pion(EPion.Aragorn));
 		j.setPion(new Pion (EPion.Frodon));
+		p.getCaseNumero(12).actionCase(j);
+
 		p.getCaseNumero(14).actionCase(j);
 		p.getCaseNumero(14).actionCase(j);
 

@@ -46,7 +46,6 @@ public abstract class CasePropriete extends Case {
     		    	//Verifier les possessions du proprio et adapter le loyer en consequence
     		    	
     				if (!this.estEnHypotheque()) {
-    					System.out.println("                           Loyer actuel :" + this.getLoyerActuel()+ " ୩\n                         -------------------\n");
     					if (this instanceof Monture) {
         					PartieDeMonopoly.affichageMessageDelai(15, MessagesJeu.caseMonturePropOK);
     					}

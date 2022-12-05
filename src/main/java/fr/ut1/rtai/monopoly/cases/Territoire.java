@@ -264,7 +264,9 @@ public class Territoire extends CasePropriete {
 			switch(choixMenu){
 			case 1:
 				this.mettreEnHypotheque(j);
-				tourFini=true;
+				if (this.estEnHypotheque()) {
+					tourFini=true;
+				}
 				break;
 			case 2:
 				this.afficherTabLoyers();
@@ -309,29 +311,29 @@ public class Territoire extends CasePropriete {
 	
 		else {
 				if (this.estEnHypotheque()) {
-					aff +="        🏠 "+this.getNomCase()+" 🏠 - EN HYPOTHEQUE                  "+this.couleur+"\n" + MessagesJeu.affichageSepCase + "\n                      Propriétaire : "+this.getProprietaire().getNomPion()+"\n";
+					aff +="        🏠 "+this.getNomCase()+" 🏠 - EN HYPOTHEQUE                  "+this.couleur+"\n" + MessagesJeu.affichageSepCase + "\n                                   Propriétaire : "+this.getProprietaire().getNomPion()+"\n";
 				}
 				else {
 						aff +="            🏠 "+this.getNomCase()+" 🏠 - "+ this.getProprietaire().getNomPion().toUpperCase()+"                      "+ this.couleur+"\n" + MessagesJeu.affichageSepCase + "\n                      Propriétaire : "+this.getProprietaire()+"\n";			
 					}
 
 				if (this.nbPlacesFortes==1) {
-						aff +="\n                             🏠              \n                        ------------\n";
+						aff +="\n                                          🏠              \n                                     ------------\n";
 				}
 				else if(this.nbPlacesFortes==2) {
-					aff +="\n                            🏠 🏠             \n                        ------------\n";
+					aff +="\n                                         🏠 🏠             \n                                     ------------\n";
 				}
 				else if(this.nbPlacesFortes==3) {
-					aff +="\n                           🏠 🏠 🏠           \n-                        -----------\n";
+					aff +="\n                                        🏠 🏠 🏠           \n-                                     -----------\n";
 				}
 				else if(this.nbPlacesFortes==4) {
-					aff +="\n                          🏠 🏠 🏠 🏠            \n                        ------------\n";
+					aff +="\n                                       🏠 🏠 🏠 🏠            \n                                     ------------\n";
 				}
 				else if(this.possedeForteresse) {
-					aff +="\n                          🏰            \n                        ------------\n";
+					aff +="\n                                       🏰            \n                                     ------------\n";
 				}
 				if (!this.estEnHypotheque()) {
-					aff += "                      Loyer actuel : "+this.loyerActuel+" ୩.\n";
+					aff += "                                   Loyer actuel : "+this.loyerActuel+" ୩.\n";
 				}
 
 				else {
