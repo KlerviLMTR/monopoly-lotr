@@ -88,7 +88,7 @@ public class JoueurTest {
 	}
 	
 	@Test
-	public void testEstMisEnPrison() {
+	public void testEstMisEnPrison() throws InterruptedException {
 		this.j.estMisEnPrison();
 		assertTrue(this.j.estEnPrison());
 		assertEquals(this.j.getNbToursEnPrison(),0);

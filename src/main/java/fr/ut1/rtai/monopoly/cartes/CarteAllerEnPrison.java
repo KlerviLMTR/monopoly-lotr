@@ -10,7 +10,7 @@ public class CarteAllerEnPrison extends Carte {
 	}
 
 	@Override
-	public void actionCarte(Joueur j) {
+	public void actionCarte(Joueur j) throws InterruptedException {
 		this.afficherCarte();
 		j.estMisEnPrison();
 		j.getPion().avancerPion(10);

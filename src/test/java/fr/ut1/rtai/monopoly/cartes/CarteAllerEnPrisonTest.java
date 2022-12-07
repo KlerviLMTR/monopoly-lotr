@@ -34,7 +34,7 @@ public class CarteAllerEnPrisonTest {
 	}
 	
 	@Test
-	public void testPositionPionJoueurMisEnPrison() {
+	public void testPositionPionJoueurMisEnPrison() throws InterruptedException {
 		c.actionCarte(j);
 		assertEquals(11,j.getPion().getNumCase());
 	}
@@ -45,13 +45,13 @@ public class CarteAllerEnPrisonTest {
 	}
 	
 	@Test
-	public void testEstEnPrisonApres() {
+	public void testEstEnPrisonApres() throws InterruptedException {
 		c.actionCarte(j);
 		assertTrue(j.estEnPrison());
 	}
 	
 	@Test
-	public void verifNbToursPrisonInit() {
+	public void verifNbToursPrisonInit() throws InterruptedException {
 		c.actionCarte(j);
 		assertEquals(0, j.getNbToursEnPrison());
 	}
