@@ -176,6 +176,9 @@ public class Joueur {
 		return cptCoul;
 	}
 
+	/**
+	 *Elimine un joueur de la partie 
+	 */
 	public void estMisEnFaillite() {
 		this.estEnFaillite=true;
 		this.partie.eliminerJoueur();
@@ -287,9 +290,38 @@ public class Joueur {
 		return (nbApparitionCoul == Plateau.NBLOTPARCOULEUR.get(c)) ;
 
 	}
+	
+	/**
+	 * Calcule l'ensemble de la fortune d'un joueur
+	 * @return
+	 */
+	public int calculerTotalFinDePartie() {
+		int total=0;
+		for (Monture m : this.monturesPossedees) {
+			total+=m.getCoutAchat();
+		}
+		for(BatonDeMagicien b : this.batonsDeMagicienPossedes) {
+			total+=b.getCoutAchat();
+		}
+		for (Territoire t : this.territoiresPossedes) {
+			total+=t.getCoutAchat();
+			//Compter pour chaque territoire le nb de PF possedees et additioner le cout de chacune
+			int nbPlacesFortes = t.getNbPlacesFortes();
+			total+=t.getCoutConstruction()*nbPlacesFortes;
+			if (t.getPossedeForteresse()) {
+				//S'il possede une forteresse, le cout qui en resulte = les 3 places fortes + le cout de la forteresse
+				total+= t.getCoutConstruction()*4;
+			}
+		}
+		return total;
+	}
 
 
 
+	/**
+	 * Retourne tous les biens après une faillite.
+	 * @param j
+	 */
 	public void rendreTousLesBiens(){
 	    Set <CasePropriete> biensRendus = new HashSet<CasePropriete>();
 
@@ -325,7 +357,7 @@ public class Joueur {
 	    }
 
 	    //Afficher les biens rendus
-	    System.out.println("--- Bien à nouveau disponibles : ---");
+	    System.out.println("--- Biens à nouveau disponibles : ---");
 	    for(CasePropriete c : biensRendus){
 	        System.out.println(" - "+ c.getNomCase());
 	    }
@@ -382,12 +414,19 @@ public class Joueur {
 	}
 
 
+	/**
+	 * Permet de changer le loyer des montures possedées. Cette méthode est déclenchée lorsque le joueur achète + d'une monture
+	 * 
+	 */
 	private void setLoyersMonturesPossedees() {
 		for (Monture m : this.monturesPossedees) {
 			m.setLoyerActuel(this.calculerLoyerMontures(m));
 		}
 	}
-
+	/**
+	 * Permet de changer le loyer des montures possedées. Cette méthode est déclenchée si le joueur achète le dernier terraind d'un lot dont il est intégralement propriétaire
+	 * 
+	 */
 	private void setLoyersterrainsNusSiTousPossedes(ECouleurCase c) {
 		int cpt =0;
 		for (Territoire t : this.territoiresPossedes) {
@@ -403,6 +442,11 @@ public class Joueur {
 	}
 
 
+	/**
+	 * calcule les montants des loyers sur les montures possedées
+	 * @param case1
+	 * @return
+	 */
 	private int calculerLoyerMontures(Monture case1) {
 		int loyer=0;
 
@@ -427,6 +471,11 @@ public class Joueur {
 
 
 
+	/**
+	 * permet au joueur de payer un loyer à un autre joueur.
+	 * @param j
+	 * @param montant
+	 */
 	public void payerJoueur(Joueur j, int montant) {
 		if (this.solde<montant) {
 			PartieDeMonopoly.affichageMessageDelai(15, ". . . Mais vous n'avez pas assez de pouvoir ! Vous êtes mis en faillite.");
@@ -439,6 +488,10 @@ public class Joueur {
 
 
 
+	/**
+	 * Tente de mettre le joueur en prison. Le joueur s'enfuit s'il possede une carte sortie de prison.
+	 * @throws InterruptedException
+	 */
 	public void estMisEnPrison() throws InterruptedException {
 		//Si le joueur possede une carte sortie de prison, l'utiliser
 		if(this.possedeCarteSortiePrison()) {
@@ -491,6 +544,8 @@ public class Joueur {
 		}
 	}
 	
+	
+	// ----- Methodes d'affichage du joueur ------
 	
 	/**
 	 * Affichage global du joueur. Appelee au début de chaque tour de jeu
