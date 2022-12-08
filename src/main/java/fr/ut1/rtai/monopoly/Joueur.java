@@ -446,6 +446,7 @@ public class Joueur {
 			System.out.println("\n"+this.getPion().getTypePion()+ " s'enfuit à toute vitesse !");		
 		}
 		else {
+            PartieDeMonopoly.affichageMessageDelai(15,this.getNomPion()+ " est amené en prison pour 3 tours.");
 			this.nbToursPrison = 0;
 			this.estEnPrison = true;
 		}

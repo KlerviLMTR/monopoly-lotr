@@ -260,17 +260,21 @@ public class PartieDeMonopoly {
 			boolean b = this.demanderContinuerPartie();
 		    if (b){
 		        for (Joueur j : this.joueurs){
-		            //Seuls les joueurs encore en lice jouent
-		            if(!j.estEnFaillite()){
-		                //Reinitialiser les compteurs de doubles
-		                j.setNbDoubles(0);
-		                j.setAFaitUnDouble(false);
-		                this.jouerUnTour(j);
-		                //Si le joueur fait un double, il rejoue jusqu'à 3 fois
-		                while(j.aFaitUnDouble() && j.getNbDoubles()<3){
-		                    this.jouerUnTour(j);
-		                }
-		            }
+		        	//Si le joueur en lice est le seul restant, le tour est sauté
+		        	if (this.joueursEncoreEnLice!=1) {
+		        		 //Seuls les joueurs encore en lice jouent
+			            if(!j.estEnFaillite()){
+			                //Reinitialiser les compteurs de doubles
+			                j.setNbDoubles(0);
+			                j.setAFaitUnDouble(false);
+			                this.jouerUnTour(j);
+			                //Si le joueur fait un double, il rejoue jusqu'à 3 fois
+			                while(j.aFaitUnDouble() && j.getNbDoubles()<=3){
+			                    this.jouerUnTour(j);
+			                }
+			            }
+		        	}
+		           
 		        
 		            
 		        }
@@ -392,7 +396,9 @@ public class PartieDeMonopoly {
 	                //Si le joueur a fait 3 doubles de suite, il est amené en prison
 	                System.out.println(MessagesJeu.lancerDeDes3fois);
 	                j.estMisEnPrison();
-	                PartieDeMonopoly.affichageMessageDelai(15,j.getNomPion()+ " est amené en prison pour 3 tours.");
+	                //Reinitialiser les compteurs de doubles
+	                j.setNbDoubles(0);
+	                j.setAFaitUnDouble(false);
 	            }
 	        }
 	        }

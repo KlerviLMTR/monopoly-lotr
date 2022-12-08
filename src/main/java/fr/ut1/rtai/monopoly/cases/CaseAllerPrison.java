@@ -10,6 +10,9 @@ public class CaseAllerPrison extends Case {
 		super("Allez en prison");
 	}
 
+	/**
+	 *définit l'action effecutée lorsqu'un joueur arrive sur une case prison
+	 */
 	@Override
 	public void actionCase(Joueur j) throws InterruptedException {
 		int position = this.getNumCase()+1;
@@ -18,14 +21,18 @@ public class CaseAllerPrison extends Case {
 		this.afficherCase();
 		System.out.println("Oh non ! Vous vous êtes faits prendre par une bande d'Uruks de l'Isengard! Vous êtes amené en prison pour 3 tours.");
 		j.estMisEnPrison();
-		j.getPion().avancerPion(10);
+		//Si le joueur n'a pas pu s'échapper à l'aide d'une carte, son pion est déplacé jusqu'en prison
+		//Le pion est déplacé mais le joueur ne touche pas de salaire
+		if (j.estEnPrison()) {
+			j.getPion().setNumeroCase(10);
+			//Annuler les doubles s'il est arrivé sur cette case après un doublé
+			j.setNbDoubles(0);
+			j.setAFaitUnDouble(false);
+		}
+	
+	
 	}
 
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public void afficherCase() throws InterruptedException {
