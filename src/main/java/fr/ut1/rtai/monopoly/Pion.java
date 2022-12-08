@@ -54,7 +54,7 @@ public class Pion {
 		this.numeroCase = nbTotal % 40;
 		if (nbTotal >= 40) {
 			this.passageCaseDepart = true;
-		
+			
 		}
 		if(this.passageCaseDepart) {
 			//Toucher un salaire 

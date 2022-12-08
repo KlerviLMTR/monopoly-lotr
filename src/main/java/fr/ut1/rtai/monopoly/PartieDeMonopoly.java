@@ -29,6 +29,7 @@ public class PartieDeMonopoly {
 		PartieDeMonopoly.afficherBarreChargement();
 		// Creer le plateau
 		this.plateau = new Plateau();
+		this.plateau.melangerLesPaquets();
 		this.des = new Des();
 		this.arretDeLaPartie=false;
 		PartieDeMonopoly.lancerCourant=0;
@@ -372,7 +373,7 @@ public class PartieDeMonopoly {
 	    }
 		
 	    /**
-	     * Lance le tour de jeu d'un joueur
+	     * Lance le tour de jeu d'un joueur. Lui demande s'il veut arreter
 	     * @param j
 	     * @throws InterruptedException
 	     */
@@ -386,33 +387,33 @@ public class PartieDeMonopoly {
 	        	
 	        //Si c'est le cas, Jouer un tour 
 
-	        //verifier si le joueur est en prison
-	        if (j.estEnPrison()){
-	            j.sejournerEnPrison();
-	        }
-	        else{
-	            //Verifier le compteur de doubles du joueur
-	            if (j.getNbDoubles()<3){
-	                //lancer les dés et jouer
-	                this.lancerDesJoueur(j);
-
-	                //Verifier si le joueur a fait un double
-	                if(this.des.estUnDouble()){
-	                    //Incrémenter le compteur de doubles du joueur
-	                    j.setNbDoubles(j.getNbDoubles()+1);
-	                    j.setAFaitUnDouble(true);
-	                    System.out.println(MessagesJeu.lancerDeDesDoubleCasNom);
-	                }
-	                else {
-	                	//reinitialiser les doubles
-	                	j.setNbDoubles(0);
-	                	j.setAFaitUnDouble(false);
-	                }
-	                
-	                //Faire avancer le pion du joueur et declencher l'action de la case d'arrivee
-	                j.getPion().avancerPion(this.des.getLancerTotal());
-	                int positionPion = j.getPion().getNumCase()+1;
-	                this.plateau.getCaseNumero(positionPion).actionCase(j); 
+	        	//verifier si le joueur est en prison
+	        	if (j.estEnPrison()){
+		            j.sejournerEnPrison();
+		        }
+		        else{
+		            //Verifier le compteur de doubles du joueur
+		            if (j.getNbDoubles()<3){
+		                //lancer les dés et jouer
+		                this.lancerDesJoueur(j);
+	
+		                //Verifier si le joueur a fait un double
+		                if(this.des.estUnDouble()){
+		                    //Incrémenter le compteur de doubles du joueur
+		                    j.setNbDoubles(j.getNbDoubles()+1);
+		                    j.setAFaitUnDouble(true);
+		                    System.out.println(MessagesJeu.lancerDeDesDoubleCasNom);
+		                }
+		                else {
+		                	//reinitialiser les doubles
+		                	j.setNbDoubles(0);
+		                	j.setAFaitUnDouble(false);
+		                }
+		                
+		                //Faire avancer le pion du joueur et declencher l'action de la case d'arrivee
+		                j.getPion().avancerPion(this.des.getLancerTotal());
+		                int positionPion = j.getPion().getNumCase()+1;
+		                this.plateau.getCaseNumero(positionPion).actionCase(j); 
 	            }
 	            else{
 	                //Si le joueur a fait 3 doubles de suite, il est amené en prison
@@ -441,6 +442,8 @@ public class PartieDeMonopoly {
 		    j.estMisEnFaillite();
 		    PartieDeMonopoly.affichageMessageDelai(15, j.getNom()+" abandonne la partie ! Toutes ses contructions sont détruites et ses biens sont de nouveau à l'achat.");
 		    j.rendreTousLesBiens();
+        	j.setNbDoubles(0);
+        	j.setAFaitUnDouble(false);
 		}
 		
 	// ----------Methodes relatives à la fin de partie ---------------
@@ -479,7 +482,11 @@ public class PartieDeMonopoly {
 		}
 		
 		//Retourner le gagnant
-		System.out.println(gagnant.getNom() + " a gagné !");
+		System.out.println("\n================================================");
+		System.out.println("|**********************************************|");
+		System.out.println("\n                    "+gagnant.getNom().toUpperCase()+ " A GAGNE !\n");
+		System.out.println("|**********************************************|");
+		System.out.println("================================================");
 	}
 	
 	

@@ -164,6 +164,12 @@ public abstract class CasePropriete extends Case {
     
 
     
+    /**
+     * Propose au joueur d'acheter une case. verifie le format de la réponse à l'aide de la methode verifierNumMenuPropLibre
+     * Traite le résultat à l'aide de la méthode traiterChoixMenuPropLibre
+     * @param j
+     * @throws InterruptedException
+     */
     public void proposerAchatCase(Joueur j) throws InterruptedException {
 		int cptErr = 0;
 		boolean premierAff = true;
@@ -203,6 +209,16 @@ public abstract class CasePropriete extends Case {
 	}
     
     
+	/**
+	 * declenche la procédure d'achat chez le joueur s'il a selectionné la premiere option
+	 * affiche la table des loyers de la propriété s'il selectionne la seconde option
+	 * Ne fait rien si le joueur selectionne la troisieme
+	 * @param j
+	 * @param choixMenu
+	 * @param tourFini
+	 * @return
+	 * @throws InterruptedException
+	 */
 	private boolean traiterChoixMenuPropLibre(Joueur j, int choixMenu, boolean tourFini) throws InterruptedException {
 		switch(choixMenu) {
 			case 1:

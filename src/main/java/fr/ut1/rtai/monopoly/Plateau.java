@@ -54,9 +54,7 @@ public class Plateau {
 		for (Carte c : this.cartesPeuple) {
 			c.setPlateau(this);
 		}
-		//Mélanger les paquets
-		Collections.shuffle(this.cartesEvenement);
-		Collections.shuffle(this.cartesPeuple);
+
 		
 		// positionner l'anneau sur le plateau
 		this.territoires.get(0).positionnerAnneauUnique();
@@ -103,7 +101,9 @@ public class Plateau {
         this.cartesPeuple.add(c15);
         this.cartesPeuple.add(c16);
 	}
+	
 
+	
 	private void genererCartesEvenement() {
         this.cartesEvenement = new ArrayList<Carte>();
         // Création des cartes
@@ -145,6 +145,13 @@ public class Plateau {
 
 
 	}
+	
+	public void melangerLesPaquets(){
+		//Mélanger les paquets
+		Collections.shuffle(this.cartesEvenement);
+		Collections.shuffle(this.cartesPeuple);
+	}
+
 
 
 

@@ -16,12 +16,16 @@ public class PionTest {
 	private Pion p;
 	private Plateau plateau;
 	private Des des;
+	private Joueur j;
 
 	@Before
 	public void setUp() throws Exception {
 		this.p = new Pion(EPion.Aragorn);
 		this.plateau = new Plateau();
 		this.des = new Des();
+		this.j=new Joueur("toto");
+		j.setPion(p);
+		p.setJoueur(j);
 	}
 
 	@After

@@ -19,6 +19,7 @@ public class JoueurTest {
 		this.j = new Joueur("Toto");
 		this.pion = new Pion(EPion.Galadriel);
 		this.p = new Plateau();
+		
 	}
 
 	@After
@@ -89,6 +90,8 @@ public class JoueurTest {
 	
 	@Test
 	public void testEstMisEnPrison() throws InterruptedException {
+		this.j.setPion(this.pion);
+
 		this.j.estMisEnPrison();
 		assertTrue(this.j.estEnPrison());
 		assertEquals(this.j.getNbToursEnPrison(),0);

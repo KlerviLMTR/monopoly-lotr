@@ -413,9 +413,6 @@ public class Joueur {
 				this.perdreDuPouvoir(((CasePropriete)case1).getCoutAchat());
 
 
-
-
-
 			}
 			else {
 				PartieDeMonopoly.affichageMessageDelai(15,". . . Vous n'avez pas assez de pouvoir !");

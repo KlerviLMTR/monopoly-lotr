@@ -17,6 +17,10 @@ public class CaseDepart extends Case {
 		PartieDeMonopoly.affichageMessageDelai(15, j.getNomPion() + " arrive sur la case n°"+ position+ ": \""+this.getNomCase()+"\"");
 		Thread.sleep(1000);
 		this.afficherCase();
+		//Toucher un salaire 
+		PartieDeMonopoly.affichageMessageDelai(15, "Vous touchez un salaire de 200 ୩.");
+		j.gagnerduPouvoir(200);
+		Thread.sleep(500);
 	}
 
 	@Override

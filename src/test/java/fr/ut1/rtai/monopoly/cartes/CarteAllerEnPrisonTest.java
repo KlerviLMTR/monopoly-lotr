@@ -36,7 +36,7 @@ public class CarteAllerEnPrisonTest {
 	@Test
 	public void testPositionPionJoueurMisEnPrison() throws InterruptedException {
 		c.actionCarte(j);
-		assertEquals(11,j.getPion().getNumCase());
+		assertEquals(11,j.getPion().getNumCase()+1);
 	}
 	
 	@Test
