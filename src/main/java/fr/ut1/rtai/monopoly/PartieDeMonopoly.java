@@ -1,8 +1,11 @@
 package fr.ut1.rtai.monopoly;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.Set;
 
 public class PartieDeMonopoly {
 	private Plateau plateau;
@@ -224,8 +227,12 @@ public class PartieDeMonopoly {
 	}
 	
 	
-	// ----- Méthodes relatives aux tours de jeu ----------------------
+	// --------------  Méthodes relatives aux tours de jeu ----------------------
 	
+		/**
+		 * Lance une partie de Monopoly, effectue toutes les actions nécessaires à celle ci
+		 * @throws InterruptedException
+		 */
 		public void jouerAuMonopoly() throws InterruptedException {
 			this.definirNbJoueurs();
 			this.creerLesJoueurs();
@@ -236,10 +243,15 @@ public class PartieDeMonopoly {
 				
 			}
 			System.out.println("La partie est terminée !");
+			this.trouverLeGagnant();
 
 		}
 	
-		//Tour de jeu
+		
+		/**
+		 * Lance un tour de jeu dans lequel tous les joueurs jouent à tour de rôle
+		 * @throws InterruptedException
+		 */
 		public void tourDeJeu() throws InterruptedException{
 			System.out.println("\n\n============= NOUVEAU TOUR DE JEU =============\n");
 			//afficher les joueurs 
@@ -329,6 +341,11 @@ public class PartieDeMonopoly {
 		}
 
 
+		/**
+		 * Vérifie le choix effectué par le joueur
+		 * @param choix
+		 * @throws IllegalArgumentException
+		 */
 		private void verifierReponseChoixMenuDT(int choix) throws IllegalArgumentException{
 			if(choix <1 || choix >2) {
 				throw new IllegalArgumentException("Choix du menu du tour du joueur invalide!");
@@ -354,7 +371,12 @@ public class PartieDeMonopoly {
 	        return question;
 	    }
 		
-	    private void jouerUnTour(Joueur j) throws InterruptedException{
+	    /**
+	     * Lance le tour de jeu d'un joueur
+	     * @param j
+	     * @throws InterruptedException
+	     */
+	    public void jouerUnTour(Joueur j) throws InterruptedException{
 	        boolean continuer ;
 	        j.afficherJoueurDebutTourDeJeuJoueur();
 	        Thread.sleep(1000);
@@ -415,21 +437,64 @@ public class PartieDeMonopoly {
 		 * procède à l'élimination d'un joueur
 		 * @param j
 		 */
-		private void eliminerJoueur(Joueur j){
+		public void eliminerJoueur(Joueur j){
 		    j.estMisEnFaillite();
 		    PartieDeMonopoly.affichageMessageDelai(15, j.getNom()+" abandonne la partie ! Toutes ses contructions sont détruites et ses biens sont de nouveau à l'achat.");
 		    j.rendreTousLesBiens();
 		}
+		
+	// ----------Methodes relatives à la fin de partie ---------------
+		
+	public void trouverLeGagnant() {
+		//Creer un tableau pour chaque joueur non éliminé
+		ArrayList<Joueur> joueursRestants = new ArrayList<Joueur>();
+		for (Joueur j : this.joueurs) {
+			// calculer pour chaque joueur le montant de sa fortune
+			j.calculerTotalFinDePartie();
+			if (!j.estEnFaillite()) {
+				//Ne conserver que les joueurs non éliminés pour le calcul du max
+				joueursRestants.add(j);
+			}
+		}
+		//Trouver le vainqueur en cherchant le max
+		
+		//Par defaut, positionner le gagnant au premier
+		Joueur gagnant = joueursRestants.get(0);
+		for (int i = 1; i<joueursRestants.size();i++ ) {
+			if (joueursRestants.get(i).getMontantTotalFinDePartie()> gagnant.getMontantTotalFinDePartie()) {
+				//Changer le vainqueur
+				gagnant = joueursRestants.get(i);
+			}
+		}
+		
+		System.out.println("※---※---※---※---※---※ CLASSEMENT FINAL ※---※---※---※---※---※\n");
+		//Affichage des joueurs
+		for (Joueur j: this.joueurs){
+			if(!j.estEnFaillite()) {
+				PartieDeMonopoly.affichageMessageDelai(15,"\n - "+j.getNom() +" : "+ j.getMontantTotalFinDePartie() + " ୩");
+			}
+			else {
+				PartieDeMonopoly.affichageMessageDelai(15,"\n - "+j.getNom() +" : EN FAILLITE ");		
+			}
+		}
+		
+		//Retourner le gagnant
+		System.out.println(gagnant.getNom() + " a gagné !");
+	}
+	
+	
 
 
 	// -------- Méthodes utilitaires ---------------------------------
+		
+		
 	public void lancerDesJoueur(Joueur j) throws InterruptedException {
 		this.des.lancerLesDes();
 		affichageMessageDelai(15,">>> " +j.getNom()+ " lance les dés . . .");
 		this.des.afficherLeLancher();
 		this.afficherLancerDes();
         //Changer le lancer courant
-        this.lancerCourant = this.des.getLancerTotal();
+        PartieDeMonopoly.lancerCourant = this.des.getLancerTotal();
 
 	}
 	
@@ -464,6 +529,7 @@ public class PartieDeMonopoly {
 	public static String poserQuestionJoueurChaine(String question) {
 		String reponse = "";
 		System.out.println(question + "\n");
+		@SuppressWarnings("resource") //Non fonctionnel si fermé...
 		Scanner scanner = new Scanner(System.in);
 		reponse = scanner.nextLine();
 		return reponse;

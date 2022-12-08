@@ -28,6 +28,7 @@ public class Joueur {
 	private PartieDeMonopoly partie;
 	private int nbDoubles; //Compte les doubles effectués pour un tour de jeu
 	private boolean aFaitUnDouble;
+	private int montantTotalFinDePartie;
 	
 	public Joueur(String nom) {
 		this.nom=nom;
@@ -41,6 +42,7 @@ public class Joueur {
 		this.solde=1500;
 		this.nbDoubles=0;
 		this.aFaitUnDouble=false;
+		this.montantTotalFinDePartie=0;
 	
 	}
 
@@ -70,6 +72,14 @@ public class Joueur {
 	public void setPion(Pion pion) {
 		this.pion=pion;
 
+	}
+	
+	public int getMontantTotalFinDePartie() {
+		return this.montantTotalFinDePartie;
+	}
+	
+	public void setMontantTotalFinDePartie(int montant) {
+		this.montantTotalFinDePartie=montant;
 	}
 
 
@@ -295,8 +305,8 @@ public class Joueur {
 	 * Calcule l'ensemble de la fortune d'un joueur
 	 * @return
 	 */
-	public int calculerTotalFinDePartie() {
-		int total=0;
+	public void calculerTotalFinDePartie() {
+		int total=this.solde;
 		for (Monture m : this.monturesPossedees) {
 			total+=m.getCoutAchat();
 		}
@@ -313,7 +323,8 @@ public class Joueur {
 				total+= t.getCoutConstruction()*4;
 			}
 		}
-		return total;
+		this.setMontantTotalFinDePartie(total);
+
 	}
 
 
