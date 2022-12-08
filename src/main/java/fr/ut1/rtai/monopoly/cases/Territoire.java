@@ -71,6 +71,13 @@ public class Territoire extends CasePropriete {
     	return super.getProprietaire();
     }
     
+	public void setNbPlacesFortes(int i) {
+		this.nbPlacesFortes=0;
+	}
+    
+	public void setPossedeForteresse(boolean b) {
+		this.possedeForteresse=false;
+	}
     // -------------------------
     
     public void positionnerAnneauUnique() {

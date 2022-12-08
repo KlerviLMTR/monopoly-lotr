@@ -11,6 +11,7 @@ public class CarteDeplacement extends Carte {
 		super(titre, description);
 		this.caseCible=caseCible;
 	}
+	
 	@Override
 	public void actionCarte(Joueur j) {
 		this.afficherCarte();

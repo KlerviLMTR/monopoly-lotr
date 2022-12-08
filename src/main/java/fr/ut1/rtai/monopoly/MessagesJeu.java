@@ -46,5 +46,10 @@ public class MessagesJeu {
 	public static String affichageSepCase="\n※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※\n";
 	public static String affichageSepCarte=" ჻ ჻ ჻ ჻ ჻ ჻ ჻ ჻ ჻ ჻ ჻ ჻ ჻ ჻";
 
+	public static String menuJoueurDebutTour = ", c'est votre tour. Que souhaitez-vous faire ?\n\n 1 - Lancer les dés\n 2 - Abandonner la partie";
+	public static String  menuDebutTour = ">>> Continuer la partie ? (oui/non)";
+	public static String lancerDeDesDoubleCasNom = ">>> Vous avez fait un double ! Vous rejouez au prochain tour.";
+	public static String  lancerDeDes3fois = ">>> Oh non ! Vous avez fait un double 3 fois d'affilée ! Vous êtes amené.e en prison...";
+
 
 }

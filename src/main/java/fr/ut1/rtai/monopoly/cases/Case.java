@@ -46,6 +46,8 @@ public abstract class Case {
 	
 	public abstract void afficherCase() throws InterruptedException;
 
-	
+	public String toString() {
+		return "Case n°"+this.numCase + " "+ this.intitule;
+	}
 
 }

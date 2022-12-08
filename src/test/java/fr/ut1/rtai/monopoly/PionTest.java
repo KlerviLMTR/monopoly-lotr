@@ -41,7 +41,7 @@ public class PionTest {
 		this.des.traiterResultatLancerDes(3, 2);
 		this.p.avancerPion(this.des.getLancerTotal());
 		assertEquals(4, this.plateau.getCaseNumero(5).getNumCase());
-		assertEquals(this.plateau.getCases().get(this.p.getNumCase()).getNomCase(), "Bill le Poney");
+		assertEquals("Bill le Poney",this.plateau.getCases().get(this.p.getNumCase()).getNomCase() );
 	}
 	
 	
@@ -51,6 +51,12 @@ public class PionTest {
 		this.des.traiterResultatLancerDes(30,5 );
 		this.p.avancerPion(this.des.getLancerTotal());
 		assertEquals( "Gripoil",this.plateau.getCases().get(this.p.getNumCase()).getNomCase());
+	}
+	
+	public void testAvancerGueBruinen() {
+		this.des.traiterResultatLancerDes(6,6 );
+		this.p.avancerPion(this.des.getLancerTotal());
+		assertEquals( "Gué de Bruinen",this.plateau.getCases().get(this.p.getNumCase()).getNomCase());
 	}
 	
 	//Oui je sais le lancer de dés est absurde

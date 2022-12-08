@@ -9,8 +9,10 @@ public class CaseAllerPrison extends Case {
 	}
 
 	@Override
-	public void actionCase(Joueur j) {
+	public void actionCase(Joueur j) throws InterruptedException {
 		System.out.println("Oh non ! Vous vous êtes faits prendre par une bande d'Uruks de l'Isengard! Vous êtes amené en prison pour 3 tours.");
+		j.estMisEnPrison();
+		j.getPion().avancerPion(10);
 	}
 
 	@Override

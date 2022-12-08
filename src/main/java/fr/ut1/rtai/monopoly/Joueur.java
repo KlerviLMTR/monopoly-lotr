@@ -26,7 +26,9 @@ public class Joueur {
 	private boolean estEnFaillite;
 	private Plateau plateau;
 	private PartieDeMonopoly partie;
-
+	private int nbDoubles; //Compte les doubles effectués pour un tour de jeu
+	private boolean aFaitUnDouble;
+	
 	public Joueur(String nom) {
 		this.nom=nom;
 		this.estEnPrison=false;
@@ -37,6 +39,9 @@ public class Joueur {
 		this.territoiresPossedes = new HashSet<Territoire>();
 		this.batonsDeMagicienPossedes = new HashSet<BatonDeMagicien>();
 		this.solde=1500;
+		this.nbDoubles=0;
+		this.aFaitUnDouble=false;
+	
 	}
 
 
@@ -108,7 +113,26 @@ public class Joueur {
 	public Set<Territoire> getTerritoiresPossedees(){
 		return this.territoiresPossedes;
 	}
-
+	
+	public boolean estEnFaillite() {
+		return this.estEnFaillite;
+	}
+	
+	public void setNbDoubles(int nbD) {
+		this.nbDoubles = nbD;
+	}
+	
+	public int getNbDoubles() {
+		return this.nbDoubles;
+	}
+	
+	public void setAFaitUnDouble(boolean b) {
+		this.aFaitUnDouble=b;
+	}
+	
+	public boolean aFaitUnDouble() {
+		return this.aFaitUnDouble;
+	}
 
 	//  --------  Méthodes du joueur ----------
 
@@ -152,8 +176,9 @@ public class Joueur {
 		return cptCoul;
 	}
 
-	public void afficherLesProprietes() {
-
+	public void estMisEnFaillite() {
+		this.estEnFaillite=true;
+		this.partie.eliminerJoueur();
 	}
 
 
@@ -228,6 +253,11 @@ public class Joueur {
 
 
 
+	/**
+	 * Vérifie si le lot concerné possède au moins un terrain en hypothèque
+	 * @param c
+	 * @return
+	 */
 	public boolean estTerrainHypothequeSurLot(ECouleurCase c) {
 		boolean hypothequeTrouvee = false;
 		for (Territoire t : this.territoiresPossedes) {
@@ -258,14 +288,48 @@ public class Joueur {
 
 	}
 
-	public void estMisFaillite(int montantDette) {
-		this.estEnFaillite = true;
-		this.declencherProcedureDeFaillite(montantDette);
-	}
 
-	//TODO: A completer ...
-	private void declencherProcedureDeFaillite(int montantDette) {
-		System.out.println("Vous avez perdu.");
+
+	public void rendreTousLesBiens(){
+	    Set <CasePropriete> biensRendus = new HashSet<CasePropriete>();
+
+	    for (Monture m : this.monturesPossedees){
+	        //Retirer le propriétaire
+	        m.setProprietaire(null);
+	        //reinitialiser les loyers
+	        m.setLoyerActuel(m.getLoyers()[0]);
+	        //Ajouter la monture au set
+	        biensRendus.add(m);
+	    }
+
+	    for (BatonDeMagicien b : this.batonsDeMagicienPossedes){
+	        //Retirer le propriétaire
+	        b.setProprietaire(null);
+	        //reinitialiser les loyers
+	        b.setLoyerActuel(b.getLoyerActuel());
+	        //Ajouter le baton au set
+	        biensRendus.add(b);
+	    }
+	    for(Territoire t : this.territoiresPossedes){
+	        //Retirer le propriétaire
+	        t.setProprietaire(null);
+	        //Detruire les constructions
+	        t.setNbPlacesFortes(0);
+	        t.setPossedeForteresse(false);
+	        //Enlever l'hypotheque
+	        t.setEstEnHypotheque(false);
+	        //Reinitialiser le loyer
+	        t.setLoyerActuel(t.getTableDesLoyers()[0]);
+	        //Ajouter le territoire au set
+	        biensRendus.add(t);
+	    }
+
+	    //Afficher les biens rendus
+	    System.out.println("--- Bien à nouveau disponibles : ---");
+	    for(CasePropriete c : biensRendus){
+	        System.out.println(" - "+ c.getNomCase());
+	    }
+
 	}
 
 
@@ -366,7 +430,7 @@ public class Joueur {
 	public void payerJoueur(Joueur j, int montant) {
 		if (this.solde<montant) {
 			PartieDeMonopoly.affichageMessageDelai(15, ". . . Mais vous n'avez pas assez de pouvoir ! Vous êtes mis en faillite.");
-			this.estEnFaillite=true;
+			this.estMisEnFaillite();
 		}
 		this.perdreDuPouvoir(montant);
 		j.gagnerduPouvoir(montant);
@@ -425,7 +489,33 @@ public class Joueur {
 			}
 		}
 	}
+	
+	
+	/**
+	 * Affichage global du joueur. Appelee au début de chaque tour de jeu
+	 */
+	public void afficherJoueurDebutTourDeJeu() {
+		System.out.println("※---※---※ "+ this.getNom().toUpperCase() +" - "+this.getPion().getTypePion().afficherPion()+ " ※---※---※\n");
+		System.out.println("୩ Solde actuel : " + this.getSolde()+ " ୩");
+		System.out.println("⚑ Position actuelle : Case n°"+ this.getPion().getNumCase()+1+", \"" +this.plateau.getCaseNumero(this.getPion().getNumCase()+1).getNomCase()+"\"" );
+		System.out.println("\n🏠 Territoires possédés : "+ this.territoiresPossedes.size());
+		System.out.println("\n🐴 Montures possédées : "+ this.getNbMonturesPossedees());
+		System.out.println("\n🏠 Bâtons possédés : "+ this.getNbBatonsDeMagicienPossedes()+"\n\n");
 
+	}
+	
+	/**
+	 * Affichage concis du joueur. Appelee au début de chaque tour de jeu du joueur
+	 */
+	public void afficherJoueurDebutTourDeJeuJoueur() {
+		PartieDeMonopoly.affichageMessageDelai(15, "\n... C'est au tour de "+this.nom+"\n");
+		System.out.println("※---※---※ "+ this.getNom().toUpperCase() + " ※---※---※\n");
+		System.out.println("୩ Solde actuel : " + this.getSolde()+ " ୩\n");
+		int position = this.getPion().getNumCase()+1;
+		System.out.println("⚑ Position actuelle : Case n°"+ position+", \"" +this.plateau.getCaseNumero(this.getPion().getNumCase()+1).getNomCase()+"\"" );
+
+
+	}
 
 
 	public String toString() {

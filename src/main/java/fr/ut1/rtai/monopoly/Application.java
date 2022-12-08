@@ -11,36 +11,39 @@ public class Application {
 	
 		//tester la generation des joueurs
 //		PartieDeMonopoly partie = new PartieDeMonopoly();
-//		partie.definirNbJoueurs();
-//		System.out.println(partie.getNbJoueurs());
-//		partie.creerLesJoueurs();
-//		partie.genererPions();	
+
 
 		
 		
 		//tester la gestion des cases : (construs territoires pas encore gérés)
 
-		Plateau p = new Plateau();
-	
+		PartieDeMonopoly p = new PartieDeMonopoly();
 
-		Joueur j = new Joueur("toto");
-		Joueur j2 = new Joueur("toto");
+		p.jouerAuMonopoly();
 		
-		j2.setPion(new Pion(EPion.Aragorn));
-		j.setPion(new Pion (EPion.Frodon));
-		p.getCaseNumero(12).actionCase(j);
-
-		p.getCaseNumero(14).actionCase(j);
-		p.getCaseNumero(14).actionCase(j);
-
-		p.getCaseNumero(15).actionCase(j);
-		p.getCaseNumero(15).actionCase(j);
-
-		System.out.println(j.getSolde());
-		p.getCaseNumero(15).actionCase(j2);
-		System.out.println(j.getSolde());
-
-		System.out.println(j2.getSolde());
+		
+//		Plateau p = new Plateau();
+//		System.out.println(p.getCaseNumero(1).getNomCase());
+//	
+//
+//		Joueur j = new Joueur("toto");
+//		Joueur j2 = new Joueur("toto");
+//		
+//		j2.setPion(new Pion(EPion.Aragorn));
+//		j.setPion(new Pion (EPion.Frodon));
+//		p.getCaseNumero(12).actionCase(j);
+//
+//		p.getCaseNumero(14).actionCase(j);
+//		p.getCaseNumero(14).actionCase(j);
+//
+//		p.getCaseNumero(15).actionCase(j);
+//		p.getCaseNumero(15).actionCase(j);
+//
+//		System.out.println(j.getSolde());
+//		p.getCaseNumero(15).actionCase(j2);
+//		System.out.println(j.getSolde());
+//
+//		System.out.println(j2.getSolde());
 
 //		p.getCaseNumero(13).actionCase(j);
 

@@ -112,6 +112,9 @@ public abstract class CasePropriete extends Case {
     	return this.estHypothequee;
     }
     
+    public void setEstEnHypotheque(boolean b) {
+    	this.estHypothequee=b;
+    }
   
     public void setProprietaire(Joueur j) {
     	this.proprietaire = j;
@@ -306,7 +309,7 @@ public abstract class CasePropriete extends Case {
 		// --> pour l'instant : on considere que si le joueur n'a plus assez d'argent pour payer, il est en faillite 
 		if (j.getSolde()< this.getLoyerActuel()) {
 			System.out.println("Vous n'avez pas assez pour payer !");
-			j.estMisFaillite(this.loyerActuel);
+			j.estMisEnFaillite();
 		}
 		else {
 			j.payerJoueur(this.proprietaire, this.loyerActuel);

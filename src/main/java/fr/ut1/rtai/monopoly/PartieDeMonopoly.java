@@ -5,19 +5,28 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class PartieDeMonopoly {
-	private Plateau p;
-	private static ArrayList<Joueur> joueurs;
+	private Plateau plateau;
+	private ArrayList<Joueur> joueurs;
 	private int nbJoueurs;
+	private int joueursEncoreEnLice;
 	private Des des;
+	private boolean arretDeLaPartie;
 	
 	
 	public PartieDeMonopoly() throws InterruptedException {
 		// Ecrire les messages destinés aux joueurs
-		System.out.println("\n--- CREATION DE LA PARTIE DE MONOPOLY ---\n\n");
+		System.out.println("===============================================");
+		System.out.println("|---****************************************--|");
+		System.out.println("|------MONOPOLY - LE SEIGNEUR DES ANNEAUX-----|");
+		System.out.println("|---****************************************--|");
+		System.out.println("|----- CREATION DE LA PARTIE DE MONOPOLY -----|");
+		System.out.println("|---****************************************--|");
+		System.out.println("===============================================");
 		PartieDeMonopoly.afficherBarreChargement();
 		// Creer le plateau
-		this.p = new Plateau();
+		this.plateau = new Plateau();
 		this.des = new Des();
+		this.arretDeLaPartie=false;
 	}
 
 	// ---------- Getters et setters utiles --------------
@@ -33,16 +42,21 @@ public class PartieDeMonopoly {
 	public ArrayList<Joueur> getJoueurs() {
 		return this.joueurs;
 	}
+	public void eliminerJoueur() {
+		this.joueursEncoreEnLice--;
+	}
+	public int getNbJoueursEncoreEnLice() {
+		return this.joueursEncoreEnLice;
+	}
 
 	// ---------- Methodes relatives à la creation des joueurs --------------
 
 	/**
 	 *definit le nb de joueurs particpant a la partie. Utilise traiterReponseQuestionNbJoueurs() et verifierNbJoueurs 
-	 * @throws InterruptedException 
 	 */
     public void definirNbJoueurs() {
         // Ecrire les messages destinés aux joueurs
-        System.out.println("--- Inscription des joueurs ---\n\n");
+        System.out.println("\n--- Inscription des joueurs ---\n\n");
         boolean inputOk = false;
         int cptErr = 0;
         while (!inputOk) {
@@ -104,9 +118,10 @@ public class PartieDeMonopoly {
 			}
 			nomsJoueurs[i] = nomJ;
 			this.genererJoueurs(this.nbJoueurs, nomsJoueurs);
+			this.joueursEncoreEnLice=this.joueurs.size();
 			//donner le plateau et la partie courant.e aux joueurs
 			for (Joueur j : this.joueurs) {
-				j.setPlateau(this.p);
+				j.setPlateau(this.plateau);
 				j.setPartie(this);
 			}
 		}
@@ -136,7 +151,7 @@ public class PartieDeMonopoly {
 	public void genererPions() throws InterruptedException {
 
 		// Ecrire les messages destinés aux joueurs
-		this.afficherBarreChargement();
+		PartieDeMonopoly.afficherBarreChargement();
 
 		System.out.println("\n--- CHOIX DES PIONS ---\n\n");
 
@@ -185,11 +200,228 @@ public class PartieDeMonopoly {
 
 		Thread.sleep(1000);
 		System.out.println("... Creation des joueurs et de leurs pions ...");
-		this.afficherBarreChargement();
+		PartieDeMonopoly.afficherBarreChargement();
 		this.afficherJoueursEtPions();
 	}
 	
    
+
+	/**
+	 * @param numeroPionChoisi
+	 * @param pionsDispo
+	 * @return
+	 * @throws IllegalArgumentException
+	 * Verifie que l'utilisateur a saisi un numero de pion qui correspond bien a un pion disponible
+	 */
+	private boolean verifierNumPionOK(int numeroPionChoisi, ArrayList<Pion> pionsDispo) throws IllegalArgumentException {
+		if (numeroPionChoisi < 0 || numeroPionChoisi >= pionsDispo.size()) {
+			throw new IllegalArgumentException("Numéro choisi invalide.");
+		}
+		return true;
+	}
+	
+	
+	// ----- Méthodes relatives aux tours de jeu ----------------------
+	
+		public void jouerAuMonopoly() throws InterruptedException {
+			this.definirNbJoueurs();
+			this.creerLesJoueurs();
+			this.genererPions();	
+	        // vérifier qu'il y a plus de 2 joueurs tjs en lice
+			while (this.joueursEncoreEnLice>1 && !this.arretDeLaPartie){
+				this.tourDeJeu();
+				PartieDeMonopoly.poserQuestionJoueurChaine("\nAppuyez sur entrée pour continuer ...");
+				
+			}
+			System.out.println("La partie est terminée !");
+
+		}
+	
+		//Tour de jeu
+		public void tourDeJeu() throws InterruptedException{
+			PartieDeMonopoly.afficherBarreChargement();
+			System.out.println("\n\n============= NOUVEAU TOUR DE JEU =============\n");
+			//afficher les joueurs 
+			for (Joueur j:this.joueurs) {
+				if (!j.estEnFaillite()) {
+					j.afficherJoueurDebutTourDeJeu();
+				}
+				else {
+					System.out.println("※---※---※"+ j.getNom().toUpperCase() + " - EN FAILLITE ※---※---※\n");
+				}
+
+			}
+			Thread.sleep(1000);
+			PartieDeMonopoly.afficherBarreChargement();
+			System.out.println();
+			boolean b = this.demanderContinuerPartie();
+		    if (b){
+		        for (Joueur j : this.joueurs){
+		            //Seuls les joueurs encore en lice jouent
+		            if(!j.estEnFaillite()){
+		                //Reinitialiser les compteurs de doubles
+		                j.setNbDoubles(0);
+		                j.setAFaitUnDouble(false);
+		                this.jouerUnTour(j);
+		                //Si le joueur fait un double, il rejoue jusqu'à 3 fois
+		                while(j.aFaitUnDouble() && j.getNbDoubles()<3){
+		                    this.jouerUnTour(j);
+		                }
+		            }
+		        
+		            
+		        }
+		    }
+		    else {
+		    	this.arretDeLaPartie=true;
+		    }
+	      
+
+		}
+		/**
+		 * verifie en debut de tour de jeu si les joueurs veulent continuer a jouer
+		 * @return
+		 */
+		public boolean demanderContinuerPartie(){
+		    //recuperer oui ou non 
+		    String rep = PartieDeMonopoly.poserQuestionReponseOuiOuNon(MessagesJeu.menuDebutTour);
+		    return (rep.toUpperCase().equals("OUI")); 
+		}
+		
+		
+		// Tour du joueur :
+		
+		/**
+		 *Demande au début du tour du joueur s'il veut continuer la partie ou non
+		 * @param j
+		 * @return
+		 */
+		public boolean demanderChoixMenuDebutTourJ(Joueur j){
+		    //Demander au joueur ce qu'il veut faire
+		    boolean inputOk=false;
+		    boolean continuer=false;
+		    int cptErr=0;
+		    while (!inputOk)
+		    try{
+		        //Afficher le message qui va bien selon le cpt err
+		        int choix = PartieDeMonopoly.poserQuestionJoueurInt(this.poserQuestiondebutTourJoueur(cptErr));
+		        this.verifierReponseChoixMenuDT(choix);
+		       	//traiter la réponse
+		        if (choix==2) {
+		        	continuer = false;
+		        }
+		        else if (choix==1) {
+		        	continuer=true;
+		        }
+		        inputOk = true;
+		    }catch(IllegalArgumentException e){
+		        cptErr++;
+		    }
+		    return continuer;
+		}
+
+
+		private void verifierReponseChoixMenuDT(int choix) throws IllegalArgumentException{
+			if(choix <1 || choix >2) {
+				throw new IllegalArgumentException("Choix du menu du tour du joueur invalide!");
+			}
+			
+		}
+
+
+	    /**
+	     * @param repetitionDeLaQuestion
+	     * @return
+	     * genere les questions pour le choix du debut de tour du joueur
+	     */
+	    private String poserQuestiondebutTourJoueur(int repetitionDeLaQuestion) {
+	        String question;
+	        if (repetitionDeLaQuestion == 0) {
+	            question = MessagesJeu.questionMenu1;
+	        } else if (repetitionDeLaQuestion <= 4) {
+	            question = MessagesJeu.questionMenuErr;
+	        } else {
+	            question = MessagesJeu.texteSiTropDerreurs;
+	        }
+	        return question;
+	    }
+		
+	    private void jouerUnTour(Joueur j) throws InterruptedException{
+	        boolean continuer ;
+	        j.afficherJoueurDebutTourDeJeuJoueur();
+	        Thread.sleep(1000);
+	        continuer = this.demanderChoixMenuDebutTourJ(j);
+	        if(continuer){
+	        //Jouer un tour 
+
+	        //verifier si le joueur est en prison
+	        if (j.estEnPrison()){
+	            j.sejournerEnPrison();
+	        }
+	        else{
+	            //Verifier le compteur de doubles du joueur
+	            if (j.getNbDoubles()<3){
+	                //lancer les dés et jouer
+	                this.lancerDesJoueur(j);
+	                //Verifier si le joueur a fait un double
+	                if(this.des.estUnDouble()){
+	                    //Incrémenter le compteur de doubles du joueur
+	                    j.setNbDoubles(j.getNbDoubles()+1);
+	                    j.setAFaitUnDouble(true);
+	                    System.out.println(MessagesJeu.lancerDeDesDoubleCasNom);
+	                }
+	                else {
+	                	//reinitialiser les doubles
+	                	j.setNbDoubles(0);
+	                	j.setAFaitUnDouble(false);
+	                }
+	                
+	                //Faire avancer le pion du joueur et declencher l'action de la case d'arrivee
+	                j.getPion().avancerPion(this.des.getLancerTotal());
+	                int positionPion = j.getPion().getNumCase()+1;
+	                this.plateau.getCaseNumero(positionPion).actionCase(j); 
+	            }
+	            else{
+	                //Si le joueur a fait 3 doubles de suite, il est amené en prison
+	                System.out.println(MessagesJeu.lancerDeDes3fois);
+	                j.estMisEnPrison();
+	                PartieDeMonopoly.affichageMessageDelai(15,j.getNomPion()+ " est amené en prison pour 3 tours.");
+	            }
+	        }
+	        }
+	        else{
+	            //Sinon éliminer le joueur
+	            this.eliminerJoueur(j);
+	        }
+			PartieDeMonopoly.poserQuestionJoueurChaine("\nAppuyez sur entrée pour continuer ...");
+
+	       
+	    }
+		
+		/**
+		 * procède à l'élimination d'un joueur
+		 * @param j
+		 */
+		private void eliminerJoueur(Joueur j){
+		    j.estMisEnFaillite();
+		    PartieDeMonopoly.affichageMessageDelai(15, j.getNom()+" abandonne la partie ! Toutes ses contructions sont détruites et ses biens sont de nouveau à l'achat.");
+		    j.rendreTousLesBiens();
+		}
+
+
+	// -------- Méthodes utilitaires ---------------------------------
+	public void lancerDesJoueur(Joueur j) throws InterruptedException {
+		this.des.lancerLesDes();
+		affichageMessageDelai(15,">>> " +j.getNom()+ " lance les dés . . .");
+		this.des.afficherLeLancher();
+		this.afficherLancerDes();
+
+	}
+	
+	public void afficherLancerDes() {
+		System.out.println(this.des);
+	}
+
 
     /**
      * @param repetitionDeLaQuestion
@@ -207,40 +439,6 @@ public class PartieDeMonopoly {
         }
         return question;
     }
-
-
-
-	/**
-	 * @param numeroPionChoisi
-	 * @param pionsDispo
-	 * @return
-	 * @throws IllegalArgumentException
-	 * Verifie que l'utilisateur a saisi un numero de pion qui correspond bien a un pion disponible
-	 */
-	private boolean verifierNumPionOK(int numeroPionChoisi, ArrayList<Pion> pionsDispo) throws IllegalArgumentException {
-		if (numeroPionChoisi < 0 || numeroPionChoisi >= pionsDispo.size()) {
-			throw new IllegalArgumentException("Numéro choisi invalide.");
-		}
-		return true;
-	}
-	
-
-	// -------- Méthodes utilitaires ---------------------------------
-	public void lancerDesJoueur(Joueur j) throws InterruptedException {
-		this.des.lancerLesDes();
-		affichageMessageDelai(15,">>> " +j.getNom()+ " lance les dés . . .");
-		this.des.afficherLeLancher();
-		this.afficherLancerDes();
-
-
-
-	}
-	
-	public void afficherLancerDes() {
-		System.out.println(this.des);
-	}
-
-
 	
 	// ---------- Methodes de dialogue avec l'utilisateur -------------
 		
@@ -323,13 +521,15 @@ public class PartieDeMonopoly {
 	
 	/**
 	 *affiche les joueurs et leur pion associe avec leur position
+	 * @throws InterruptedException 
 	 */
-	private void afficherJoueursEtPions() {
+	private void afficherJoueursEtPions() throws InterruptedException {
 		// Ecrire les messages destinés aux joueurs
-		System.out.println("--- LISTE DES JOUEURS ---\n\n");
+		System.out.println("--- JOUEURS : ---\n");
 		for (Joueur j : this.joueurs) {
-			System.out.println("- " + j.toString()+ this.p.getCaseNumero(j.getPion().getNumCase()+1));
+			System.out.println("- " + j.toString()+ " - Pion : "+j.getPion().getTypePion().afficherPion() +"\n"); 
 		}
+		Thread.sleep(1000);
 	}
 	
 	/**

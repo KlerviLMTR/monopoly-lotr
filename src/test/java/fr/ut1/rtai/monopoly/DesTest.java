@@ -122,14 +122,5 @@ public class DesTest {
 	}
 	
 
-	/**
-	 *Teste l'affichage des des 
-	 */
-	@Test
-	public void testToString() {
-		this.des.lancerLesDes();
-		assertTrue(this.des.toString().equals("Lancer : "+this.des.getChiffreDe1() +" + "+this.des.getChiffreDe2()));
-	}
-	
 
 }

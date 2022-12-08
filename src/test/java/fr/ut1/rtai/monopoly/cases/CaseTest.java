@@ -43,7 +43,7 @@ public class CaseTest {
 	@Test
 	public void testCaracteristiquesMontagneDuDestin() {
 		assertEquals(39, this.p.getCaseNumero(40).getNumCase());
-		assertTrue(this.p.getCaseNumero(40).getNomCase().equals("Montagne du Destin"));
+		assertEquals(this.p.getCaseNumero(40).getNomCase(),"La Montagne du Destin");
 		assertEquals(400, ( (Territoire)(this.p.getCaseNumero(40))).getCoutAchat());
 		assertEquals(200, ( (Territoire)(this.p.getCaseNumero(40))).getCoutConstruction());
 		assertEquals(200, ( (CasePropriete)(this.p.getCaseNumero(40))).getValeurHypothequee());
