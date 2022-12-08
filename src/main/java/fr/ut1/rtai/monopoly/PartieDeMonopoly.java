@@ -188,6 +188,7 @@ public class PartieDeMonopoly {
 						Thread.sleep(1000);
 						j.setPion(pionsDispo.get(choixPion));
 						j.getPion().setNumeroCase(0);
+						j.getPion().setJoueur(j);
 						pionsDispo.remove(choixPion);
 	                }		
 	                inputOk = true;

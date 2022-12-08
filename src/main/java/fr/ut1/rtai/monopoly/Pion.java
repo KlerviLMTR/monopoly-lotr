@@ -6,7 +6,7 @@ public class Pion {
 	private EPion typePion;
 	private int numeroCase;
 	private boolean passageCaseDepart;
-
+	private Joueur joueur;
 	
 	public Pion(EPion typeP) {
 		this.typePion=typeP;
@@ -20,6 +20,11 @@ public class Pion {
 	
 	public void setNumeroCase(int num) {
 		this.numeroCase = num;
+	}
+	
+	
+	public void setJoueur(Joueur j) {
+		this.joueur = j;
 	}
 	
 	public int getNumCase() {
@@ -46,9 +51,15 @@ public class Pion {
 		this.passageCaseDepart = false;
 		int nbTotal = this.getNumCase() + nbCases;
 		this.numeroCase = nbTotal % 40;
-		if (nbTotal > 40) {
+		if (nbTotal >= 40) {
 			this.passageCaseDepart = true;
-
+		
+		}
+		if(this.passageCaseDepart) {
+			//Toucher un salaire 
+			System.out.println("Vous passez par la case départ et touchez un salaire de 200 ୩.");
+			this.joueur.gagnerduPouvoir(200);
+			
 		}
 	}
 
@@ -61,14 +72,7 @@ public class Pion {
 		this.numeroCase = numeroCase;
 	}
 
-	/**
-	 * Deplacer le pion jusqu'a une nouvelle case.
-	 * 
-	 * @param nouvelleCase -> la nouvelle case
-	 */
-	public void seDeplacerCase(Case nouvelleCase) {
-		this.numeroCase = nouvelleCase.getNumCase();
-	}
+
 
 
 }

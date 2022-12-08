@@ -12,7 +12,7 @@ public class CasePeuple extends Case {
 	@Override
 	public void actionCase(Joueur j) throws InterruptedException {
 		this.afficherCase();
-		PartieDeMonopoly.affichageMessageDelai(15, j.getPion().getTypePion() + " arrive sur une case peuple. Vous piochez une carte évènement.\n");
+		PartieDeMonopoly.affichageMessageDelai(15, j.getPion().getTypePion() + " arrive sur une case peuple. Vous piochez une carte peuple.\n");
 		Thread.sleep(1000);
 		PartieDeMonopoly.afficherBarreChargement();
 		j.piocherUneCartePeuple();
