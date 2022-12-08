@@ -24,6 +24,7 @@ public class Plateau {
 		tmpHash.put(ECouleurCase.rose, 3);
 		tmpHash.put(ECouleurCase.orange, 3);
 		tmpHash.put(ECouleurCase.jaune, 3);
+		tmpHash.put(ECouleurCase.rouge, 3);
 		tmpHash.put(ECouleurCase.vert, 3);
 		tmpHash.put(ECouleurCase.bleu, 2);
 		NBLOTPARCOULEUR = Collections.unmodifiableMap(tmpHash);

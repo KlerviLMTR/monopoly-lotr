@@ -496,8 +496,9 @@ public class Joueur {
 	 */
 	public void afficherJoueurDebutTourDeJeu() {
 		System.out.println("※---※---※ "+ this.getNom().toUpperCase() +" - "+this.getPion().getTypePion().afficherPion()+ " ※---※---※\n");
-		System.out.println("୩ Solde actuel : " + this.getSolde()+ " ୩");
-		System.out.println("⚑ Position actuelle : Case n°"+ this.getPion().getNumCase()+1+", \"" +this.plateau.getCaseNumero(this.getPion().getNumCase()+1).getNomCase()+"\"" );
+		System.out.println("୩ Solde actuel : " + this.getSolde()+ " ୩\n");
+		int position = this.getPion().getNumCase()+1;
+		System.out.println("⚑ Position actuelle : Case n°"+ position+", \"" +this.plateau.getCaseNumero(this.getPion().getNumCase()+1).getNomCase()+"\"" );
 		System.out.println("\n🏠 Territoires possédés : "+ this.territoiresPossedes.size());
 		System.out.println("\n🐴 Montures possédées : "+ this.getNbMonturesPossedees());
 		System.out.println("\n🏠 Bâtons possédés : "+ this.getNbBatonsDeMagicienPossedes()+"\n\n");

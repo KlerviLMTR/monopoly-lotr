@@ -230,7 +230,7 @@ public class PartieDeMonopoly {
 	        // vérifier qu'il y a plus de 2 joueurs tjs en lice
 			while (this.joueursEncoreEnLice>1 && !this.arretDeLaPartie){
 				this.tourDeJeu();
-				PartieDeMonopoly.poserQuestionJoueurChaine("\nAppuyez sur entrée pour continuer ...");
+				PartieDeMonopoly.poserQuestionJoueurChaine("\nLe tour est terminé ! Appuyez sur entrée pour continuer ...");
 				
 			}
 			System.out.println("La partie est terminée !");
@@ -239,9 +239,10 @@ public class PartieDeMonopoly {
 	
 		//Tour de jeu
 		public void tourDeJeu() throws InterruptedException{
-			PartieDeMonopoly.afficherBarreChargement();
 			System.out.println("\n\n============= NOUVEAU TOUR DE JEU =============\n");
 			//afficher les joueurs 
+			PartieDeMonopoly.afficherBarreChargement();
+			Thread.sleep(1000);
 			for (Joueur j:this.joueurs) {
 				if (!j.estEnFaillite()) {
 					j.afficherJoueurDebutTourDeJeu();
@@ -252,7 +253,6 @@ public class PartieDeMonopoly {
 
 			}
 			Thread.sleep(1000);
-			PartieDeMonopoly.afficherBarreChargement();
 			System.out.println();
 			boolean b = this.demanderContinuerPartie();
 		    if (b){
