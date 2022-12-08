@@ -17,13 +17,14 @@ public class Application {
 		
 		//tester la gestion des cases : (construs territoires pas encore gérés)
 
-		PartieDeMonopoly p = new PartieDeMonopoly();
-
-		p.jouerAuMonopoly();
-		
-		
-//		Plateau p = new Plateau();
-//		System.out.println(p.getCaseNumero(1).getNomCase());
+//		PartieDeMonopoly p = new PartieDeMonopoly();
+//
+//		p.jouerAuMonopoly();
+		Plateau p = new Plateau();
+		Joueur j = new Joueur("toto");
+		j.setPion(new Pion(EPion.Aragorn));
+		p.getCaseNumero(5).actionCase(j);
+		System.out.println(j.getSolde());
 //	
 //
 //		Joueur j = new Joueur("toto");

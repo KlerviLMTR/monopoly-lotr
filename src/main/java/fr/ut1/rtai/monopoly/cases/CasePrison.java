@@ -1,6 +1,7 @@
 package fr.ut1.rtai.monopoly.cases;
 
 import fr.ut1.rtai.monopoly.Joueur;
+import fr.ut1.rtai.monopoly.PartieDeMonopoly;
 
 public class CasePrison extends Case {
 
@@ -10,7 +11,9 @@ public class CasePrison extends Case {
 
 	@Override
 	public void actionCase(Joueur j) {
-		
+		if (!j.estEnPrison()) {
+			PartieDeMonopoly.affichageMessageDelai(15, j.getNomPion() + " visite les prisons ...");
+		}
 	}
 
 	@Override
