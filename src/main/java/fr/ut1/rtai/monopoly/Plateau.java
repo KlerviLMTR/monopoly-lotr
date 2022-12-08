@@ -55,6 +55,9 @@ public class Plateau {
 		for (Carte c : this.cartesPeuple) {
 			c.setPlateau(this);
 		}
+		//Mélanger les paquets
+		Collections.shuffle(this.cartesEvenement);
+		Collections.shuffle(this.cartesPeuple);
 		
 		// positionner l'anneau sur le plateau
 		this.territoires.get(0).positionnerAnneauUnique();

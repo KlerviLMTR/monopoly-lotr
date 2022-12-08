@@ -46,8 +46,9 @@ public class Pion {
 	 * Avancer le pion d'un certain nombre de cases.
 	 * 
 	 * @param nbCases -> le nombre de cases dont il doit avancer
+	 * @throws InterruptedException 
 	 */
-	public void avancerPion(int nbCases) {
+	public void avancerPion(int nbCases) throws InterruptedException {
 		this.passageCaseDepart = false;
 		int nbTotal = this.getNumCase() + nbCases;
 		this.numeroCase = nbTotal % 40;
@@ -57,8 +58,9 @@ public class Pion {
 		}
 		if(this.passageCaseDepart) {
 			//Toucher un salaire 
-			System.out.println("Vous passez par la case départ et touchez un salaire de 200 ୩.");
+			PartieDeMonopoly.affichageMessageDelai(15, "Vous passez par la case départ et touchez un salaire de 200 ୩.");
 			this.joueur.gagnerduPouvoir(200);
+			Thread.sleep(500);
 			
 		}
 	}

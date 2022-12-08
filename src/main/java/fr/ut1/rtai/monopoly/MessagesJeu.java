@@ -43,7 +43,7 @@ public class MessagesJeu {
 
 	public static String constructionF="Vous construisez une forteresse.";
 	public static String choixNeRienFaire="Vous décidez de ne rien faire.";
-	public static String affichageSepCase="\n※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※\n";
+	public static String affichageSepCase="\n※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※\n";
 	public static String affichageSepCarte=" ჻ ჻ ჻ ჻ ჻ ჻ ჻ ჻ ჻ ჻ ჻ ჻ ჻ ჻";
 
 	public static String menuJoueurDebutTour = ", c'est votre tour. Que souhaitez-vous faire ?\n\n 1 - Lancer les dés\n 2 - Abandonner la partie";

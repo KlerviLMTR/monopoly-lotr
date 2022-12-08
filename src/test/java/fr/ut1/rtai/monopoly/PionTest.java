@@ -37,7 +37,7 @@ public class PionTest {
 	}
 
 	@Test
-	public void testAvancerDe3Cases() {
+	public void testAvancerDe3Cases() throws InterruptedException {
 		this.des.traiterResultatLancerDes(3, 2);
 		this.p.avancerPion(this.des.getLancerTotal());
 		assertEquals(4, this.plateau.getCaseNumero(5).getNumCase());
@@ -47,13 +47,13 @@ public class PionTest {
 	
 	//Oui je sais le lancer de dés est absurde
 	@Test
-	public void testAvancerDe35Cases() {
+	public void testAvancerDe35Cases() throws InterruptedException {
 		this.des.traiterResultatLancerDes(30,5 );
 		this.p.avancerPion(this.des.getLancerTotal());
 		assertEquals( "Gripoil",this.plateau.getCases().get(this.p.getNumCase()).getNomCase());
 	}
 	
-	public void testAvancerGueBruinen() {
+	public void testAvancerGueBruinen() throws InterruptedException {
 		this.des.traiterResultatLancerDes(6,6 );
 		this.p.avancerPion(this.des.getLancerTotal());
 		assertEquals( "Gué de Bruinen",this.plateau.getCases().get(this.p.getNumCase()).getNomCase());
@@ -61,7 +61,7 @@ public class PionTest {
 	
 	//Oui je sais le lancer de dés est absurde
 	@Test
-	public void testAvancerDe35Plus() {
+	public void testAvancerDe35Plus() throws InterruptedException {
 		this.des.traiterResultatLancerDes(30,5 );
 		this.p.avancerPion(this.des.getLancerTotal());
 		this.des.traiterResultatLancerDes(3,3 );
