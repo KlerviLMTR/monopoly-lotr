@@ -1,6 +1,8 @@
 package fr.ut1.rtai.monopoly.cases;
 
 import fr.ut1.rtai.monopoly.Joueur;
+import fr.ut1.rtai.monopoly.MessagesJeu;
+import fr.ut1.rtai.monopoly.PartieDeMonopoly;
 
 public class CaseDepart extends Case {
 
@@ -10,9 +12,11 @@ public class CaseDepart extends Case {
 	}
 
 	@Override
-	public void actionCase(Joueur j) {
-		// TODO Auto-generated method stub
-		
+	public void actionCase(Joueur j) throws InterruptedException {
+		int position = this.getNumCase()+1;
+		PartieDeMonopoly.affichageMessageDelai(15, j.getNomPion() + " arrive sur la case n°"+ position+ ": \""+this.getNomCase()+"\"");
+		Thread.sleep(1000);
+		this.afficherCase();
 	}
 
 	@Override
@@ -23,7 +27,9 @@ public class CaseDepart extends Case {
 
 	@Override
 	public void afficherCase() throws InterruptedException {
-		// TODO Auto-generated method stub
+		String aff = MessagesJeu.affichageSepCase+"\nCase n°"+Integer.valueOf(getNumCase()+1);
+		aff +=  "                                 ୩ Départ ୩  \n"+ MessagesJeu.affichageSepCase;		
+		System.out.println(aff);
 		
 	}
 

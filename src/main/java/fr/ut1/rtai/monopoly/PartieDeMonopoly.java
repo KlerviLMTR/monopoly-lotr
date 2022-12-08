@@ -11,6 +11,7 @@ public class PartieDeMonopoly {
 	private int joueursEncoreEnLice;
 	private Des des;
 	private boolean arretDeLaPartie;
+	public static int lancerCourant;
 	
 	
 	public PartieDeMonopoly() throws InterruptedException {
@@ -27,6 +28,7 @@ public class PartieDeMonopoly {
 		this.plateau = new Plateau();
 		this.des = new Des();
 		this.arretDeLaPartie=false;
+		PartieDeMonopoly.lancerCourant=0;
 	}
 
 	// ---------- Getters et setters utiles --------------
@@ -231,7 +233,6 @@ public class PartieDeMonopoly {
 	        // vérifier qu'il y a plus de 2 joueurs tjs en lice
 			while (this.joueursEncoreEnLice>1 && !this.arretDeLaPartie){
 				this.tourDeJeu();
-				PartieDeMonopoly.poserQuestionJoueurChaine("\nLe tour est terminé ! Appuyez sur entrée pour continuer ...");
 				
 			}
 			System.out.println("La partie est terminée !");
@@ -253,6 +254,7 @@ public class PartieDeMonopoly {
 				}
 
 			}
+			
 			Thread.sleep(1000);
 			System.out.println();
 			boolean b = this.demanderContinuerPartie();
@@ -272,6 +274,7 @@ public class PartieDeMonopoly {
 		        
 		            
 		        }
+				PartieDeMonopoly.poserQuestionJoueurChaine("\nLe tour est terminé ! Appuyez sur entrée pour continuer ...");
 		    }
 		    else {
 		    	this.arretDeLaPartie=true;
@@ -338,7 +341,7 @@ public class PartieDeMonopoly {
 	    private String poserQuestiondebutTourJoueur(int repetitionDeLaQuestion) {
 	        String question;
 	        if (repetitionDeLaQuestion == 0) {
-	            question = MessagesJeu.questionMenu1;
+	            question = MessagesJeu.menuJoueurDebutTour;
 	        } else if (repetitionDeLaQuestion <= 4) {
 	            question = MessagesJeu.questionMenuErr;
 	        } else {
@@ -352,8 +355,10 @@ public class PartieDeMonopoly {
 	        j.afficherJoueurDebutTourDeJeuJoueur();
 	        Thread.sleep(1000);
 	        continuer = this.demanderChoixMenuDebutTourJ(j);
+	        //Demander au joueur s'il veut continuer à jouer
 	        if(continuer){
-	        //Jouer un tour 
+	        	
+	        //Si c'est le cas, Jouer un tour 
 
 	        //verifier si le joueur est en prison
 	        if (j.estEnPrison()){
@@ -364,6 +369,7 @@ public class PartieDeMonopoly {
 	            if (j.getNbDoubles()<3){
 	                //lancer les dés et jouer
 	                this.lancerDesJoueur(j);
+
 	                //Verifier si le joueur a fait un double
 	                if(this.des.estUnDouble()){
 	                    //Incrémenter le compteur de doubles du joueur
@@ -416,6 +422,8 @@ public class PartieDeMonopoly {
 		affichageMessageDelai(15,">>> " +j.getNom()+ " lance les dés . . .");
 		this.des.afficherLeLancher();
 		this.afficherLancerDes();
+        //Changer le lancer courant
+        this.lancerCourant = this.des.getLancerTotal();
 
 	}
 	

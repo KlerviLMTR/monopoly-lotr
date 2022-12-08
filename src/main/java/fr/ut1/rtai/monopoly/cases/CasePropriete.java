@@ -21,7 +21,9 @@ public abstract class CasePropriete extends Case {
     }
     
     public void actionCase(Joueur j) throws InterruptedException {
-    	
+    	int position = this.getNumCase()+1;
+		PartieDeMonopoly.affichageMessageDelai(15, j.getNomPion() + " arrive sur la case n°"+ position+ ": \""+this.getNomCase()+"\"");
+
     	//Dans tous les cas, afficher la case
     			this.afficherCase();
     			//Si la case n'est a personne, afficher le message descriptif
@@ -79,14 +81,30 @@ public abstract class CasePropriete extends Case {
     				if (!this.estEnHypotheque()) {
     					if (this instanceof Monture) {
         					PartieDeMonopoly.affichageMessageDelai(15,">>> Cette monture est la propriété de " + this.getProprietaire()+ ". Vous lui devez "+ this.getLoyerActuel()+" ୩.\n");
+        					j.payerJoueur(this.getProprietaire(), this.getLoyerActuel());
     					}
     					else if (this instanceof BatonDeMagicien) {
-        					PartieDeMonopoly.affichageMessageDelai(15,">>> Ce bâton est la propriété de " + this.getProprietaire()+ ". Vous lui devez "+ this.getLoyerActuel()+" ୩.\n");
+    						int montantAPayer=0;
+        					//Compter le nombre de bâtons possédés par le proprio et adapter le montant à payer
+        					if (this.getProprietaire().estPropdeNbBatons()==1) {
+        						montantAPayer= PartieDeMonopoly.lancerCourant*4;	
+            					PartieDeMonopoly.affichageMessageDelai(15,">>> Ce bâton est la propriété de " + this.getProprietaire()+ ". Vous lui devez un loyer de 4x votre lancer de dés.\n");
+            					
+        					}
+        					if (this.getProprietaire().estPropdeNbBatons()==2) {
+            					montantAPayer= PartieDeMonopoly.lancerCourant*10;
+            					PartieDeMonopoly.affichageMessageDelai(15,">>> Ce bâton est la propriété de " + this.getProprietaire()+ ". Vous lui devez un loyer de 10x votre lancer de dés.\n");
+
+        					}
+        					j.payerJoueur(this.getProprietaire(), montantAPayer);
+
+        					
     					}
         				else if (this instanceof Territoire) {
         					PartieDeMonopoly.affichageMessageDelai(15,">>> Ce territoire est la propriété de " + this.getProprietaire()+ ". Vous lui devez "+ this.getLoyerActuel()+" ୩.\n");
+        					j.payerJoueur(this.getProprietaire(), this.getLoyerActuel());
+
         				}
-    					j.payerJoueur(this.getProprietaire(), this.getLoyerActuel());
     				}
     				else {
     					if (this instanceof Monture) {

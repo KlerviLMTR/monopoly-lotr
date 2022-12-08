@@ -13,7 +13,7 @@ public class CarteAllerEnPrison extends Carte {
 	public void actionCarte(Joueur j) throws InterruptedException {
 		this.afficherCarte();
 		j.estMisEnPrison();
-		j.getPion().seDeplacerNumCase(11);
+		j.getPion().seDeplacerNumCase(10);
 		super.estPiocheeEtRemiseAuFondDuPaquet();
 	}
 

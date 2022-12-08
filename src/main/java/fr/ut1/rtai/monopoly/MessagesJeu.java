@@ -18,9 +18,9 @@ public class MessagesJeu {
 	public static String descriptionCaseBatons = "             Case propriété de type Bâton de Magicien, achetable.";
 	public static String descriptionCaseTerritoire = "             Case propriété de type Territoire, achetable.";
 	
-	public static String questionTerrainAPersonne="Ce territoire n'a encore été revendiqué par personne. Voulez l'acheter pour ";
-	public static String questionMontureAPersonne="Cette monture n'a encore été apprivoisée par personne. Voulez vous l'apprivoiser pour  ";
-	public static String questionBatonAPersonne="Ce bâton n'a encore été revendiqué par personne. Voulez l'obtenir pour ";
+	public static String questionTerrainAPersonne="\nCe territoire n'a encore été revendiqué par personne. Voulez l'acheter pour ";
+	public static String questionMontureAPersonne="\nCette monture n'a encore été apprivoisée par personne. Voulez vous l'apprivoiser pour  ";
+	public static String questionBatonAPersonne="\nCe bâton n'a encore été revendiqué par personne. Voulez l'obtenir pour ";
 	
 	public static String caseMonturePropOK = ">>> Cette Monture vous appartient. Que voulez vous faire ?.\n";
 	public static String caseBatonPropOK = ">>> Ce bâton vous appartient. Que voulez vous faire ?.";
@@ -46,7 +46,7 @@ public class MessagesJeu {
 	public static String affichageSepCase="\n※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※---※\n";
 	public static String affichageSepCarte=" ჻ ჻ ჻ ჻ ჻ ჻ ჻ ჻ ჻ ჻ ჻ ჻ ჻ ჻";
 
-	public static String menuJoueurDebutTour = ", c'est votre tour. Que souhaitez-vous faire ?\n\n 1 - Lancer les dés\n 2 - Abandonner la partie";
+	public static String menuJoueurDebutTour = "\nQue souhaitez-vous faire ?\n\n 1 - Lancer les dés\n 2 - Abandonner la partie";
 	public static String  menuDebutTour = ">>> Continuer la partie ? (oui/non)";
 	public static String lancerDeDesDoubleCasNom = ">>> Vous avez fait un double ! Vous rejouez au prochain tour.";
 	public static String  lancerDeDes3fois = ">>> Oh non ! Vous avez fait un double 3 fois d'affilée ! Vous êtes amené.e en prison...";

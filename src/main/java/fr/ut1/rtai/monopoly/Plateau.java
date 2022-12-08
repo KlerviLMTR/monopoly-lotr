@@ -8,7 +8,6 @@ import java.util.Map;
 import fr.ut1.rtai.monopoly.cartes.Carte;
 import fr.ut1.rtai.monopoly.cartes.CarteAllerEnPrison;
 import fr.ut1.rtai.monopoly.cartes.CarteDeplacement;
-import fr.ut1.rtai.monopoly.cartes.CarteDeplacementSpecial;
 import fr.ut1.rtai.monopoly.cartes.CarteGagnerDuPouvoir;
 import fr.ut1.rtai.monopoly.cartes.CartePerdreDuPouvoir;
 import fr.ut1.rtai.monopoly.cartes.CarteSortirDePrison;
@@ -108,7 +107,7 @@ public class Plateau {
 	private void genererCartesEvenement() {
         this.cartesEvenement = new ArrayList<Carte>();
         // Création des cartes
-        Carte c1 = new CarteGagnerDuPouvoir("Carte Evenement","En expédition dans les montagne brumeuses, vous trouvez un précieux trésor. Vous gagnez 50 de pouvoir.",50);
+        Carte c1 = new CarteGagnerDuPouvoir("Carte Evenement","En expédition dans les montagnes brumeuses, vous trouvez un précieux trésor. Vous gagnez 50 de pouvoir.",50);
         Carte c2 = new CarteGagnerDuPouvoir("Carte Evenement","Votre petite auberge à Edoras fait le bonheur de ses habitués. Vous gagnez 50 de pouvoir.",50);
         Carte c3 = new CarteDeplacement("Carte Evenement","Avancez jusqu’à la case Départ (Recevez 200 de pouvoir).", this.getCaseNumero(1));
         Carte c4 = new CarteDeplacement("Carte Evenement","Aventurez vous jusqu’au Gué de Bruinen. Si vous passez par la case Départ, recevez 200 de pouvoir.", this.getCaseNumero(12));
@@ -117,10 +116,10 @@ public class Plateau {
         Carte c7 = new CarteGagnerDuPouvoir("Carte Evenement","Vous vendez votre récolte de champignons à deux hobbits enthousiastes. Vous gagnez 15 de pouvoir.",15);
         Carte c8 = new CartePerdreDuPouvoir("Carte Evenement","Vous faites des réparations sur toutes vos propriétés : vous perdez 25 de pouvoir pour chaque place forte et 100 de pouvoir pour chaque forteresse que vous possédez.",25);
         Carte c9 = new CartePerdreDuPouvoir("Carte Evenement","Vous avez été élu Grand Intendant du Gondor. Vous donnez 50 de pouvoir à chaque joueur.",50);
-        Carte c10 = new CarteDeplacementSpecial("Carte Evenement","Allez à la rencontre de la Monture la plus proche. Si elle n’appartient à personne, vous pouvez l’acheter. Si elle appartient déjà à un autre joueur, vous devez lui payer deux fois le loyer demandé.", "Monture");
-        Carte c11 = new CarteDeplacementSpecial("Carte Evenement","Allez à la rencontre de la la plus proche. Si elle n’appartient à personne, vous pouvez l’acheter. Si elle appartient déjà à un autre joueur, vous devez lui payer deux fois le loyer demandé.", "Monture");
-        Carte c12 = new CarteDeplacementSpecial("Carte Evenement","Allez quérir le conseil du Magicien le plus proche. Si le bâton de ce dernier n’appartient à personne, vous pouvez l’acheter. S'il appartient déjà à un autre joueur, lancez les dés et payez le montant du total de vos dés multiplié par 10.", "Magicien");
-        Carte c13 = new CarteDeplacementSpecial("Carte Evenement","Reculez de trois cases.","recul3cases");
+        Carte c10 = new CarteDeplacement("Carte Evenement","Allez à la rencontre des elfes de la Lorien. Si vous passez par la case départ, recevez 200 de pouvoir.", this.getCaseNumero(19));
+        Carte c11 = new CarteGagnerDuPouvoir("Carte Evenement","Vous profitez du mauvais temps pour lire les vieux parchemins des archives de Minas Tirith. Vous gagnez 50 de pouvoir.",50);
+        Carte c12 = new CarteDeplacement("Carte Evenement","Allez quérir le conseil de Gandalf. Si vous passez par la case Départ, recevez 200 de pouvoir.",this.getCaseNumero(13));
+        Carte c13 = new CartePerdreDuPouvoir("Carte Evenement","Vous avez trop mangé de pain elfique ! Vous faites une sieste digestive et perdez 100 de pouvoir.",100);
         Carte c14 = new CarteDeplacement("Carte Evenement","Rendez-vous à la Montagne du Destin.", this.getCaseNumero(40));
         Carte c15 = new CarteAllerEnPrison("Carte Evenement","Une horde de loups Wargs vous pourchasse jusque dans les geôles de l'Isengard. Vous croupissez en prison pendant 3 tours.");
         Carte c16 = new CarteSortirDePrison("Carte Evenement", "Vous vous évadez de prison. Vous pouvez conserver cette carte et vous en servir à tout moment.");
