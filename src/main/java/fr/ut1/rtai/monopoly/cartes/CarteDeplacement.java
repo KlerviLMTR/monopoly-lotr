@@ -2,7 +2,6 @@ package fr.ut1.rtai.monopoly.cartes;
 
 import fr.ut1.rtai.monopoly.Joueur;
 import fr.ut1.rtai.monopoly.PartieDeMonopoly;
-import fr.ut1.rtai.monopoly.Plateau;
 import fr.ut1.rtai.monopoly.cases.Case;
 
 public class CarteDeplacement extends Carte {
@@ -22,6 +21,7 @@ public class CarteDeplacement extends Carte {
 		PartieDeMonopoly.poserQuestionJoueurChaine("Appuyez sur entrée pour continuer ...");
 		//declencher l'action
 		this.caseCible.actionCase(j);
+		
 	}
 
 }

@@ -1,7 +1,6 @@
 package fr.ut1.rtai.monopoly.cartes;
 
 import fr.ut1.rtai.monopoly.Joueur;
-import fr.ut1.rtai.monopoly.Plateau;
 
 public class CartePerdreDuPouvoir extends Carte {
 	

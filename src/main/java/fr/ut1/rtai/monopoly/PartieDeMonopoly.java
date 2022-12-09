@@ -1,11 +1,10 @@
 package fr.ut1.rtai.monopoly;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import java.util.Set;
+
 
 public class PartieDeMonopoly {
 	private Plateau plateau;
@@ -54,6 +53,8 @@ public class PartieDeMonopoly {
 	public int getNbJoueursEncoreEnLice() {
 		return this.joueursEncoreEnLice;
 	}
+	
+
 
 	// ---------- Methodes relatives à la creation des joueurs --------------
 
@@ -184,7 +185,7 @@ public class PartieDeMonopoly {
 			this.afficherLesPions(pionsDispo);
 			int cptErr = 0;
 			boolean inputOk = false;
-			
+			//Demander la saisie d'un nombre
 			while(!inputOk) {
 				try {
 	                String question = poserQuestionChoixPion(cptErr);
@@ -281,8 +282,9 @@ public class PartieDeMonopoly {
 			                j.setNbDoubles(0);
 			                j.setAFaitUnDouble(false);
 			                this.jouerUnTour(j);
-			                //Si le joueur fait un double, il rejoue jusqu'à 3 fois
-			                while(j.aFaitUnDouble() && j.getNbDoubles()<=3){
+			                //Si le joueur fait un double, il rejoue jusqu'à 3 fois, sauf s'il est emprisonné
+			                while(j.aFaitUnDouble() && j.getNbDoubles()<=3 && !j.estEnPrison()){
+			                	
 			                    this.jouerUnTour(j);
 			                }
 			            }
@@ -324,10 +326,14 @@ public class PartieDeMonopoly {
 		    int cptErr=0;
 		    while (!inputOk)
 		    try{
-		        //Afficher le message qui va bien selon le cpt err
+		        //Afficher le message selon le cpt err
+		    	//Appel à la méthode de vérification des saisies de type entier 
 		        int choix = PartieDeMonopoly.poserQuestionJoueurInt(this.poserQuestiondebutTourJoueur(cptErr));
-		        this.verifierReponseChoixMenuDT(choix);
-		       	//traiter la réponse
+		        //Appel à la méthode de vérification des saisies spécifiques à ce menu
+		        this.verifierReponseChoixMenuDT(choix);// LANCE L'EXCEPTION SI LA REPONSE N EST PAS CORRECTE 
+		        									   // -- Suite du bloc ignoré
+		        
+		       	//Si OK, traiter la réponse
 		        if (choix==2) {
 		        	continuer = false;
 		        }
@@ -336,6 +342,7 @@ public class PartieDeMonopoly {
 		        }
 		        inputOk = true;
 		    }catch(IllegalArgumentException e){
+		    	//Incrémenter le compteur d'erreurs pour modifier les affichages
 		        cptErr++;
 		    }
 		    return continuer;
@@ -424,6 +431,12 @@ public class PartieDeMonopoly {
 	                j.setAFaitUnDouble(false);
 	            }
 	        }
+	        	//A la fin du tour, verifier le solde
+	        	if (j.getSolde()<=0) {
+	        		j.estMisEnFaillite();
+	    			PartieDeMonopoly.poserQuestionJoueurChaine("\nVotre pouvoir est tombé à 0! Vous êtes mis en faillite.");
+
+	        	}
 	        }
 	        else{
 	            //Sinon éliminer le joueur
@@ -548,21 +561,26 @@ public class PartieDeMonopoly {
 	 */
 	  public static int poserQuestionJoueurInt(String question) {
 	        System.out.println(question + "\n");
-	        Scanner scannerInt = new Scanner(System.in);
+	        @SuppressWarnings("resource")//Non fonctionnel si scanner fermé
+			Scanner scannerInt = new Scanner(System.in);
 	        int reponse = -1;
 	        try {
 	            reponse = scannerInt.nextInt();
 	        } catch (InputMismatchException e) {
 	            throw new IllegalArgumentException("Merci de saisir un nombre !");
 	        }
-	        // scanner.close();
 	        return reponse;
 	    }
 	  
 	  
 	
 	  
-	  public static String poserQuestionReponseOuiOuNon(String question) {
+	  /**
+	   * Pose une question et attend une reponse de la forme "oui" ou "non" (majuscules autorisées)
+	 * @param question
+	 * @return
+	 */
+	public static String poserQuestionReponseOuiOuNon(String question) {
 		  Scanner scanner = new Scanner(System.in);
 		  String rep;
 		  System.out.println(question);
@@ -590,7 +608,7 @@ public class PartieDeMonopoly {
 	
 	/**
 	 * @throws InterruptedException
-	 * Affichage convivial d'un chargement
+	 * Affichage convivial d'un chargement: Source : Stack Overflow
 	 */
 	public static void afficherBarreChargement() throws InterruptedException {
 		PartieDeMonopoly.affichageMessageDelai(100, ". . . . .");
@@ -599,12 +617,12 @@ public class PartieDeMonopoly {
 	public static void affichageMessageDelai(int delai, String s) {
 	    try {
 	        for (char c : s.toCharArray()) {
-	            System.out.print(c);  // print characters without newline
-	            Thread.sleep(delai);  // wait for some milli seconds
+	            System.out.print(c); 
+	            Thread.sleep(delai);  
 	        }
 	    } catch (InterruptedException e) {
 	    }
-	    System.out.println(); // finally, add a line break
+	    System.out.println(); 
 	}
 	
 	/**

@@ -19,7 +19,6 @@ public class CaseDepart extends Case {
 		this.afficherCase();
 		//Toucher un salaire 
 		PartieDeMonopoly.affichageMessageDelai(15, "Vous touchez un salaire de 200 ୩.");
-		j.gagnerduPouvoir(200);
 		Thread.sleep(500);
 	}
 

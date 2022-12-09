@@ -3,13 +3,11 @@ package fr.ut1.rtai.monopoly.cases;
 import static org.junit.Assert.*;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
 import fr.ut1.rtai.monopoly.ECouleurCase;
 import fr.ut1.rtai.monopoly.Joueur;
-import fr.ut1.rtai.monopoly.Plateau;
 
 public class TerritoireTest {
 	private Territoire fanghorn ;

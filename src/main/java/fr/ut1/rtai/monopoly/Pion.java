@@ -1,6 +1,5 @@
 package fr.ut1.rtai.monopoly;
 
-import fr.ut1.rtai.monopoly.cases.Case;
 
 public class Pion {
 	private EPion typePion;

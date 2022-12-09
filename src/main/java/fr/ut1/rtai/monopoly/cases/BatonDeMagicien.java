@@ -1,6 +1,5 @@
 package fr.ut1.rtai.monopoly.cases;
 
-import fr.ut1.rtai.monopoly.Joueur;
 import fr.ut1.rtai.monopoly.MessagesJeu;
 import fr.ut1.rtai.monopoly.PartieDeMonopoly;
 

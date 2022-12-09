@@ -1,11 +1,8 @@
 package fr.ut1.rtai.monopoly.cases;
 
-import java.util.ArrayList;
 
-import fr.ut1.rtai.monopoly.Joueur;
 import fr.ut1.rtai.monopoly.MessagesJeu;
 import fr.ut1.rtai.monopoly.PartieDeMonopoly;
-import fr.ut1.rtai.monopoly.Pion;
 
 public class Monture extends CasePropriete {
 	

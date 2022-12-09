@@ -67,7 +67,7 @@ public class Plateau {
         this.cartesPeuple = new ArrayList<Carte>();
         // Création des cartes
         Carte c1 = new CarteGagnerDuPouvoir("Carte Peuple","Vous vendez votre vieille épée rouillée. Vous gagnez 10 de pouvoir.",10);
-        Carte c2 = new CarteGagnerDuPouvoir("Carte Peuple","C’est votre anniversaire : chaque joueur vous donne 10 de pouvoir.",10);
+        Carte c2 = new CarteGagnerDuPouvoir("Carte Peuple","Vous vous endormez paisiblement auprès du Vieux Saule. Vous gagnez 10 de pouvoir.",10);
         Carte c3 = new CarteGagnerDuPouvoir("Carte Peuple","Lors d'une promenade dans les bois, vous entendez le chant des elfes. Vous gagnez 25 de pouvoir.",25);
         Carte c4 = new CarteGagnerDuPouvoir("Carte Peuple","Vous tombez sur le garde-manger de Saroumane ! Vous gagnez 50 de pouvoir.",50);
         Carte c5 = new CarteGagnerDuPouvoir("Carte Peuple","Lors d'une expédition dans les mines de la Moria, vous tombez sur un filon de Mithril. Vous gagnez 100 de pouvoir.",100);
@@ -79,7 +79,7 @@ public class Plateau {
         Carte c11 = new CartePerdreDuPouvoir("Carte Peuple","Vous tombez sur une hordre d'Uruk-hai mécontents. Vous perdez 50 de pouvoir.",50);
         Carte c12 = new CartePerdreDuPouvoir("Carte Peuple","Votre dernière soirée au Poney Fringant a été un peu trop arrosée... Vous perdez 50 de pouvoir.",50);
         Carte c13 = new CartePerdreDuPouvoir("Carte Peuple","Oh non ! Vous vous faites pourchasser par une horde de Nazguls! Vous perdez 100 de pouvoir.",100);
-        Carte c14 = new CartePerdreDuPouvoir("Carte Peuple","Vous devez faire des travaux sur vos propriétés : vous perdez 40 de pouvoir pour chaque place forte et 115 de pouvoir pour chaque forteresse que vous possédez.",40);
+        Carte c14 = new CartePerdreDuPouvoir("Carte Peuple","Vous tombez du haut du pont de Khazad-Dûm! Vous perdez 100 de pouvoir.",100);
         Carte c15 = new CarteAllerEnPrison("Carte Peuple","Les cavaliers noirs vous ont attrapé.e. Vous êtes amené.e en prison pour 3 tours");
         Carte c16 = new CarteSortirDePrison("Carte Peuple", "Vous vous évadez de prison. Vous pouvez conserver cette carte et vous en servir à tout moment.");
 
@@ -114,8 +114,8 @@ public class Plateau {
         Carte c5 = new CarteDeplacement("Carte Evenement","Galopez jusqu'à Edoras. Si vous passez par la case Départ, recevez 200 de pouvoir.", this.getCaseNumero(25));
         Carte c6 = new CarteDeplacement("Carte Evenement","Connaissez-vous Asfaloth ? Rendez-vous sur la case Asfaloth pour rencontrer cette brave monture. Si vous passez par la case Départ, recevez 200 de pouvoir.", this.getCaseNumero(16));
         Carte c7 = new CarteGagnerDuPouvoir("Carte Evenement","Vous vendez votre récolte de champignons à deux hobbits enthousiastes. Vous gagnez 15 de pouvoir.",15);
-        Carte c8 = new CartePerdreDuPouvoir("Carte Evenement","Vous faites des réparations sur toutes vos propriétés : vous perdez 25 de pouvoir pour chaque place forte et 100 de pouvoir pour chaque forteresse que vous possédez.",25);
-        Carte c9 = new CartePerdreDuPouvoir("Carte Evenement","Vous avez été élu Grand Intendant du Gondor. Vous donnez 50 de pouvoir à chaque joueur.",50);
+        Carte c8 = new CartePerdreDuPouvoir("Carte Evenement","Vous avez fumé trop d'herbe à pipe ! Vous perdes 25 de pouvoir.",25);
+        Carte c9 = new CartePerdreDuPouvoir("Carte Evenement","Vous avez été élu Grand Intendant du Gondor. Vous donnez 150 de pouvoir à la ville par charité.",150);
         Carte c10 = new CarteDeplacement("Carte Evenement","Allez à la rencontre des elfes de la Lorien. Si vous passez par la case départ, recevez 200 de pouvoir.", this.getCaseNumero(19));
         Carte c11 = new CarteGagnerDuPouvoir("Carte Evenement","Vous profitez du mauvais temps pour lire les vieux parchemins des archives de Minas Tirith. Vous gagnez 50 de pouvoir.",50);
         Carte c12 = new CarteDeplacement("Carte Evenement","Allez quérir le conseil de Gandalf. Si vous passez par la case Départ, recevez 200 de pouvoir.",this.getCaseNumero(13));
@@ -282,6 +282,7 @@ public class Plateau {
 	}
 	
 	// ------- Méthodes d'affichage --------
+	//Utiles aux tests uniquement
 	public void afficherCartesEvenement() {
 		for(Carte c : this.cartesEvenement) {
 			System.out.println(c);

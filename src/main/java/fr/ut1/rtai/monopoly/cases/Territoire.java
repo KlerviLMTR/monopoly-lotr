@@ -1,6 +1,5 @@
 package fr.ut1.rtai.monopoly.cases;
 
-import java.util.Scanner;
 
 import fr.ut1.rtai.monopoly.ECouleurCase;
 import fr.ut1.rtai.monopoly.Joueur;
@@ -109,8 +108,8 @@ public class Territoire extends CasePropriete {
     
 	public void construireForteresse() { 
 		if(this.peutConstruireForteresse()) {
-			if(this.nbPlacesFortes<3) {
-	    		PartieDeMonopoly.affichageMessageDelai(15, ". . . Il vous faut 3 places fortes pour pouvoir construire une forteresse.");		
+			if(this.nbPlacesFortes<4) {
+	    		PartieDeMonopoly.affichageMessageDelai(15, ". . . Il vous faut 4 places fortes pour pouvoir construire une forteresse.");		
 			}
 			else if(this.getProprietaire().getSolde() < this.coutConstruction) {
 	    		PartieDeMonopoly.affichageMessageDelai(15, ". . . Mais vous n'avez pas assez de pouvoir.");		
@@ -131,8 +130,8 @@ public class Territoire extends CasePropriete {
 	}
     
     public void construirePlaceForte() {
-    	if (this.nbPlacesFortes>=3) {
-    		PartieDeMonopoly.affichageMessageDelai(15, ". . . Il y a déjà 3 places fortes sur ce terrain. Vous ne pouvez pas en construire davantage.");		  		
+    	if (this.nbPlacesFortes>=4) {
+    		PartieDeMonopoly.affichageMessageDelai(15, ". . . Il y a déjà 4 places fortes sur ce terrain. Vous ne pouvez pas en construire davantage.");		  		
     	}
     	else if (this.getProprietaire().getSolde()<this.coutConstruction) {
     		PartieDeMonopoly.affichageMessageDelai(15, ". . . Mais vous n'avez pas assez de pouvoir.");		  		
